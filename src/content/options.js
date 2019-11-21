@@ -8,9 +8,8 @@ XPCOMUtils.defineLazyGetter(ssMsgNotification, "notificationbox", () => {
     return new MozElements.NotificationBox(element => {
         element.setAttribute("flex", "1");
         element.setAttribute("notificationside", "bottom");
-alert(1);
-         document.getElementById("ssMsg-notification").append(element);
 
+        document.getElementById("ssMsg-notification").append(element);
     });
 });
 
@@ -159,6 +158,21 @@ com.ktsystems.subswitch.OptionsPanel = {
         var cs = csClass.getService(Components.interfaces.nsIConsoleService);
 
         cs.logStringMessage((new Date()).getTime() + ": " + str);
+    },
+
+    showMessage : function(title, msg) {
+        var nb = ssMsgNotification.notificationbox;
+
+        if (nb) {
+            let notification = nb.getNotificationWithValue("ssMsgNotification");
+            if (notification) {
+                nb.removeNotification(notification);
+            }
+
+            nb.appendNotification(msg, "ssMsgNotification",
+                "chrome://global/skin/icons/information-16.png",
+                nb.PRIORITY_INFO_MEDIUM, null);
+        }
     },
 
     optionsOnLoad : function(){
@@ -452,11 +466,11 @@ this.dumpStr('initTree2');
                             converter.close(); // this closes foStream
                             foStream.close();
 
-                            com.ktsystems.subswitch.Utils.showMessage(
+                            com.ktsystems.subswitch.OptionsPanel.showMessage(
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportSuccess"));
                         } catch (e) {
-                            com.ktsystems.subswitch.Utils.showMessage(
+                            com.ktsystems.subswitch.OptionsPanel.showMessage(
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportError")+e);
                         }
@@ -507,7 +521,7 @@ this.dumpStr('initTree2');
                                 converter.close();
                                 fiStream.close();
 
-                                com.ktsystems.subswitch.Utils.showMessage(
+                                com.ktsystems.subswitch.OptionsPanel.showMessage(
                                     com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickImportTitle"),
                                     com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickImportSuccess"));
 
@@ -516,7 +530,7 @@ this.dumpStr('initTree2');
                                     com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickImportInvalidOperation"));
                             }
                         } catch (e) {
-                            com.ktsystems.subswitch.Utils.showMessage(
+                            com.ktsystems.subswitch.OptionsPanel.showMessage(
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickImportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickImportError")+e);
                         }

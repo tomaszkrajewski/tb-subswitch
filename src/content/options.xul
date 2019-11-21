@@ -2,13 +2,11 @@
 
 <?xml-stylesheet href="chrome://global/skin/"?>
 <?xml-stylesheet href="chrome://global/skin/global.css"?>
-<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css"?>
-<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
-<?xml-stylesheet type="text/css" href="chrome://messenger/skin/messenger.css"?>
 <?xml-stylesheet href="chrome://messenger/content/messenger.css"?>
+<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css"?>
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/messenger.css"?>
 
-<?xml-stylesheet href="chrome://global/skin/"?>
-<?xml-stylesheet href="chrome://subjects_prefix_switch/skin/options.css" type="text/css"?>
+<?xml-stylesheet type="text/css" href="chrome://subjects_prefix_switch/skin/options.css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
 
@@ -40,7 +38,7 @@
 		</tabs>
 
 		<tabpanels flex="1" orient="vertical">
-		  <tabpanel id="maintab" flex="1" orient="vertical">
+		  <tabpanel id="maintabpanel" flex="1" orient="vertical">
 			<groupbox orient="horizontal" align="stretch" flex="1" >
 				<hbox class="groupbox-title">
 			    <label class="header">&subjects_prefix_switch.label.options.tree.rds;</label>
@@ -95,7 +93,7 @@
 			<checkbox id="contextmenu" label="&subjects_prefix_switch.label.options.contextmenu;" prefstring="contextmenu" defaultpref="true"/>
 			<textbox id="initdelay" prefstring="initdelay" defaultpref="1000" hidden="true"/>
 		  </tabpanel>
-		  <tabpanel id="othertab">
+		  <tabpanel id="othertabpanel">
 				<vbox>
 					<groupbox orient="vertical">
 					<hbox class="groupbox-title">
@@ -177,7 +175,7 @@
 					</hbox>
 				</vbox>
 		  </tabpanel>
-		  <tabpanel id="helptab">
+		  <tabpanel id="helptabpanel">
 			  <hbox>
 				<vbox flex="1">
 					<description value="SubSwitch" style="font-weight: bold; font-size: x-large;"/>

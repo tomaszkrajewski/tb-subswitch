@@ -70,14 +70,14 @@
   list-style-image: url("chrome://subjects_prefix_switch/skin/browse.png");
 }
 
-radio[pane=maintab] {
-  list-style-image: url("chrome://messenger/skin/preferences/general.png");
+#maintab {
+  list-style-image: url("chrome://subjects_prefix_switch/skin/general.png");
 }
-radio[pane=othertab] {
-  list-style-image: url("chrome://messenger/skin/preferences/advanced.png");
+#othertab {
+  list-style-image: url("chrome://subjects_prefix_switch/skin/advanced.png");
 }
 
-radio[pane=helptab] {
+#helptab {
   list-style-image: url("chrome://subjects_prefix_switch/skin/about.png");
 }
 
