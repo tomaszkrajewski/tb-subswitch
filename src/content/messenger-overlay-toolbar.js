@@ -48,7 +48,7 @@ com.ktsystems.subswitch.SubSwitchMOToolbar = {
             let vCC = "";
             let vBCC = "";
             composeFields.subject = rdData[aIdx].formattedPrefixValue;
-            
+
             if (rdData[aIdx].addresses != null) {
                 for (var i = 0; i < rdData[aIdx].addresses.length; i++) {
                     var address = rdData[aIdx].addresses[i].split(':');
@@ -88,8 +88,8 @@ com.ktsystems.subswitch.SubSwitchMOToolbar = {
         var item = com.ktsystems.subswitch.Utils.createMenuItem(
             this.rdi_prefix + idx, label, tooltip,
             "event.stopPropagation(); com.ktsystems.subswitch.SubSwitchMOToolbar.MsgNewSubSwitchMessage(" + idx + ");");
-		item.setAttribute("class", "menuitem-iconic");
-        
+        item.setAttribute("class", "menuitem-iconic");
+
         menu.appendChild(item);
     }
 };

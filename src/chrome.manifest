@@ -1,5 +1,5 @@
 overlay chrome://messenger/content/messengercompose/messengercompose.xul    chrome://subjects_prefix_switch/content/subjects_prefix_switch.xul
-overlay chrome://messenger/content/mailWindowOverlay.xul                    chrome://subjects_prefix_switch/content/messenger-overlay-toolbar.xul
+overlay chrome://messenger/content/messenger.xul                            chrome://subjects_prefix_switch/content/messenger-overlay-toolbar.xul
 
 content subjects_prefix_switch                                              jar:chrome/subjects_prefix_switch.jar!/content/
 
