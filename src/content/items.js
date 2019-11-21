@@ -8,6 +8,7 @@ com.ktsystems.subswitch.PrefixesListSingleton = (function() {
         this.prefixesList = null;
         this.initPrefixesArray = function() {
             com.ktsystems.subswitch.Utils.dumpStr('-> initPrefixesArray');
+          
             var dataString, addressesString, sequencesString;
             var items = new Array();
 
@@ -22,7 +23,7 @@ com.ktsystems.subswitch.PrefixesListSingleton = (function() {
                         dataString = com.ktsystems.subswitch.Utils.upgradeSettings(dataString);
                     }
                     var itemStrings = dataString.split(com.ktsystems.subswitch.Utils.getRDPrefEntriesSplitSign());
-                    
+
                     var addressesStrings;
                     if (addressesString != null && addressesString != "") {
                         addressesStrings = addressesString.split(com.ktsystems.subswitch.Utils.getRDPrefEntriesSplitSign());
@@ -57,7 +58,7 @@ com.ktsystems.subswitch.PrefixesListSingleton = (function() {
                             item.currentSeqValue = sequenceData;
                         }
                     }
-                } 
+                }
                 this.currentDataString = dataString;
                 this.currentAddressesString = addressesString;
             } catch (e) {
@@ -137,7 +138,7 @@ com.ktsystems.subswitch.PrefixesListSingleton = (function() {
 
             configStr.data = writer.toAddressesString();
             configPrefs.setStringPref("rds_addresses", configStr);
-            
+
             if (defaultsignature != undefined) {
                 com.ktsystems.subswitch.Const.subswitch_prefs.setCharPref("defaultrd", defaultsignature);
             }
@@ -206,7 +207,7 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
     set aliases(aAliases)   { this.aliasesList = aAliases; },
     set addresses(aAddresses)   { this.addressesList = aAddresses; },
     set showInNewMsgPopup(aShowInNewMsgPopup) { this.inNewMsgPopup = aShowInNewMsgPopup; },
-    
+
     incSeqValue : function()     {
         if (com.ktsystems.subswitch.Utils.isTemplateWithSequence(this.rd)) {
             this.currentSeqValue++;
@@ -233,15 +234,15 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
 
             if (numnerMatchArr.length == 2) {
                 var numberFormat = numnerMatchArr[1];
-        
+
                 var currNumberForm = com.ktsystems.subswitch.Utils.padNumber(currnumber, numberFormat.toString().length);
 
                 tmpPrefix = tmpPrefix.replace(numnerMatchArr[0], currNumberForm);
             }
         }
-        
+
         var dateRE       = new RegExp(/{(date|time|datetime):[\w\\\/\-: ]+}/gi);
-        
+
         var dtMatchArr = tmpPrefix.match(dateRE);
         var dateValue = new Date();
 

@@ -1,3 +1,4 @@
+
 if(!com.ktsystems.subswitch.Utils) com.ktsystems.subswitch.Utils={};
 
 com.ktsystems.subswitch.Utils = {
@@ -11,21 +12,27 @@ com.ktsystems.subswitch.Utils = {
     },
 
     showMessage : function(title, msg) {
-        var nb = document.getElementById("ssMsg");
-        nb.removeAllNotifications();
+        var nb = ssMsgNotification.notificationbox;
 
-        nb.appendNotification(msg, msg,
-            "chrome://global/skin/icons/information-16.png",
-            nb.PRIORITY_INFO_MEDIUM, null);
+        if (nb) {
+          let notification = nb.getNotificationWithValue("ssMsgNotification");
+          if (notification) {
+            nb.removeNotification(notification);
+          }
+
+          nb.appendNotification(msg, "ssMsgNotification",
+              "chrome://global/skin/icons/information-16.png",
+              nb.PRIORITY_INFO_MEDIUM, null);
+        }
     },
 
     openURL : function(aURL) {
         var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-		var uri = ioService.newURI(aURL, null, null);
+        var uri = ioService.newURI(aURL, null, null);
 
-        var protocolSvc = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"].getService(Components.interfaces.nsIExternalProtocolService);
+        var msgComposeService =  Components.classes["@mozilla.org/messengercompose;1"].getService(Components.interfaces.nsIMsgComposeService);
 
-        protocolSvc.loadURI(uri);
+        msgComposeService.OpenComposeWindowWithURI (null, uri);
     },
 
     openOptions : function(ev, autosave) {
@@ -48,15 +55,15 @@ com.ktsystems.subswitch.Utils = {
             if (array[i] != "-") {
                 let newNode = document.createElement("richlistitem");
 
-				// Store the value in the list item as before.
-				newNode.value = array[i]; 
-				let newLabel = document.createElement("label");
-				// The label is now stored in the value attribute of the label element.
-				newLabel.value = array[i];
+      				// Store the value in the list item as before.
+      				newNode.value = array[i];
+      				let newLabel = document.createElement("label");
+      				// The label is now stored in the value attribute of the label element.
+      				newLabel.value = array[i];
 
-				newNode.appendChild(newLabel);
-				listbox.appendChild(newNode);
-			}
+      				newNode.appendChild(newLabel);
+      				listbox.appendChild(newNode);
+      			}
         }
     },
 
@@ -136,7 +143,7 @@ com.ktsystems.subswitch.Utils = {
 	    if (s.length < len) {
 	        s = (com.ktsystems.subswitch.Const.SEQ_PAD_MASK + s).slice(-len);
 	    }
-	 
+
 	    return s;
 	},
 

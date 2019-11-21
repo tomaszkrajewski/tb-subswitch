@@ -8,7 +8,7 @@
   %messengercomposeDTD;
   <!ENTITY % dialog1 SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
   %dialog1;
-]>  
+]>
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         id="subjects_prefix_switchSetSignature"
@@ -51,12 +51,12 @@
                 </hbox>
             </row>
             <separator style="margin-bottom:5px;"/>
-            <tabbox>
-        <tabs>
-            <tab label="&subjects_prefix_switch.label.setrd.aliases;"/>
-            <tab label="&subjects_prefix_switch.label.setrd.addresses;"/>
-            <tab label="&subjects_prefix_switch.label.options.othertab;"/>
-        </tabs>
+        <tabbox>
+          <tabs>
+              <tab label="&subjects_prefix_switch.label.setrd.aliases;"/>
+              <tab label="&subjects_prefix_switch.label.setrd.addresses;"/>
+              <tab label="&subjects_prefix_switch.label.options.othertab;"/>
+          </tabs>
         <tabpanels>
         <tabpanel id="aliasestab">
         <vbox flex="1">
@@ -69,7 +69,9 @@
                     oncommand="com.ktsystems.subswitch.SetPrefix.removeAlias('address');"/>
                 <spacer flex="1"/>
             </hbox>
-            <richlistbox id="aliasesList" seltype="single" rows="4"/>
+            <vbox>
+              <richlistbox id="aliasesList" seltype="single" rows="4"/>
+            </vbox>
         </vbox>
         </tabpanel>
         <tabpanel id="addresstab">
@@ -82,7 +84,7 @@
 						<menuitem value="BCC:" label="&bccAddr.label;" />
 					</menupopup>
                 </menulist>
-                <textbox id="address" flex="1" 
+                <textbox id="address" flex="1"
                          type="autocomplete"
                          autocompletesearch="mydomain addrbook"
                          timeout="300" maxrows="4"
@@ -103,7 +105,9 @@
                     oncommand="com.ktsystems.subswitch.SetPrefix.removeAddress();"/>
                 <spacer flex="1"/>
             </hbox>
-            <richlistbox id="addressList" seltype="single" rows="4"/>
+            <vbox>
+              <richlistbox id="addressList" seltype="single" rows="4"/>
+            </vbox>
         </vbox>
         </tabpanel>
         <tabpanel id="detailstab">
@@ -113,7 +117,7 @@
                     <label control="rdSequenceValue" value="&subjects_prefix_switch.label.setrd.sequence;"/>
                 </hbox>
                 <hbox align="center">
-                    <textbox type="number" min="0" 
+                    <textbox type="number" min="0"
                         max="com.ktsystems.subswitch.Const.SEQ_MAX_VALUE"
                         flex="1"
                         id="rdSequenceValue"/>
@@ -126,7 +130,7 @@
         </rows>
        </grid>
       <!-- -->
-       
+
     </vbox>
     <separator style="margin-bottom:5px;" class="groove"/>
 </dialog>

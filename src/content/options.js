@@ -1,5 +1,18 @@
+var { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
+
 if(!com.ktsystems.subswitch.OptionsPanel) com.ktsystems.subswitch.OptionsPanel={};
 if(!com.ktsystems.subswitch.OptionsTreeView) com.ktsystems.subswitch.OptionsTreeView={};
+
+const ssMsgNotification = {};
+XPCOMUtils.defineLazyGetter(ssMsgNotification, "notificationbox", () => {
+    return new MozElements.NotificationBox(element => {
+        element.setAttribute("flex", "1");
+        element.setAttribute("notificationside", "bottom");
+alert(1);
+         document.getElementById("ssMsg-notification").append(element);
+
+    });
+});
 
 com.ktsystems.subswitch.OptionsTreeView = function(items, defaultsignature){
     this.items = items;
@@ -51,7 +64,7 @@ com.ktsystems.subswitch.OptionsTreeView.prototype = {
                 return;
 
             var removedItems = this.items.splice(selIdx, 1);
-            
+
             if (selIdx == this.defaultsignature) {
                 this.defaultsignature = -1;
             } else if (selIdx < this.defaultsignature) {
@@ -119,7 +132,7 @@ com.ktsystems.subswitch.OptionsTreeView.prototype = {
         } else if (col == "showInNewMsgPopup" && this.items[row].showInNewMsgPopup) {
             result =  "chrome://subjects_prefix_switch/skin/emblem-important.png";
         }
-        
+
         return result;
     },
 
@@ -149,12 +162,12 @@ com.ktsystems.subswitch.OptionsPanel = {
     },
 
     optionsOnLoad : function(){
-		
+
 		document.addEventListener("dialogaccept", function() {
 			com.ktsystems.subswitch.OptionsPanel.onDialogAccept();
-		}); 
-		
-		
+		});
+
+
         var elementID;
         var element;
         var eltType;
@@ -208,7 +221,7 @@ this.dumpStr (element);
                         com.ktsystems.subswitch.Const.subswitch_prefs.setStringPref(element.getAttribute("prefstring"), com.ktsystems.subswitch.Const.subswitch_str);
                     } catch (e) {this.dumpStr (e);}
                 }
-            } else if (eltType == "listbox") {
+            } else if (eltType == "richlistbox") {
                 try {
                     com.ktsystems.subswitch.Utils.fillListboxFromArray(element,
                         com.ktsystems.subswitch.Const.subswitch_prefs.getStringPref(element.getAttribute("prefstring")).split(";"));
@@ -222,26 +235,6 @@ this.dumpStr (element);
         }
 
         this.initTree();
-/* 
-        this.createNotificationBox();
-*/
-    },
- 
-    createNotificationBox : function() {
-		var nb = document.getElementById("ssMsg");
-        nb.removeAllNotifications();
- /*       var nb = document.getElementById("subjects_prefix_switchoptions");
-        var windowdragbox = this.findWindowDragBox(nb);
-        if (windowdragbox) {
-            var element = document.createElement("notificationbox");
-            element.id = 'ssMsg';
-            element.flex = '1';
-            windowdragbox.appendChild(element);
-        }
-
-        // todo linux !!! 3.0.2
-        nb.setAttribute("type", "prefwindow");
-*/
     },
 
     findWindowDragBox: function(nb) {
@@ -287,7 +280,7 @@ this.dumpStr('initTree1');
         } catch(e) {}
 this.dumpStr('initTree2');
         this.rdTree = document.getElementById("subjects_prefix_switchTree");this.dumpStr('initTree3');
-        
+
         this.rdTreeView = new com.ktsystems.subswitch.OptionsTreeView(treeData, defaultRD);this.dumpStr('initTree4');
         this.rdTree.view = this.rdTreeView;this.dumpStr('initTree5');
         this.rdTreeView.invalidate();this.dumpStr('initTree6');
@@ -319,7 +312,7 @@ this.dumpStr('initTree2');
             } else if (eltType == "menulist") {
                 com.ktsystems.subswitch.Const.subswitch_str.data = element.selectedItem.label;
                 com.ktsystems.subswitch.Const.subswitch_prefs.setStringPref(element.getAttribute("prefstring"), com.ktsystems.subswitch.Const.subswitch_str);
-            } else if (eltType == "listbox") {
+            } else if (eltType == "richlistbox") {
                 com.ktsystems.subswitch.Const.subswitch_str.data = com.ktsystems.subswitch.Utils.getStringFromListbox(element);
                 com.ktsystems.subswitch.Const.subswitch_prefs.setStringPref(element.getAttribute("prefstring"), com.ktsystems.subswitch.Const.subswitch_str);
             }
@@ -369,9 +362,9 @@ this.dumpStr('initTree2');
         var selIdx = this.rdTreeView.selection.currentIndex;
         if (selIdx < 0)
             return;
-        
+
         var oldItem = this.rdTreeView.items[selIdx]
-        var item = new com.ktsystems.subswitch.PrefixItem(oldItem.label 
+        var item = new com.ktsystems.subswitch.PrefixItem(oldItem.label
                 + ' ('
                 + com.ktsystems.subswitch.Utils.getLocalizedMessage("options.prefixCopy")
                 +')', oldItem.prefix);
@@ -458,7 +451,7 @@ this.dumpStr('initTree2');
                             }
                             converter.close(); // this closes foStream
                             foStream.close();
-                            
+
                             com.ktsystems.subswitch.Utils.showMessage(
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportSuccess"));
@@ -534,10 +527,10 @@ this.dumpStr('initTree2');
     pickFile : function(localizedTitle, fileMode, fileName, func) {
         var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
         fp.init(window, localizedTitle, fileMode);
-        
+
         var dirService = Components.classes["@mozilla.org/file/directory_service;1"].
                       getService(Components.interfaces.nsIProperties);
-        
+
         var homeDirFile = dirService.get("Home", Components.interfaces.nsIFile); // returns an nsIFile object
 
         fp.defaultString = fileName;
@@ -548,7 +541,7 @@ this.dumpStr('initTree2');
 		fp.open(function (rv) {
 		  if (rv == Components.interfaces.nsIFilePicker.returnOK || rv == Components.interfaces.nsIFilePicker.returnReplace) {
 			var file = fp.file;
-			
+
 			func(fp.file);
 		  }
 		});
@@ -578,16 +571,16 @@ this.dumpStr('initTree2');
 		let newNode = document.createElement("richlistitem");
 
 		// Store the value in the list item as before.
-		newNode.value = input.value; 
+		newNode.value = input.value;
 		let newLabel = document.createElement("label");
 		// The label is now stored in the value attribute of the label element.
 		newLabel.value = input.value;
 
 		newNode.appendChild(newLabel);
-		
+
 		listbox.appendChild(newNode);
         listbox.ensureIndexIsVisible(listbox.itemCount - 1);
-        
+
 		input.value = "";
     },
 
@@ -614,7 +607,7 @@ this.dumpStr('initTree2');
 
         var validate = new RegExp(com.ktsystems.subswitch.Const.rx);
     com.ktsystems.subswitch.Utils.dumpStr(com.ktsystems.subswitch.Const.rx);
-    
+
         return validate.test(input);
     }
 }
