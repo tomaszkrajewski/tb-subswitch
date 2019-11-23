@@ -24,7 +24,7 @@
         label="&subjects_prefix_switch.label.toolbar;"
         tooltiptext="&subjects_prefix_switch.tooltip.toolbar;"
         oncommand="com.ktsystems.subswitch.SubSwitchMain.subjects_prefix_switch();">
-            <menupopup id="subjects_prefix_switchMenuPopup-toolbar" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('toolbar');"/>
+        <menupopup id="subjects_prefix_switchMenuPopup-toolbar" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('toolbar');"/>
     </toolbarbutton>
  </toolbarpalette>
 
@@ -32,13 +32,13 @@
     <menu   id="subjects_prefix_switchMenu"
             label="&subjects_prefix_switch.label.menu;"
             insertafter="menu_checkspelling">
-                <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('menu');"/>
+        <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('menu');"/>
     </menu>
  </menupopup>
 
  <vbox id="addresses-box">
  <menulist id="subjects_prefix_switchMenuPopup-subtoolbarButton" align="stretch"
-    crop="right" 
+    crop="right"
     class="toolbar" disableonsend="true" >
     <menupopup id="subjects_prefix_switchMenuPopup-subtoolbar" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('subtoolbar');" flex="1" />
  </menulist>

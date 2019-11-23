@@ -5,7 +5,7 @@ content subjects_prefix_switch                                              jar:
 
 skin    subjects_prefix_switch                         classic/1.0          jar:chrome/subjects_prefix_switch.jar!/skin/classic/
 
-style   chrome://global/content/customizeToolbar.xul   chrome://subjects_prefix_switch/skin/subjects_prefix_switch.css
+style   chrome://messenger/content/customizeToolbar.xul   chrome://subjects_prefix_switch/skin/subjects_prefix_switch.css
 
 locale	subjects_prefix_switch	en-US	jar:chrome/subjects_prefix_switch.jar!/locale/en-US/
 locale	subjects_prefix_switch	de-DE	jar:chrome/subjects_prefix_switch.jar!/locale/de-DE/

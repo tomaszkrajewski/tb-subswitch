@@ -3,7 +3,6 @@
 <project name="foxbeans-impl" default="dist" basedir="..">
     <property name="impl-version" value="16" />
 
-
     <property file="nbproject/private/project-moz.properties"/>
     <property file="nbproject/project-moz.properties"/>
 
@@ -147,6 +146,8 @@
                     <token  key="targetApplications" value="${targetApplications}"/>
                     <token  key="publicDist" value="${publicDist}"/>
                     <token  key="distDate" value="${distDate}"/>
+                    <token  key="contactToEmail" value="${contactToEmail}"/>
+                    <token  key="issuesSite" value="${issuesSite}"/>
                  </replacetokens>
             </filterchain>
         </copy>

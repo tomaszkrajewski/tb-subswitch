@@ -11,13 +11,21 @@ com.ktsystems.subswitch.Utils = {
         return document.getElementById("subjects_prefix_switch.locale").getString(msg);
     },
 
-    openURL : function(aURL) {
+    openMailURL : function(aURL) {
         var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
         var uri = ioService.newURI(aURL, null, null);
 
         var msgComposeService =  Components.classes["@mozilla.org/messengercompose;1"].getService(Components.interfaces.nsIMsgComposeService);
 
         msgComposeService.OpenComposeWindowWithURI (null, uri);
+    },
+
+    openURL : function(aURL) {
+        var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+		    var uri = ioService.newURI(aURL, null, null);
+
+        var protocolSvc = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"].getService(Components.interfaces.nsIExternalProtocolService);
+        protocolSvc.loadURI(uri);
     },
 
     openOptions : function(ev, autosave) {

@@ -39,60 +39,64 @@
 
 		<tabpanels flex="1" orient="vertical">
 		  <tabpanel id="maintabpanel" flex="1" orient="vertical">
-			<groupbox orient="horizontal" align="stretch" flex="1" >
-				<hbox class="groupbox-title">
-			    <label class="header">&subjects_prefix_switch.label.options.tree.rds;</label>
-			  </hbox>
-			  <hbox flex="1">
-					<tree id="subjects_prefix_switchTree" align="stretch" flex="1" rows="4"
-						onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
-							ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();">
-						<treecols>
-							<treecol id="default" label="&subjects_prefix_switch.label.options.tree.default;" persist="width" cycler="true"/>
-							<splitter class="tree-splitter"/>
-							<treecol id="description" label="&subjects_prefix_switch.label.options.tree.description;" flex="1" persist="width"/>
-							<splitter class="tree-splitter"/>
-							<treecol id="rd" label="&subjects_prefix_switch.label.options.tree.rd;" flex="1" persist="width"/>
-							<splitter class="tree-splitter"/>
-							<treecol id="showInNewMsgPopup" label="&subjects_prefix_switch.label.options.tree.showInNewMsgPopup;" persist="width" cycler="true"/>
-						</treecols>
-						<treechildren/>
-					</tree>
-					<vbox>
-						<button class="new optionsButton"
-								label="&subjects_prefix_switch.label.options.button.new;"
-								id="new"
-								oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"/>
-						<button class="edit optionsButton"
-								label="&subjects_prefix_switch.label.options.button.edit;"
-								id="edit"
-								oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"/>
-						<button class="delete optionsButton"
-								label="&subjects_prefix_switch.label.options.button.delete;"
-								id="delete"
-								oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"/>
-						<button class="duplicate optionsButton"
-								label="&subjects_prefix_switch.label.options.button.duplicate;"
-								id="duplicate"
-								oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"/>
-						<hbox>
-							<button class="up"
-									id="up"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"/>
+				<vbox>
+					<groupbox orient="vertical" align="stretch" flex="1" >
+					<hbox class="groupbox-title">
+				    <label class="header">&subjects_prefix_switch.label.options.tree.rds;</label>
+				  </hbox>
+				  <vbox>
+						<hbox flex="1">
+						<tree id="subjects_prefix_switchTree" align="stretch" flex="1" rows="4"
+							onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
+								ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();">
+							<treecols>
+								<treecol id="default" label="&subjects_prefix_switch.label.options.tree.default;" persist="width" cycler="true"/>
+								<splitter class="tree-splitter"/>
+								<treecol id="description" label="&subjects_prefix_switch.label.options.tree.description;" flex="1" persist="width"/>
+								<splitter class="tree-splitter"/>
+								<treecol id="rd" label="&subjects_prefix_switch.label.options.tree.rd;" flex="1" persist="width"/>
+								<splitter class="tree-splitter"/>
+								<treecol id="showInNewMsgPopup" label="&subjects_prefix_switch.label.options.tree.showInNewMsgPopup;" persist="width" cycler="true"/>
+							</treecols>
+							<treechildren/>
+						</tree>
+						<vbox>
+							<button class="new optionsButton"
+									label="&subjects_prefix_switch.label.options.button.new;"
+									id="new"
+									oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"/>
+							<button class="edit optionsButton"
+									label="&subjects_prefix_switch.label.options.button.edit;"
+									id="edit"
+									oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"/>
+							<button class="delete optionsButton"
+									label="&subjects_prefix_switch.label.options.button.delete;"
+									id="delete"
+									oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"/>
+							<button class="duplicate optionsButton"
+									label="&subjects_prefix_switch.label.options.button.duplicate;"
+									id="duplicate"
+									oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"/>
+							<hbox>
+								<button class="up"
+										id="up"
+										oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"/>
+								<spacer flex="1"/>
+								<button class="down"
+										id="down"
+										oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"/>
+							</hbox>
 							<spacer flex="1"/>
-							<button class="down"
-									id="down"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"/>
-						</hbox>
-						<spacer flex="1"/>
-					</vbox>
-				</hbox>
-			</groupbox>
-			<checkbox id="offbydefault" label="&subjects_prefix_switch.label.options.offbydefault;" prefstring="offbydefault" defaultpref="false"/>
-			<checkbox id="beforeMsgSubject" label="&subjects_prefix_switch.label.options.msgSubject;" prefstring="beforeMsgSubject" defaultpref="true"/>
-			<checkbox id="contextmenu" label="&subjects_prefix_switch.label.options.contextmenu;" prefstring="contextmenu" defaultpref="true"/>
-			<textbox id="initdelay" prefstring="initdelay" defaultpref="1000" hidden="true"/>
-		  </tabpanel>
+						</vbox>
+					</hbox>
+				</vbox>
+				</groupbox>
+				<checkbox id="offbydefault" label="&subjects_prefix_switch.label.options.offbydefault;" prefstring="offbydefault" defaultpref="false"/>
+				<checkbox id="beforeMsgSubject" label="&subjects_prefix_switch.label.options.msgSubject;" prefstring="beforeMsgSubject" defaultpref="true"/>
+				<checkbox id="contextmenu" label="&subjects_prefix_switch.label.options.contextmenu;" prefstring="contextmenu" defaultpref="true"/>
+				<textbox id="initdelay" prefstring="initdelay" defaultpref="1000" hidden="true"/>
+			</vbox>
+			</tabpanel>
 		  <tabpanel id="othertabpanel">
 				<vbox>
 					<groupbox orient="vertical">
@@ -151,24 +155,18 @@
 					</groupbox>
 					<separator style="margin-bottom:10px;" class="groove"/>
 
-					<groupbox orient="horizhorizontal" align="center">
+					<groupbox orient="horizhorizontal">
 					  <hbox class="groupbox-title">
 					    <label class="header">&subjects_prefix_switch.label.options.other.impexp;</label>
 					  </hbox>
-					  <grid flex="1">
-							<columns>
-								<column flex="0.5"/>
-								<column flex="0.5"/>
-							</columns>
-							<rows>
-								<row>
-									<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
-												label="&subjects_prefix_switch.label.options.other.imp;" />
-									<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
-												label="&subjects_prefix_switch.label.options.other.exp;" />
-								</row>
-							</rows>
-						</grid>
+						<vbox align="center">
+							<hbox>
+								<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
+										label="&subjects_prefix_switch.label.options.other.imp;" />
+								<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
+										label="&subjects_prefix_switch.label.options.other.exp;" />
+							</hbox>
+						</vbox>
 					</groupbox>
 					<hbox id="ssMsg-notification">
 							<!-- notificationbox will be added here lazily. -->
@@ -185,17 +183,17 @@
 					<separator class="thin"/>
 
 					<description value="&subjects_prefix_switch.label.options.createdBy;" style="font-weight: bold;"/>
-					<description value="Tomasz Krajewski" class="url" onclick="com.ktsystems.subswitch.Utils.openURL('mailto:ktsystems@gmail.com');"/>
+					<label value="{auther} / {contactToEmail}" class="text-link" onclick="com.ktsystems.subswitch.Utils.openMailURL('mailto:{contactToEmail}');"/>
 
 					<separator class="thin"/>
 
 					<description style="margin-top:10px; font-weight: bold;">&subjects_prefix_switch.label.options.website;</description>
-					<label id="website" class="text-link" onclick="com.ktsystems.subswitch.Utils.openURL('mailto:ktsystems@gmail.com');" style="margin-left:25px;" value="ktsystems@gmail.com"/>
+					<label id="website" class="text-link" onclick="com.ktsystems.subswitch.Utils.openURL('{issuesSite}');" style="margin-left:25px;" value="{issuesSite}"/>
 
 					<separator class="thin"/>
 
 					<description style="margin-top:10px; font-weight: bold;">&subjects_prefix_switch.label.options.translate;</description>
-					<label id="website" class="text-link" onclick="com.ktsystems.subswitch.Utils.openURL('mailto:ktsystems@gmail.com');" style="margin-left:25px;" value="ktsystems@gmail.com"/>
+					<label id="website" class="text-link" onclick="com.ktsystems.subswitch.Utils.openURL('{issuesSite}');" style="margin-left:25px;" value="{issuesSite}"/>
 
 					<separator class="thin"/>
 
