@@ -15,8 +15,7 @@
   "applications": {
     "gecko": {
       "id": "{appid}",
-      "strict_min_version": "68.1.0",
-      "strict_max_version": "78.*"
+      "strict_min_version": "68.1.0"
     }
   },
   "icons": {
