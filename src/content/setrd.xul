@@ -11,6 +11,7 @@
 ]>
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
         id="subjects_prefix_switchSetSignature"
         minwidth="300"
         onload="return com.ktsystems.subswitch.SetPrefix.setRDOnLoad();"
@@ -38,7 +39,7 @@
                     <label control="description" value="&subjects_prefix_switch.label.setrd.description;"/>
                 </hbox>
                 <hbox align="center">
-                    <textbox flex="1" id="description"/>
+                    <html:input flex="1" id="description"/>
                 </hbox>
             </row>
             <row>
@@ -46,7 +47,7 @@
                     <label control="rd" value="&subjects_prefix_switch.label.setrd.path;"/>
                 </hbox>
                 <hbox align="center">
-                    <textbox flex="1" id="rd"
+                    <html:input flex="1" id="rd"
                         oninput="com.ktsystems.subswitch.SetPrefix.onChangeRD(value);"/>
                 </hbox>
             </row>
@@ -60,7 +61,7 @@
         <tabpanels>
         <tabpanel id="aliasestab">
         <vbox flex="1">
-            <textbox id="alias" />
+            <html:input id="alias" />
             <hbox align="center">
                 <spacer flex="1"/>
                 <button class="new optionsButton" id="addAlias" label="&subjects_prefix_switch.label.setrd.aliasesAdd;"
@@ -84,7 +85,7 @@
 						<menuitem value="BCC:" label="&bccAddr.label;" />
 					</menupopup>
                 </menulist>
-                <textbox id="address" flex="1"
+                <html:input id="address" flex="1"
                          type="autocomplete"
                          autocompletesearch="mydomain addrbook"
                          timeout="300" maxrows="4"
@@ -117,7 +118,7 @@
                     <label control="rdSequenceValue" value="&subjects_prefix_switch.label.setrd.sequence;"/>
                 </hbox>
                 <hbox align="center">
-                    <textbox type="number" min="0"
+                    <html:input type="number" min="0"
                         max="com.ktsystems.subswitch.Const.SEQ_MAX_VALUE"
                         flex="1"
                         id="rdSequenceValue"/>

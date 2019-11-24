@@ -285,7 +285,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
             subMain.insertOnOffItem(menuPopup,
                 com.ktsystems.subswitch.Utils.getLocalizedMessage("menuItem.onOff"),
                 com.ktsystems.subswitch.Utils.getLocalizedMessage("toolTip.onOff"));
-            menuPopup.appendChild(document.createElement("menuseparator"));
+            menuPopup.appendChild(document.createXULElement("menuseparator"));
         } else if (element == "subtoolbar") {
             subMain.insertEraseItem(menuPopup,
                 "",
@@ -299,7 +299,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         }
 
         if (rdData.length > 0) {
-            menuPopup.appendChild(document.createElement("menuseparator"));
+            menuPopup.appendChild(document.createXULElement("menuseparator"));
         }
 
         subMain.insertOptionsItem(menuPopup,
