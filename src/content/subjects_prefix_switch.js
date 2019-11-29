@@ -4,14 +4,14 @@ Components.utils.import("resource:///modules/gloda/connotent.js");
 if(!com.ktsystems.subswitch.SubSwitchMain) com.ktsystems.subswitch.SubSwitchMain={};
 
 com.ktsystems.subswitch.SubSwitchMain = {
-    rdi_loadStatus : false, 
+    rdi_loadStatus : false,
     rdi_initStatus : false,
     rdi_isRD : false,
     loadRDfromEmail : true,
     addRDtoEmail : true,
     showSSBeforeMsgSubject : true,
     rdi_curr : null,
-    
+
     init : function() {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         if (subMain.rdi_initStatus)
@@ -40,13 +40,13 @@ com.ktsystems.subswitch.SubSwitchMain = {
         ctxmenu.setAttribute("hidden", !contextmenu);
         var ctxmenuSep = document.getElementById("subjects_prefix_switchContextSeparator");
         ctxmenuSep.setAttribute("hidden", !contextmenu);
-        
+
         com.ktsystems.subswitch.SubSwitchMain.createSubToolbar(subMain.showSSBeforeMsgSubject);
 
         setTimeout(function(){
                 com.ktsystems.subswitch.SubSwitchMain.delayedInit(defaultRD, offbydefault);
         }, initdelay);
-        
+
         subMain.rdi_initStatus = true;
     },
 
@@ -66,9 +66,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
         if (!subMain.rdi_isRD && subMain.rdi_curr != null) {
             subMain.insertRD(subjectElement, subMain.rdi_curr);
         }
-        
+
         com.ktsystems.subswitch.Utils.dumpStr('XXXXXXXX->' + subMain.rdi_curr + ' ' + subMain.rdi_isRD);
-        
+
         SetComposeWindowTitle();
         subjectElement.editor.endTransaction();
     },
@@ -86,7 +86,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
                 subMain.removeRD(subjectElement);
             }
         }
-        
+
         SetComposeWindowTitle();
         subjectElement.editor.endTransaction();
     },
@@ -115,7 +115,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         var idx;
 
         subMain.rdi_curr = newPrefix;
-        
+
         if (newPrefix != null) {
             var prefixes = subMain.loadRDProperty();
             idx = prefixes.indexOf(subMain.rdi_curr) + 1;
@@ -139,7 +139,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         if (!subMain.rdi_curr)
             return false;
-        
+
         var indexOf = subjectElement.value.indexOf(subMain.rdi_curr.lastFormattedPrefixValue);
         return (indexOf > -1);
     },
@@ -148,10 +148,10 @@ com.ktsystems.subswitch.SubSwitchMain = {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         var start = subjectElement.value.indexOf(subMain.rdi_curr.lastFormattedPrefixValue);
         var len = subMain.rdi_curr.lastFormattedPrefixValue.length
-        
-        subjectElement.value = 
+
+        subjectElement.value =
             // 0 - RD
-            subjectElement.value.substring(0, start) 
+            subjectElement.value.substring(0, start)
             // RD - koniec z usuniecie spacji po RD
             + (subjectElement.value.substring(start+len).charAt(0) == ' '
                 ? subjectElement.value.substring(start + len + 1)
@@ -203,7 +203,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
     loadRD : function(idx, del) {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         var rd = subMain.loadRDProperty()[idx];
-        
+
         var subjectElement = GetMsgSubjectElement();
         var currentEditor = subjectElement.editor;
         var initialRange = currentEditor.selection.getRangeAt(0).cloneRange();
@@ -214,7 +214,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
             subMain.removeRD(subjectElement);
         }
         subMain.insertRD(subjectElement, rd);
-        
+
         SetComposeWindowTitle();
         currentEditor.endTransaction();
 
@@ -245,7 +245,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
             return;
         subMain.ensurePrefs();
         subMain.init();
-        
+
         subMain.rdi_loadStatus = true;
     },
 
@@ -388,7 +388,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
             }
         }
         com.ktsystems.subswitch.Utils.dumpStr(author);
-        
+
         if (ignoreList.length > 0) {
             var validate = new RegExp(com.ktsystems.subswitch.Const.rx);
             var match;
@@ -483,12 +483,12 @@ com.ktsystems.subswitch.SubSwitchMain = {
         var header = strbundle.getString("discovery.confirmHeader");
         var params = Components.classes["@mozilla.org/embedcomp/dialogparam;1"].createInstance(Components.interfaces.nsIDialogParamBlock);
         params.SetNumberStrings(30);
-        
+
         params.SetString(0, msg);
         params.SetString(2, "question-icon");
         params.SetString(3, header);
         params.SetString(12, title);
-        
+
         params.SetString(20, remotePrefixItem.rd);
         params.SetString(21, remotePrefixItem.description);
 
@@ -498,7 +498,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
         remotePrefixItem.rd = params.GetString(20);
         remotePrefixItem.description = params.GetString(21);
-            
+
         return params.GetInt(0) == 0 ? true : false;
     },
 
@@ -510,9 +510,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
         com.ktsystems.subswitch.Utils.dumpStr('-> onSend; currentSeqValue 3= '+subMain.rdi_curr.currentSeqValue);
 
         com.ktsystems.subswitch.Utils.dumpStr('-> onSend; addRDtoEmail = '+subMain.addRDtoEmail);
-        if (subMain.addRDtoEmail) {
+        if (subMain.addRDtoEmail && subMain.rdi_isRD) {
             try {
-                gMsgCompose.compFields.setHeader(com.ktsystems.subswitch.Const.SUBSWITCH_MIME_HEADER, 
+                gMsgCompose.compFields.setHeader(com.ktsystems.subswitch.Const.SUBSWITCH_MIME_HEADER,
                          subMain.mimeEncodeHeader(subMain.rdi_curr.description + "; " + subMain.rdi_curr.rd, gMsgCompose.compFields.characterSet));
             } catch (ex) {
                 com.ktsystems.subswitch.Utils.dumpStr ("ERROR: Cannot add current RD to message\n" + ex + "\r\n");

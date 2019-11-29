@@ -6,6 +6,14 @@
     <property file="nbproject/private/project-moz.properties"/>
     <property file="nbproject/project-moz.properties"/>
 
+    <tstamp>
+       <format property="distDate" pattern="yyyy-MM-dd" />
+    </tstamp>
+
+    <tstamp>
+       <format property="distDateTime" pattern="yyyyMMddHHmm" />
+    </tstamp>
+
     <condition property="uri" value="" >
         <not>
             <isset property="uri"/>
@@ -18,6 +26,10 @@
     </condition>
     <condition property="with-runwith-ffexec" value="true" >
         <isset property="runwith-ffexec"/>
+    </condition>
+
+    <condition property="appversion1" value="${appversion}${distDateTime}" else="${appversion}">
+      <equals arg1="${publicDist}" arg2="false"/>
     </condition>
 
     <property name="src.dir" value="src" />
@@ -139,7 +151,7 @@
                 <replacetokens begintoken="{" endtoken="}">
                     <token  key="appname" value="${appname}"/>
                     <token  key="appid" value="${appid}"/>
-                    <token  key="appversion" value="${appversion}"/>
+                    <token  key="appversion" value="${appversion1}"/>
                     <token  key="auther" value="${auther}"/>
                     <token  key="appdisplayname" value="${appdisplayname}"/>
                     <token  key="appdescription" value="${appdescription}"/>
@@ -302,7 +314,7 @@
                 <exclude name="**/Thumbs.db" />
             </fileset>
         </zip>
-        <copy file="${dist.dir}/${appname}.xpi" tofile="${dist.dir}/${appname}_${appversion}.xpi" overwrite="true"/>
+        <copy file="${dist.dir}/${appname}.xpi" tofile="${dist.dir}/${appname}_${appversion1}.xpi" overwrite="true"/>
     </target>
 
     <target name="clean">
