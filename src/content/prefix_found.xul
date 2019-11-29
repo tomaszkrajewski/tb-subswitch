@@ -13,6 +13,7 @@
 
 <dialog id="prefixFoundDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
         aria-describedby="info.body"
         minwidth="300"
         onload="com.ktsystems.subswitch.SetPrefix.oldCommonDialogOnLoad();
@@ -80,7 +81,7 @@
                             <label control="description" value="&subjects_prefix_switch.label.setrd.description;"/>
                         </hbox>
                         <hbox align="center">
-                            <textbox flex="1" id="description"/>
+                            <html:input flex="1" id="description"/>
                         </hbox>
                     </row>
                     <row>
@@ -88,7 +89,7 @@
                             <label control="rd" value="&subjects_prefix_switch.label.setrd.path;"/>
                         </hbox>
                         <hbox align="center">
-                            <textbox flex="1" id="rd"/>
+                            <html:input flex="1" id="rd"/>
                         </hbox>
                     </row>
                     <checkbox id="aliasCheckbox" class="header" label="&subjects_prefix_switch.label.setrd.justAlias;" 

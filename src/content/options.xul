@@ -94,7 +94,7 @@
 				<checkbox id="offbydefault" label="&subjects_prefix_switch.label.options.offbydefault;" prefstring="offbydefault" defaultpref="false"/>
 				<checkbox id="beforeMsgSubject" label="&subjects_prefix_switch.label.options.msgSubject;" prefstring="beforeMsgSubject" defaultpref="true"/>
 				<checkbox id="contextmenu" label="&subjects_prefix_switch.label.options.contextmenu;" prefstring="contextmenu" defaultpref="true"/>
-				<textbox id="initdelay" prefstring="initdelay" defaultpref="1000" hidden="true"/>
+				<html:input id="initdelay" prefstring="initdelay" defaultpref="1000" hidden="true"/>
 			</vbox>
 			</tabpanel>
 		  <tabpanel id="othertabpanel">
@@ -116,13 +116,13 @@
 								<row>
 									 <description>&subjects_prefix_switch.label.options.discoveryIgnoreSigns;</description>
 									 <vbox align="center">
-										 <textbox align="center" id="discoveryIgnoreSigns" prefstring="discoveryIgnoreSigns" defaultpref="[]\/ "/>
+										 <html:input align="center" id="discoveryIgnoreSigns" prefstring="discoveryIgnoreSigns" defaultpref="[]\/ "/>
 									 </vbox>
 								</row>
 								<row>
 									<description width="300">&subjects_prefix_switch.label.options.discoveryItemRegex;</description>
 									<vbox align="center">
-										<textbox align="center" id="discoveryItemPattern" prefstring="discoveryItemPattern" defaultpref="\[.+\]"/>
+										<html:input align="center" id="discoveryItemPattern" prefstring="discoveryItemPattern" defaultpref="\[.+\]"/>
 									</vbox>
 								</row>
 							</rows>
@@ -140,7 +140,7 @@
 								<row>
 									<hbox align="center">
 										<label value="&subjects_prefix_switch.label.options.discovery.autodisable.description.address;"/>
-										<textbox id="address" size="10"/>
+										<html:input id="address" size="10"/>
 									</hbox>
 									<vbox>
 										<button id="addAddress" class="addAddress optionsButton" label="&subjects_prefix_switch.label.options.discovery.autodisable.description.add;" oncommand="com.ktsystems.subswitch.OptionsPanel.addAutoSwitch('address');"/>

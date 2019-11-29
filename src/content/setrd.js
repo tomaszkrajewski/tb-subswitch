@@ -182,11 +182,11 @@ com.ktsystems.subswitch.SetPrefix = {
             }
         }
         
-		let newNode = document.createElement("richlistitem");
+		let newNode = document.createXULElement("richlistitem");
 
 		// Store the value in the list item as before.
 		newNode.value = newValue; 
-		let newLabel = document.createElement("label");
+		let newLabel = document.createXULElement("label");
 		// The label is now stored in the value attribute of the label element.
 		newLabel.value = newValue;
 

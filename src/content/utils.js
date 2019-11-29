@@ -46,11 +46,11 @@ com.ktsystems.subswitch.Utils = {
     fillListboxFromArray : function (listbox, array) {
         for (var i = 0; i < array.length; i++) {
             if (array[i] != "-") {
-                let newNode = document.createElement("richlistitem");
+                let newNode = document.createXULElement("richlistitem");
 
       				// Store the value in the list item as before.
       				newNode.value = array[i];
-      				let newLabel = document.createElement("label");
+      				let newLabel = document.createXULElement("label");
       				// The label is now stored in the value attribute of the label element.
       				newLabel.value = array[i];
 
@@ -120,7 +120,7 @@ com.ktsystems.subswitch.Utils = {
     },
 
     createMenuItem : function(id, label, tooltip, oncommand) {
-        var item = document.createElement("menuitem");
+        var item = document.createXULElement("menuitem");
 
         item.setAttribute("id", id);
         item.setAttribute("label", label);
