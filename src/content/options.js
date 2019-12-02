@@ -215,7 +215,7 @@ this.dumpStr (element);
                         com.ktsystems.subswitch.Const.subswitch_prefs.setBoolPref(element.getAttribute("prefstring"), (defpref == "true"));
                     } catch (e) {this.dumpStr (e);}
                 }
-            } else if (eltType == "textbox") {
+            } else if (eltType == "textbox" || eltType == "input") {
                 try {
                     element.setAttribute("value", com.ktsystems.subswitch.Const.subswitch_prefs.getStringPref(element.getAttribute("prefstring")));
                 } catch (e) {
@@ -318,9 +318,9 @@ this.dumpStr('initTree2');
                 com.ktsystems.subswitch.Const.subswitch_prefs.setIntPref(element.getAttribute("prefstring"), parseInt(element.value));
             else if  (eltType == "checkbox")
                 com.ktsystems.subswitch.Const.subswitch_prefs.setBoolPref(element.getAttribute("prefstring"), element.checked);
-            else if (eltType == "textbox" && element.preftype == "int")
+            else if ((eltType == "textbox" || eltType == "input") && element.preftype == "int")
                 com.ktsystems.subswitch.Const.subswitch_prefs.setIntPref(element.getAttribute("prefstring"), parseInt(element.getAttribute("value")));
-            else if (eltType == "textbox") {
+            else if (eltType == "textbox" || eltType == "input") {
                 com.ktsystems.subswitch.Const.subswitch_str.data = element.value;
                 com.ktsystems.subswitch.Const.subswitch_prefs.setStringPref(element.getAttribute("prefstring"), com.ktsystems.subswitch.Const.subswitch_str);
             } else if (eltType == "menulist") {

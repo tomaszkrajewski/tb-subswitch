@@ -17,9 +17,8 @@
         aria-describedby="info.body"
         minwidth="300"
         onload="com.ktsystems.subswitch.SetPrefix.oldCommonDialogOnLoad();
-                com.ktsystems.subswitch.SetPrefix.setRDOnLoad();"
-        ondialogaccept="return com.ktsystems.subswitch.PrefixFound.prefixFoundOnDialogAccept();"
-        buttonpack="center"
+                com.ktsystems.subswitch.SetPrefix.setRDOnLoad();
+                com.ktsystems.subswitch.PrefixFound.prefixFoundOnLoad()"
         style="min-width: 29em; min-height: 8.5em; -moz-user-focus: ignore;">
 
   <stringbundleset id="stringbundleset">
@@ -36,26 +35,26 @@
     <command id="cmd_copy" oncommand="goDoCommand('cmd_copy')" disabled="true"/>
     <command id="cmd_selectAll" oncommand="goDoCommand('cmd_selectAll')"/>
   </commandset>
+    <!--
+        <popupset id="contentAreaContextSet">
+          <popup id="contentAreaContextMenu"
+                 onpopupshowing="goUpdateCommand('cmd_copy')">
+            <menuitem id="context-copy"
+                      label="&copyCmd.label;"
+                      accesskey="&copyCmd.accesskey;"
+                      command="cmd_copy"
+                      disabled="true"/>
+            <menuitem id="context-selectall"
+                      label="&selectAllCmd.label;"
+                      accesskey="&selectAllCmd.accesskey;"
+                      command="cmd_selectAll"/>
+          </popup>
+        </popupset>
 
-  <popupset id="contentAreaContextSet">
-    <popup id="contentAreaContextMenu"
-           onpopupshowing="goUpdateCommand('cmd_copy')">
-      <menuitem id="context-copy"
-                label="&copyCmd.label;"
-                accesskey="&copyCmd.accesskey;"
-                command="cmd_copy"
-                disabled="true"/>
-      <menuitem id="context-selectall"
-                label="&selectAllCmd.label;"
-                accesskey="&selectAllCmd.accesskey;"
-                command="cmd_selectAll"/>
-    </popup>
-  </popupset>
-  
-  <hbox id="filler" style="min-width: 0%;">
-    <spacer style="width: 29em;"/>
-  </hbox>
-
+        <hbox id="filler" style="min-width: 0%;">
+          <spacer style="width: 29em;"/>
+        </hbox>
+      -->
   <grid>
     <columns>
       <column/>
@@ -67,10 +66,11 @@
         <hbox align="start">
           <image id="info.icon" class="spaced"/>
         </hbox>
-        <vbox id="infoContainer">
-          <description id="info.header" class="header"/>
-          <description id="info.body" context="contentAreaContextMenu" tabindex="-1"/>
-              <grid>
+        <vbox id="infoContainer" >
+          <description id="info.header" />
+          <description id="info.body" class="header" context="contentAreaContextMenu" tabindex="-1"/>
+
+                <grid align="center">
                 <columns>
                     <column/>
                     <column flex="1"/>
@@ -81,7 +81,7 @@
                             <label control="description" value="&subjects_prefix_switch.label.setrd.description;"/>
                         </hbox>
                         <hbox align="center">
-                            <html:input flex="1" id="description"/>
+                            <hbox><html:input id="description"/></hbox>
                         </hbox>
                     </row>
                     <row>
@@ -89,15 +89,14 @@
                             <label control="rd" value="&subjects_prefix_switch.label.setrd.path;"/>
                         </hbox>
                         <hbox align="center">
-                            <html:input flex="1" id="rd"/>
+                            <hbox><html:input id="rd"/></hbox>
                         </hbox>
                     </row>
-                    <checkbox id="aliasCheckbox" class="header" label="&subjects_prefix_switch.label.setrd.justAlias;" 
-                    checked="false" oncommand="com.ktsystems.subswitch.PrefixFound.updateAliasButton();"/>
                     <row>
-                        <spacer/>
+                        <checkbox id="aliasCheckbox" class="header" label="&subjects_prefix_switch.label.setrd.justAlias;"
+                                  checked="false" oncommand="com.ktsystems.subswitch.PrefixFound.updateAliasButton();"/>
                         <hbox align="center">
-                            <menulist id="aliasButton" type="menu" disabled="true" flex="1">
+                            <menulist id="aliasButton" disabled="true">
                                 <menupopup id="aliasMenuPopup" onpopupshowing="com.ktsystems.subswitch.PrefixFound.initAliasMenuPopup();" flex="1" />
                             </menulist>
                         </hbox>

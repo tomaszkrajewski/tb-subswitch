@@ -1,6 +1,16 @@
 if(!com.ktsystems.subswitch.PrefixFound) com.ktsystems.subswitch.PrefixFound={};
 
 com.ktsystems.subswitch.PrefixFound = {
+
+    prefixesMap : new WeakMap(),
+
+    prefixFoundOnLoad : function() {
+        document.addEventListener("dialogaccept", function () {
+            com.ktsystems.subswitch.PrefixFound.prefixFoundOnDialogAccept();
+        });
+
+    },
+
     updateAliasButton : function() {
         var checkbox = document.getElementById("aliasCheckbox");
         var button = document.getElementById("aliasButton");
@@ -11,12 +21,14 @@ com.ktsystems.subswitch.PrefixFound = {
         var menuPopup = document.getElementById("aliasMenuPopup");
 
         com.ktsystems.subswitch.Utils.removeMenuItems(menuPopup);
+        prefixesMap = new WeakMap();
 
         var rdData = com.ktsystems.subswitch.PrefixesListSingleton.getInstance().getPrefixesList();
 
         for (var i = 0; i < rdData.length; i++) {
             var item = com.ktsystems.subswitch.Utils.createMenuItem("aliasMenuPopup_" + rdData[i].rd, rdData[i].description, null, "");
-            item.setUserData("prefixItem", rdData[i], null);
+            prefixesMap.set(item, rdData[i]);
+
             menuPopup.appendChild(item);
         }
     },
@@ -39,7 +51,7 @@ com.ktsystems.subswitch.PrefixFound = {
                     isValid = false;
                 } else {
                     var alias = document.getElementById("rd").value;
-                    item = document.getElementById("aliasButton").selectedItem.getUserData("prefixItem");
+                    item = prefixesMap.get(document.getElementById("aliasButton").selectedItem);
                     item.aliases.push(alias);
 
                     arg.SetString(20, alias);
