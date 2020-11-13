@@ -44,7 +44,7 @@
 <!ENTITY  subjects_prefix_switch.label.options.discovery.autodisable.description.remove "Usuń">
 <!ENTITY  subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1 "Znak '?' może być użyty jako znak wieloznaczny. (na przykład: '?@mozilla.com', 'test@?.com' lub 't?t@m?a.c?' będzie pasowało do 'test@mozilla.com' podanego jako nadawca)">
 <!ENTITY  subjects_prefix_switch.label.options.tree.showInNewMsgPopup "Nowa wiadomość">
-<!ENTITY  subjects_prefix_switch.label.options.settings.support "Wesprzyj SubSwitch">
+<!ENTITY  subjects_prefix_switch.label.options.settings.support "Wesprzyj SubSwitch przez wpłatę na PayPal">
 <!ENTITY  subjects_prefix_switch.label.setrd.addresses "Adresy dla prefiksu">
 <!ENTITY  subjects_prefix_switch.label.setrd.addressesAdd "Dodaj">
 <!ENTITY  subjects_prefix_switch.label.setrd.addressesRemove "Usuń">

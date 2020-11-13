@@ -3,15 +3,16 @@
 <project name="foxbeans-impl" default="dist" basedir="..">
     <property name="impl-version" value="16" />
 
+
     <property file="nbproject/private/project-moz.properties"/>
     <property file="nbproject/project-moz.properties"/>
 
     <tstamp>
-       <format property="distDate" pattern="yyyy-MM-dd" />
+        <format property="distDate" pattern="yyyy-MM-dd" />
     </tstamp>
 
     <tstamp>
-       <format property="distDateTime" pattern="yyyyMMddHHmm" />
+        <format property="distDateTime" pattern="yyyyMMddHHmm" />
     </tstamp>
 
     <condition property="uri" value="" >
@@ -29,7 +30,7 @@
     </condition>
 
     <condition property="appversion1" value="${appversion}${distDateTime}" else="${appversion}">
-      <equals arg1="${publicDist}" arg2="false"/>
+        <equals arg1="${publicDist}" arg2="false"/>
     </condition>
 
     <property name="src.dir" value="src" />
@@ -99,12 +100,13 @@
                 <include name="locale/**" />
                 <include name="skin/**" />
                 <include name="icons/**" />
+                <include name="api/**" />
                 <include name="components/**" />
                 <include name="*" />
                 <exclude name="skin/**/*.css" />
                 <exclude name="**/*.manifest" />
                 <exclude name="**/*.properties" />
-                <exclude name="**/*.js" />
+                <!--<exclude name="**/*.js" />-->
                 <exclude name="**/*.rdf" />
                 <exclude name="**/*.dtd" />
                 <exclude name="**/*.xul" />
@@ -122,6 +124,7 @@
                 <include name="content/**/*.rdf" />
                 <include name="content/**/*.xul" />
                 <include name="content/**/*.dtd" />
+                <include name="content/**/*.xhtml" />
                 <include name="components/**/*.manifest" />
                 <include name="components/**/*.properties" />
                 <include name="components/**/*.js" />
@@ -183,7 +186,7 @@
     <target name="-pre-jar"/>
 
     <target name="-do-jar">
-        <zip destfile="${dist.dir}/${appname}.jar">
+       <zip destfile="${dist.dir}/${appname}.jar">
             <fileset dir="${build.chrome.dir}">
                 <include name="content/**" />
                 <include name="locale/**" />
@@ -193,6 +196,7 @@
                 <exclude name="**/Thumbs.db" />
             </fileset>
         </zip>
+
     </target>
 
     <target name="convert2ascii">
@@ -275,10 +279,10 @@
     <target name="-pre-dist"/>
 
     <target name="-do-dist" depends="jar,-pre-dist">
-        <delete file="${dist.dir}/chrome.manifest" quiet="true"/>
+        <delete file="${dist.dir}/manifest.json" quiet="true"/>
 
 
-        <copy file="${build.dir}/chrome/chrome.manifest" tofile="${dist.dir}/chrome.manifest" overwrite="true">
+        <copy file="${build.dir}/chrome/manifest.json" tofile="${dist.dir}/manifest.json" overwrite="true">
             <filterchain>
                 <tabstospaces/>
 
@@ -304,7 +308,8 @@
             <fileset dir="${build.dir}/chrome">
                 <include name="components/**" />
                 <include name="icons/**" />
-                <include name="install.rdf" />
+                <include name="api/**" />
+                <include name="background.js" />
                 <include name="manifest.json" />
                 <include name="install.js" />
                 <!--<include name="icon.png" />-->

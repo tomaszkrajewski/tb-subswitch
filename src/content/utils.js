@@ -1,6 +1,22 @@
 
 if(!com.ktsystems.subswitch.Utils) com.ktsystems.subswitch.Utils={};
 
+var subswitchOptionsHandler = {
+    onLoadOptions: function () {
+        window.close();
+    },
+    onUnloadOptions: function () {
+        this.openSettings();
+    },
+    //FIXME: maybe someday. keep instead of reload settings
+    openSettings: function() {
+        var settingsDialog = window.open("chrome://subjects_prefix_switch/content/options.xhtml",
+            "subjects_prefix_switch_options", "chrome,centerscreen,resizable");
+        settingsDialog.focus();
+    }
+}
+
+
 com.ktsystems.subswitch.Utils = {
     createItem : function(description, rd) {
         this.description = description;
@@ -29,8 +45,7 @@ com.ktsystems.subswitch.Utils = {
     },
 
     openOptions : function(ev, autosave) {
-        return window.openDialog("chrome://subjects_prefix_switch/content/options.xul",
-            "_blank", "chrome, centerscreen, modal, resizable=yes, toolbar", autosave);
+        subswitchOptionsHandler.openSettings();
     },
 
     dumpStr : function(str) {

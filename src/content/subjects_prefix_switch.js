@@ -1,5 +1,5 @@
-Components.utils.import("resource:///modules/gloda/mimemsg.js");
-Components.utils.import("resource:///modules/gloda/connotent.js");
+var { MsgHdrToMimeMessage } = ChromeUtils.import("resource:///modules/gloda/MimeMessage.jsm");
+var { mimeMsgToContentSnippetAndMeta } = ChromeUtils.import("resource:///modules/gloda/GlodaContent.jsm");
 
 if(!com.ktsystems.subswitch.SubSwitchMain) com.ktsystems.subswitch.SubSwitchMain={};
 
@@ -52,7 +52,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
     subjects_prefix_switch : function() {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
-        var subjectElement = GetMsgSubjectElement();
+        var subjectElement = document.getElementById("msgSubject");
         var wasPrefix = subMain.rdi_isRD;
         subjectElement.editor.beginTransaction();
 
@@ -75,7 +75,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
     on_off_prefix : function(onlyRemove) {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
-        var subjectElement = GetMsgSubjectElement();
+        var subjectElement = document.getElementById("msgSubject");
         var wasPrefix = subMain.rdi_isRD;
         subjectElement.editor.beginTransaction();
 
@@ -204,7 +204,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         var rd = subMain.loadRDProperty()[idx];
 
-        var subjectElement = GetMsgSubjectElement();
+        var subjectElement = document.getElementById("msgSubject");
         var currentEditor = subjectElement.editor;
         var initialRange = currentEditor.selection.getRangeAt(0).cloneRange();
         var hasRD = subMain.searchRD(subjectElement);
@@ -276,6 +276,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
     },
 
     initMenuPopup : function(element) {
+        console.log("Init of initMenuPopup - START");
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         var menuPopup = document.getElementById("subjects_prefix_switchMenuPopup-" + element);
 
@@ -304,7 +305,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
         subMain.insertOptionsItem(menuPopup,
             com.ktsystems.subswitch.Utils.getLocalizedMessage("menuItem.options"),
-            com.ktsystems.subswitch.Utils.getLocalizedMessage("toolTip.enterOptions"));
+            com.ktsystems.subswitch.Utils.getLocalizedMessage("toolTip.enterOptions"))
+
+        console.log("Init of initMenuPopup - END");
     },
 
     loadRDProperty : function() {
@@ -459,7 +462,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
     findSubSwitchHeaderNew : function(defaultRD, offbydefault) {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
-        var subjectElement = GetMsgSubjectElement();
+        var subjectElement = document.getElementById("msgSubject");
         var ssKey = subjectElement.value;
 
         var item = new com.ktsystems.subswitch.PrefixItem(ssKey, ssKey);
@@ -492,7 +495,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         params.SetString(20, remotePrefixItem.rd);
         params.SetString(21, remotePrefixItem.description);
 
-        window.openDialog("chrome://subjects_prefix_switch/content/prefix_found.xul", null,
+        window.openDialog("chrome://subjects_prefix_switch/content/prefix_found.xhtml", null,
             "chrome,centerscreen,modal,dialog,resizable=no", params);
         com.ktsystems.subswitch.Utils.dumpStr('parseSubSwitchMimeHeader; displayConfirm4 ->');
 
@@ -560,6 +563,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
     createSubToolbar : function(isVisible) {
         var subtoolbar = document.getElementById("subjects_prefix_switchMenuPopup-subtoolbarButton");
+
         var ms = document.getElementById("msgSubject");
 
         //TB 5.0 fix
@@ -597,9 +601,3 @@ com.ktsystems.subswitch.SubSwitchMain = {
         }
     }
 };
-
-window.addEventListener("compose-send-message", com.ktsystems.subswitch.SubSwitchMain.onSend, true)
-window.addEventListener("load", com.ktsystems.subswitch.SubSwitchMain.onLoad, true);
-window.addEventListener("compose-window-close", com.ktsystems.subswitch.SubSwitchMain.sanitize, true);
-window.addEventListener("compose-window-reopen", com.ktsystems.subswitch.SubSwitchMain.init, true);
-window.addEventListener("compose-window-reopen", com.ktsystems.subswitch.SubSwitchMain.initMsgWindowToolbar, true);

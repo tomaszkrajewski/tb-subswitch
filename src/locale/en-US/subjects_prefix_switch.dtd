@@ -43,7 +43,7 @@
 <!ENTITY  subjects_prefix_switch.label.options.discovery.autodisable.description.remove "Remove">
 <!ENTITY  subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1 "The '?'-character can be used as a wildcard. (Example: '?@mozilla.com', 'test@?.com' or 't?t@m?a.c?' will match when 'test@mozilla.com' is a sender)">
 <!ENTITY  subjects_prefix_switch.label.options.tree.showInNewMsgPopup "New message">
-<!ENTITY  subjects_prefix_switch.label.options.settings.support "Support SubSwitch">
+<!ENTITY  subjects_prefix_switch.label.options.settings.support "Support SubSwitch via PayPal">
 <!ENTITY  subjects_prefix_switch.label.setrd.addresses "Addresses for prefix">
 <!ENTITY  subjects_prefix_switch.label.setrd.addressesAdd "Add">
 <!ENTITY  subjects_prefix_switch.label.setrd.addressesRemove "Remove">

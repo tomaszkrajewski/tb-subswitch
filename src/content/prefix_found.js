@@ -14,7 +14,11 @@ com.ktsystems.subswitch.PrefixFound = {
     updateAliasButton : function() {
         var checkbox = document.getElementById("aliasCheckbox");
         var button = document.getElementById("aliasButton");
+
         button.disabled = !checkbox.checked;
+
+        document.getElementById("rd").disabled = checkbox.checked;
+        document.getElementById("description").disabled = checkbox.checked;
     },
 
     initAliasMenuPopup : function() {

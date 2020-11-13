@@ -1,4 +1,4 @@
-var { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
+const { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 if(!com.ktsystems.subswitch.OptionsPanel) com.ktsystems.subswitch.OptionsPanel={};
 if(!com.ktsystems.subswitch.OptionsTreeView) com.ktsystems.subswitch.OptionsTreeView={};
@@ -92,6 +92,8 @@ com.ktsystems.subswitch.OptionsTreeView.prototype = {
                 return this.items[row].rd;
             case "showInNewMsgPopup":
                 return this.items[row].showInNewMsgPopup;
+            case "aliases":
+                return this.items[row].aliases.join(", ");
             default:
                 return "";
         }
@@ -127,9 +129,9 @@ com.ktsystems.subswitch.OptionsTreeView.prototype = {
         var result = null;
 
         if (col == "default" && row == this.defaultsignature) {
-            result = "chrome://subjects_prefix_switch/skin/default.png";
+            result = "resource://subjects_prefix_switch/default.png";
         } else if (col == "showInNewMsgPopup" && this.items[row].showInNewMsgPopup) {
-            result =  "chrome://subjects_prefix_switch/skin/emblem-important.png";
+            result =  "resource://subjects_prefix_switch/emblem-important.png";
         }
 
         return result;
@@ -352,7 +354,7 @@ this.dumpStr('initTree2');
     newItem : function() {
         var item = new com.ktsystems.subswitch.PrefixItem("", "");
 
-        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xul",
+        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xhtml",
             "_blank", "chrome,centerscreen,modal,resizable=yes,dependent=yes", item);
 
         if (item.isValid()) {
@@ -366,7 +368,7 @@ this.dumpStr('initTree2');
         if (selIdx < 0)
             return;
 
-        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xul",
+        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xhtml",
             "_blank", "chrome,centerscreen,modal,resizable=yes,dependent=yes", this.rdTreeView.items[selIdx]);
 
         this.rdTreeView.invalidate();
@@ -386,7 +388,7 @@ this.dumpStr('initTree2');
         item.aliasesList = oldItem.aliasesList;
         item.addressesList = oldItem.addressesList;
 
-        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xul",
+        window.openDialog("chrome://subjects_prefix_switch/content/setrd.xhtml",
             "_blank", "chrome,centerscreen,modal,resizable=yes,dependent=yes", item);
 
         if (item.isValid()) {

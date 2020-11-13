@@ -1,3 +1,6 @@
+if(!com) var com={};
+if(!com.ktsystems) com.ktsystems={};
+if(!com.ktsystems.subswitch) com.ktsystems.subswitch={};
 if(!com.ktsystems.subswitch.SubSwitchMOToolbar) com.ktsystems.subswitch.SubSwitchMOToolbar={};
 
 com.ktsystems.subswitch.SubSwitchMOToolbar = {
