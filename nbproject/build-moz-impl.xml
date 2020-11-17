@@ -169,7 +169,7 @@
 
         <convertproperties folder="${build.chrome.dir}"/>
         <mkdir dir="${dist.dir}" />
-
+<!--
         <zip destfile="${dist.dir}/${appname}.jar">
             <fileset dir="${build.chrome.dir}">
                 <include name="content/**" />
@@ -180,13 +180,14 @@
                 <exclude name="**/Thumbs.db" />
             </fileset>
         </zip>
+-->
     </target>
     <target name="-post-jar" depends="-pre-jar,-do-jar"/>
     <target name="jar" depends="chrome,-pre-jar,-do-jar,-post-jar"/>
     <target name="-pre-jar"/>
 
     <target name="-do-jar">
-       <zip destfile="${dist.dir}/${appname}.jar">
+ <!--      <zip destfile="${dist.dir}/${appname}.jar">
             <fileset dir="${build.chrome.dir}">
                 <include name="content/**" />
                 <include name="locale/**" />
@@ -196,7 +197,7 @@
                 <exclude name="**/Thumbs.db" />
             </fileset>
         </zip>
-
+-->
     </target>
 
     <target name="convert2ascii">
@@ -295,7 +296,12 @@
         </copy>
 
         <zip destfile="${dist.dir}/${appname}.xpi">
-            <zipfileset file="${dist.dir}/${appname}.jar" prefix="chrome"/>
+            <zipfileset dir="${build.dir}/chrome" prefix="chrome">
+                <include name="content/**" />
+                <include name="locale/**" />
+                <include name="skin/**" />
+                <exclude name="**/.*" />
+            </zipfileset>
             <fileset dir="${dist.dir}">
                 <include name="chrome.manifest" />
                 <exclude name="**/.*" />

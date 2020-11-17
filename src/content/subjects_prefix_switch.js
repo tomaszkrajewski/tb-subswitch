@@ -189,12 +189,14 @@ com.ktsystems.subswitch.SubSwitchMain = {
     },
 
     insertAddress : function(rd) {
+        var msgCompFields = gMsgCompose.compFields;
+
         if (rd != null && rd.addresses != null) {
             for (var i = 0; i < rd.addresses.length; i++) {
                 var address = rd.addresses[i].split(':');
                 var type = 'addr_' + address[0].toLowerCase();
                 if (address[1] != null) {
-                    awAddRecipient(type, address[1]);
+                    awAddRecipients(msgCompFields,type, address[1]);
                 }
             }
         }

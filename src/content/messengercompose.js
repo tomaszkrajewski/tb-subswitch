@@ -34,8 +34,9 @@ function onLoad(activatedWhileWindowOpen) {
          <menupopup id="optionsMenuPopup">
             <menu   id="subjects_prefix_switchMenu"
                     label="&subjects_prefix_switch.label.menu;"
-                    insertbefore="returnReceiptMenu">
-                <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('menu');"/>
+                    insertbefore="returnReceiptMenu"
+                    class="menu-iconic subjects_prefix_switch-icon menuitem-iconic">
+                <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('menu');" />
             </menu>
             <menuseparator insertafter="subjects_prefix_switchMenu"/>
          </menupopup>

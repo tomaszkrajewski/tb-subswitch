@@ -3,16 +3,16 @@ async function main() {
     await messenger.WindowListener.registerDefaultPrefs("defaults/preferences/subjects_prefix_switch.js");
 //FIXME: maybe someday. handle different skins
     await messenger.WindowListener.registerChromeUrl([
-            ["content",  "subjects_prefix_switch",           "jar:chrome/subjects_prefix_switch.jar!/content/"],
-            ["resource", "subjects_prefix_switch",           "jar:chrome/subjects_prefix_switch.jar!/"],
-            ["resource", "subjects_prefix_switch",           "jar:chrome/subjects_prefix_switch.jar!/skin/classic/"],
-            ["locale",   "subjects_prefix_switch", "en-US", "jar:chrome/subjects_prefix_switch.jar!/locale/en-US/"],
-            ["locale",   "subjects_prefix_switch", "de-DE", "jar:chrome/subjects_prefix_switch.jar!/locale/de-DE/"],
-            ["locale",   "subjects_prefix_switch", "pl-PL", "jar:chrome/subjects_prefix_switch.jar!/locale/pl-PL/"],
-            ["locale",   "subjects_prefix_switch", "es-ES", "jar:chrome/subjects_prefix_switch.jar!/locale/es-ES/"],
-            ["locale",   "subjects_prefix_switch", "sv-SE", "jar:chrome/subjects_prefix_switch.jar!/locale/sv-SE/"],
-            ["locale",   "subjects_prefix_switch", "fr-FR", "jar:chrome/subjects_prefix_switch.jar!/locale/fr-FR/"],
-            ["locale",   "subjects_prefix_switch", "zh-TW", "jar:chrome/subjects_prefix_switch.jar!/locale/zh-TW/"]
+            ["content",  "subjects_prefix_switch",           "chrome/content/"],
+            ["resource", "subjects_prefix_switch",           "chrome/"],
+            ["resource", "subjects_prefix_switch",           "chrome/skin/classic/"],
+            ["locale",   "subjects_prefix_switch", "en-US", "chrome/locale/en-US/"],
+            ["locale",   "subjects_prefix_switch", "de-DE", "chrome/locale/de-DE/"],
+            ["locale",   "subjects_prefix_switch", "pl-PL", "chrome/locale/pl-PL/"],
+            ["locale",   "subjects_prefix_switch", "es-ES", "chrome/locale/es-ES/"],
+            ["locale",   "subjects_prefix_switch", "sv-SE", "chrome/locale/sv-SE/"],
+            ["locale",   "subjects_prefix_switch", "fr-FR", "chrome/locale/fr-FR/"],
+            ["locale",   "subjects_prefix_switch", "zh-TW", "chrome/locale/zh-TW/"]
         ]
     );
 
