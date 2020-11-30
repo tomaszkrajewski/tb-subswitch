@@ -223,7 +223,7 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
 
     get formattedPrefixValue(){
         var d1 = new Date();
-        var numberRE = new RegExp(/{number:(N+)}/gi);
+        var numberRE = new RegExp(com.ktsystems.subswitch.Const.pattern_number);
         var tmpPrefix = this.rd;
 
         com.ktsystems.subswitch.Utils.dumpStr('-> getFormattedPrefixValue; numberRE:'+numberRE+ '; tmpPrefix=' + tmpPrefix);
@@ -241,7 +241,7 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
             }
         }
 
-        var dateRE       = new RegExp(/{(date|time|datetime):[\w\\\/\-: ]+}/gi);
+        var dateRE       = new RegExp(com.ktsystems.subswitch.Const.pattern_date);
 
         var dtMatchArr = tmpPrefix.match(dateRE);
         var dateValue = new Date();
@@ -257,6 +257,39 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
 
         this.lastPrefixValue = tmpPrefix;
 
+        return tmpPrefix;
+    },
+
+    get patternPrefixString() {
+        com.ktsystems.subswitch.Utils.dumpStr('patternPrefixString - START');
+        var numberRE = new RegExp(com.ktsystems.subswitch.Const.pattern_number);
+        var numberReplacement = "\\d+"
+        var dateRE   = new RegExp(com.ktsystems.subswitch.Const.pattern_date);
+        var dateReplacement = ".+"
+        var tmpPrefix = this.rd;
+
+        com.ktsystems.subswitch.Utils.dumpStr('patternPrefixString; numberRE:'+numberRE+ '; dateRE=' + dateRE+ '; tmpPrefix=' + tmpPrefix);
+
+        if (tmpPrefix.match(numberRE)) {
+            var numnerMatchArr = numberRE.exec(tmpPrefix);
+
+            if (numnerMatchArr.length == 2) {
+                tmpPrefix = tmpPrefix.replace(numnerMatchArr[0], numberReplacement);
+            }
+        }
+/*
+        var dtMatchArr = tmpPrefix.match(dateRE);
+
+        if (dtMatchArr != null) {
+            for (var i=0; i<dtMatchArr.length; i++) {
+                var dateFormatRE = new RegExp(/{(date|time|datetime):([\w\\\/\-: ]+)}/gi);
+                var dateFormat = dateFormatRE.exec(dtMatchArr[i])[2];
+
+                tmpPrefix = tmpPrefix.replace(dtMatchArr[i], com.ktsystems.subswitch.Utils.dateFormat(dateValue, dateFormat));
+            }
+        }
+*/
+        com.ktsystems.subswitch.Utils.dumpStr('patternPrefixString - END');
         return tmpPrefix;
     },
 

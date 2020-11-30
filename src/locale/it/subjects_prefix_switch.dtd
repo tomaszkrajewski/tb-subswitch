@@ -25,7 +25,7 @@
 <!ENTITY  subjects_prefix_switch.label.context "SubSwitch">
 <!ENTITY  subjects_prefix_switch.tooltip.toolbar "Switch the Prefix on/off">
 <!ENTITY  subjects_prefix_switch.label.options.helptab "About">
-<!ENTITY  subjects_prefix_switch.label.options.website "Currently we don't have any help, please feel free to contact me if you have any questions or comments:">
+<!ENTITY  subjects_prefix_switch.label.options.website "Al momento non abbiamo alcun aiuto, non esitate a contattarmi se avete domande o commenti:">
 <!ENTITY  subjects_prefix_switch.label.options.translate "I'm looking for help with SubSwitch translation. If you want to have your language's version of SubSwitch - write for detailed instructions:">
 <!ENTITY  subjects_prefix_switch.label.options.shortcut.onoff "On/Off:">
 <!ENTITY  subjects_prefix_switch.label.options.othertab "Other">
