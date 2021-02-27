@@ -4,7 +4,7 @@ pref("extensions.subjects_prefix_switch.beforeMsgSubject", true);
 pref("extensions.subjects_prefix_switch.contextmenu", true);
 pref("extensions.subjects_prefix_switch.defaultrd", "1");
 pref("extensions.subjects_prefix_switch.discoveryIgnoreList", "bugzilla?@?.com");
-pref("extensions.subjects_prefix_switch.discoveryIgnoreSigns", "[]\\/ ");
+pref("extensions.subjects_prefix_switch.discoveryIgnoreSigns", "[]/ ");
 pref("extensions.subjects_prefix_switch.discoveryItemPattern", "\\[.+\\]");
 pref("extensions.subjects_prefix_switch.entries_split_sign", "##");
 pref("extensions.subjects_prefix_switch.entry_split_sign", "~~");

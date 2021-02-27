@@ -65,9 +65,17 @@ com.ktsystems.subswitch.PrefixesListSingleton = (function() {
                 com.ktsystems.subswitch.Utils.dumpStr(e);
             }
 
+            items.indexOfComplex = function(elt) {
+                return items.indexOfInternal(elt, true);
+            };
+
             items.indexOf = function(elt) {
+                return items.indexOfInternal(elt, false);
+            };
+
+            items.indexOfInternal = function(elt, deep) {
                 for (var i = 0; i < this.length; i++) {
-                    if (this[i].equals(elt)) {
+                    if (this[i].equals(elt, deep)) {
                         return i;
                     }
                 }
@@ -293,8 +301,8 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
         return tmpPrefix;
     },
 
-    equals : function (otherItem) {
-        //com.ktsystems.subswitch.Utils.dumpStr('-> equals; this:'+this+'; other:'+otherItem);
+    equals : function (otherItem, deep) {
+        com.ktsystems.subswitch.Utils.dumpStr('-> equals; this:'+this+'; other:'+otherItem);
         if (this.compare(this.rd, otherItem.rd))
             return true;
 
@@ -312,6 +320,25 @@ com.ktsystems.subswitch.PrefixItem.prototype = {
             }
         }
 
+        if (deep) {
+            let cleanThis = this.removeIgnoredSigns(this.rd);
+            let rex = new RegExp(otherItem.removeIgnoredSigns(otherItem.patternPrefixString), "gi")
+
+            com.ktsystems.subswitch.Utils.dumpStr('-> equals; cleanThis:'+cleanThis+'; rex:'+rex);
+            if (cleanThis.match(rex)) {
+                com.ktsystems.subswitch.Utils.dumpStr('-> equals; matched');
+                return true
+            }
+
+            let cleanThat = otherItem.removeIgnoredSigns(otherItem.rd);
+            let rexThis = new RegExp(this.removeIgnoredSigns(this.patternPrefixString), "gi")
+
+            com.ktsystems.subswitch.Utils.dumpStr('-> equals; cleanThat:'+cleanThat+'; rex:'+rexThis);
+            if (cleanThat.match(rexThis)) {
+                com.ktsystems.subswitch.Utils.dumpStr('-> equals; matched');
+                return true
+            }
+        }
         return false;
     },
 

@@ -447,26 +447,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
             com.ktsystems.subswitch.Utils.dumpStr('findSubSwitchHeader; dopasowanie prefiksu remoteSP ->'+remotePrefixItem);
 
             let rdData = subMain.loadRDProperty();
-            let idx = subMain.loadRDProperty().indexOf(remotePrefixItem);
+            let idx = subMain.loadRDProperty().indexOfComplex(remotePrefixItem);
             let found = (idx >= 0);
             com.ktsystems.subswitch.Utils.dumpStr('findSubSwitchHeader; found ->' + found);
-
-            if (!found) {
-                for (var i = 0; i < rdData.length; i++) {
-                    let pattern = rdData[i].patternPrefixString;
-                    com.ktsystems.subswitch.Utils.dumpStr('findSubSwitchHeader; dopasowanie prefiksu internalSP ->' + pattern);
-
-                    var rdRegex = new RegExp(pattern);
-
-                    if (remotePrefixItem.prefix.match(pattern)) {
-                        com.ktsystems.subswitch.Utils.dumpStr('findSubSwitchHeader; matched ->' + pattern);
-                        idx = i;
-                        break;
-                    }
-                }
-                found = (idx >= 0);
-            }
-            com.ktsystems.subswitch.Utils.dumpStr('findSubSwitchHeader; final found ->' + found);
 
             if (!found) {
                 if (!subMain.displayConfirm(remotePrefixItem)) {
