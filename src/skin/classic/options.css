@@ -80,6 +80,13 @@
   list-style-image: url("resource://subjects_prefix_switch/about.png");
 }
 
+dialog[OS=WINNT] legend.insideTab {
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-bottom:5px;
+  background-color: -moz-Field;
+}
+
 prefwindow[type="child"] {
   padding: 0px;
 }

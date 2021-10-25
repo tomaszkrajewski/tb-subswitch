@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/input-fields.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/messenger.css" type="text/css"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
 <?xml-stylesheet href="chrome://messenger/skin/dialogs.css" type="text/css"?>
-<?xml-stylesheet href="chrome://messenger/skin/messenger.css" type="text/css"?>
-<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css" type="text/css"?>
 <?xml-stylesheet href="resource://subjects_prefix_switch/options.css" type="text/css" ?>
 
 <!DOCTYPE dialog SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
@@ -42,57 +42,55 @@
 		  <tabpanel id="maintabpanel" flex="1" orient="vertical">
 				<vbox>
 					<groupbox orient="vertical" align="stretch" flex="1" >
-					<hbox class="groupbox-title">
-				    <label class="header">&subjects_prefix_switch.label.options.tree.rds;</label>
-				  </hbox>
-				  <vbox>
-						<hbox flex="1">
-						<tree id="subjects_prefix_switchTree" align="stretch" flex="1" rows="4"
-							onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
-								ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();">
-							<treecols>
-								<treecol id="default" label="&subjects_prefix_switch.label.options.tree.default;" persist="width" cycler="true"/>
-								<splitter class="tree-splitter"/>
-								<treecol id="description" label="&subjects_prefix_switch.label.options.tree.description;" flex="1" persist="width"/>
-								<splitter class="tree-splitter"/>
-								<treecol id="rd" label="&subjects_prefix_switch.label.options.tree.rd;" flex="1" persist="width"/>
-								<splitter class="tree-splitter"/>
-								<treecol id="showInNewMsgPopup" label="&subjects_prefix_switch.label.options.tree.showInNewMsgPopup;" persist="width" cycler="true"/>
-                                <splitter class="tree-splitter"/>
-                                <treecol id="aliases" label="&subjects_prefix_switch.label.setrd.aliases;" flex="1" persist="width"  />
-                            </treecols>
-							<treechildren/>
-						</tree>
+						<hbox><legend class="insideTab">&subjects_prefix_switch.label.options.tree.rds;</legend></hbox>
 						<vbox>
-							<button class="new optionsButton"
-									label="&subjects_prefix_switch.label.options.button.new;"
-									id="new"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"/>
-							<button class="edit optionsButton"
-									label="&subjects_prefix_switch.label.options.button.edit;"
-									id="edit"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"/>
-							<button class="delete optionsButton"
-									label="&subjects_prefix_switch.label.options.button.delete;"
-									id="delete"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"/>
-							<button class="duplicate optionsButton"
-									label="&subjects_prefix_switch.label.options.button.duplicate;"
-									id="duplicate"
-									oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"/>
-							<hbox>
-								<button class="up"
-										id="up"
-										oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"/>
-								<spacer flex="1"/>
-								<button class="down"
-										id="down"
-										oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"/>
+								<hbox flex="1">
+								<tree id="subjects_prefix_switchTree" align="stretch" flex="1" rows="8"
+									onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
+										ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();">
+									<treecols>
+										<treecol id="default" label="&subjects_prefix_switch.label.options.tree.default;" persist="width" cycler="true"/>
+										<splitter class="tree-splitter"/>
+										<treecol id="description" label="&subjects_prefix_switch.label.options.tree.description;" flex="1" persist="width"/>
+										<splitter class="tree-splitter"/>
+										<treecol id="rd" label="&subjects_prefix_switch.label.options.tree.rd;" flex="1" persist="width"/>
+										<splitter class="tree-splitter"/>
+										<treecol id="showInNewMsgPopup" label="&subjects_prefix_switch.label.options.tree.showInNewMsgPopup;" persist="width" cycler="true"/>
+										<splitter class="tree-splitter"/>
+										<treecol id="aliases" label="&subjects_prefix_switch.label.setrd.aliases;" flex="1" persist="width"  />
+									</treecols>
+									<treechildren/>
+								</tree>
+								<vbox>
+									<button class="new optionsButton"
+											label="&subjects_prefix_switch.label.options.button.new;"
+											id="new"
+											oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"/>
+									<button class="edit optionsButton"
+											label="&subjects_prefix_switch.label.options.button.edit;"
+											id="edit"
+											oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"/>
+									<button class="delete optionsButton"
+											label="&subjects_prefix_switch.label.options.button.delete;"
+											id="delete"
+											oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"/>
+									<button class="duplicate optionsButton"
+											label="&subjects_prefix_switch.label.options.button.duplicate;"
+											id="duplicate"
+											oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"/>
+									<hbox>
+										<button class="up"
+												id="up"
+												oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"/>
+										<spacer flex="1"/>
+										<button class="down"
+												id="down"
+												oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"/>
+									</hbox>
+									<spacer flex="1"/>
+								</vbox>
 							</hbox>
-							<spacer flex="1"/>
 						</vbox>
-					</hbox>
-				</vbox>
 				</groupbox>
 				<checkbox id="offbydefault" label="&subjects_prefix_switch.label.options.offbydefault;" prefstring="offbydefault" defaultpref="false"/>
 				<checkbox id="beforeMsgSubject" label="&subjects_prefix_switch.label.options.msgSubject;" prefstring="beforeMsgSubject" defaultpref="true"/>
@@ -100,86 +98,94 @@
 				<html:input id="initdelay" prefstring="extensions.subjects_prefix_switch.initdelay" defaultpref="1000" hidden="true"/>
 			</vbox>
 			</tabpanel>
-		  <tabpanel id="othertabpanel">
-				<vbox>
-					<groupbox orient="vertical">
-					<hbox class="groupbox-title">
-			    	<label class="header">&subjects_prefix_switch.label.options.other.autodiscovery;</label>
-			  	</hbox>
-			  	<checkbox id="addRDtoEmail" label="&subjects_prefix_switch.label.options.addRDtoEmail;" prefstring="addRDtoEmail" defaultpref="true"/>
-					<checkbox id="loadRDfromEmail" label="&subjects_prefix_switch.label.options.loadRDfromEmail;" prefstring="loadRDfromEmail" defaultpref="true"/>
-					<spacer flex="1"/>
-					<spacer flex="1"/>
-					<grid>
-							<columns>
-								<column flex="1"/>
-								<column/>
-							</columns>
-							<rows>
-								<row>
-									 <description>&subjects_prefix_switch.label.options.discoveryIgnoreSigns;</description>
-									 <vbox align="center">
-										 <html:input align="center" id="discoveryIgnoreSigns" prefstring="discoveryIgnoreSigns" defaultpref="[]\/ "/>
-									 </vbox>
-								</row>
-								<row>
-									<description width="300">&subjects_prefix_switch.label.options.discoveryItemRegex;</description>
-									<vbox align="center">
-										<html:input align="center" id="discoveryItemPattern" prefstring="discoveryItemPattern" defaultpref="\[.+\]"/>
-									</vbox>
-								</row>
-							</rows>
-					</grid>
-					<separator style="margin-bottom:10px;" class="groove"/>
+		  	<tabpanel id="othertabpanel">
+				<hbox flex="1">
+					<vbox flex="1">
+						<fieldset>
+							<vbox>
+								<vbox>
+									<hbox><legend class="insideTab">&subjects_prefix_switch.label.options.other.autodiscovery;</legend></hbox>
 
-					<description width="200" style="margin-bottom:10px;">&subjects_prefix_switch.label.options.discovery.autodisable.description;</description>
-					<hbox align="top">
-						<grid>
-							<columns>
-								<column/>
-								<column/>
-							</columns>
-							<rows>
-								<row>
-									<hbox align="center">
-										<label value="&subjects_prefix_switch.label.options.discovery.autodisable.description.address;"/>
-										<html:input id="address" size="10"/>
+									<checkbox id="addRDtoEmail" label="&subjects_prefix_switch.label.options.addRDtoEmail;" prefstring="addRDtoEmail" defaultpref="true"/>
+									<checkbox id="loadRDfromEmail" label="&subjects_prefix_switch.label.options.loadRDfromEmail;" prefstring="loadRDfromEmail" defaultpref="true"/>
+									<spacer flex="1"/>
+									<spacer flex="1"/>
+									<html:table>
+										<html:tr>
+											<html:td width="150">
+												<description>&subjects_prefix_switch.label.options.discoveryIgnoreSigns;</description>
+											</html:td>
+											<html:td>
+												<hbox class="input-container">
+													<html:input align="center" id="discoveryIgnoreSigns" prefstring="discoveryIgnoreSigns" defaultpref="[]\/ "/>
+												</hbox>
+											</html:td>
+										</html:tr>
+										<html:tr>
+											<html:td width="150">
+												<description width="300">&subjects_prefix_switch.label.options.discoveryItemRegex;</description>
+											</html:td>
+											<html:td>
+												<hbox class="input-container">
+													<html:input align="center" id="discoveryItemPattern" prefstring="discoveryItemPattern" defaultpref="\[.+\]"/>
+												</hbox>
+											</html:td>
+										</html:tr>
+									</html:table>
+								</vbox>
+								<description width="200" style="margin-bottom:10px;">&subjects_prefix_switch.label.options.discovery.autodisable.description;</description>
+								<hbox align="top">
+									<html:table>
+										<html:tr>
+											<html:td>
+												<hbox align="center">
+													<label value="&subjects_prefix_switch.label.options.discovery.autodisable.description.address;"/>
+													<html:input id="address" size="10"/>
+												</hbox>
+											</html:td>
+											<html:td>
+												<vbox>
+													<button id="addAddress" class="addAddress optionsButton" label="&subjects_prefix_switch.label.options.discovery.autodisable.description.add;" oncommand="com.ktsystems.subswitch.OptionsPanel.addAutoSwitch('address');"/>
+													<button id="removeAddress"  class="removeAddress optionsButton" label="&subjects_prefix_switch.label.options.discovery.autodisable.description.remove;" oncommand="com.ktsystems.subswitch.OptionsPanel.removeAutoswitch('address');"/>
+												</vbox>
+											</html:td>
+
+										</html:tr>
+
+									</html:table>
+									<hbox><vbox><richlistbox id="discoveryIgnoreList" prefstring="discoveryIgnoreList" defaultpref="-" seltype="single" flex="1" rows="3"/></vbox></hbox>
+								</hbox>
+								<description style="margin-top:10px;margin-bottom:10px;">&subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1;</description>
+							</vbox>
+						</fieldset>
+						<fieldset>
+							<vbox align="center">
+								<hbox><legend class="insideTab">&subjects_prefix_switch.label.options.other.impexp;</legend></hbox>
+								<vbox align="center">
+									<hbox>
+										<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
+												label="&subjects_prefix_switch.label.options.other.imp;" />
+										<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
+												label="&subjects_prefix_switch.label.options.other.exp;" />
 									</hbox>
-									<vbox>
-										<button id="addAddress" class="addAddress optionsButton" label="&subjects_prefix_switch.label.options.discovery.autodisable.description.add;" oncommand="com.ktsystems.subswitch.OptionsPanel.addAutoSwitch('address');"/>
-										<button id="removeAddress"  class="removeAddress optionsButton" label="&subjects_prefix_switch.label.options.discovery.autodisable.description.remove;" oncommand="com.ktsystems.subswitch.OptionsPanel.removeAutoswitch('address');"/>
-									</vbox>
-								</row>
-							</rows>
-						</grid>
-						<hbox><vbox><richlistbox id="discoveryIgnoreList" prefstring="discoveryIgnoreList" defaultpref="-" seltype="single" flex="1" rows="3"/></vbox></hbox>
-					</hbox>
-					<description style="margin-top:10px;margin-bottom:10px;">&subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1;</description>
-					</groupbox>
-					<separator style="margin-bottom:10px;" class="groove"/>
+								</vbox>
+								<hbox id="ssMsg-notification">
+									<!-- notificationbox will be added here lazily. -->
+								</hbox>
 
-					<groupbox orient="horizhorizontal">
-					  <hbox class="groupbox-title">
-					    <label class="header">&subjects_prefix_switch.label.options.other.impexp;</label>
-					  </hbox>
-						<vbox align="center">
-							<hbox>
-								<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
-										label="&subjects_prefix_switch.label.options.other.imp;" />
-								<button class="browse optionsButton" id="button-composer-pick" oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
-										label="&subjects_prefix_switch.label.options.other.exp;" />
-							</hbox>
-						</vbox>
-					</groupbox>
-					<hbox id="ssMsg-notification">
-							<!-- notificationbox will be added here lazily. -->
-					</hbox>
-				</vbox>
+							</vbox>
+						</fieldset>
+					</vbox>
+				</hbox>
 		  </tabpanel>
 		  <tabpanel id="helptabpanel">
-			  <hbox>
-				<vbox flex="1">
-					<description value="SubSwitch" style="font-weight: bold; font-size: x-large;"/>
+			  <vbox flex="1">
+					<hbox>
+						<image src="resource://subjects_prefix_switch/sub_switch232.png" id="dtbAboutLogo" />
+						<spacer width="15"/>
+						<description value="SubSwitch" style="font-weight: bold; font-size: x-large;"/>
+					</hbox>
+
 					<description value="Version {appversion}"/>
 					<description value="Build {appversion} ({distDate})" style="font-size: 10px; color: #666666;"/>
 
@@ -208,13 +214,6 @@
 						onclick="com.ktsystems.subswitch.Utils.openURL('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3ZHGJ9QSHRZNW');" />
 					</hbox>
 				</vbox>
-
-				<spacer width="15"/>
-
-				<vbox align="top">
-					<image src="resource://subjects_prefix_switch/sub_switch232.png" id="dtbAboutLogo" />
-				</vbox>
-			</hbox>
 		  </tabpanel>
 		</tabpanels>
     </tabbox>
