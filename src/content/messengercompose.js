@@ -47,7 +47,7 @@ function onLoad(activatedWhileWindowOpen) {
                     crop="right" 
                     is="menulist-editable"
                     disableonsend="true" 
-                    style="-moz-box-flex: 1;" insertBefore="msgSubject">
+                    style="/*!-moz-box-flex: 1;*/" insertBefore="msgSubject">
             <menupopup id="subjects_prefix_switchMenuPopup-subtoolbar" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('subtoolbar');" flex="1" />
          </menulist>
          

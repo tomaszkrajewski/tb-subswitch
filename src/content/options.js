@@ -13,6 +13,8 @@ XPCOMUtils.defineLazyGetter(ssMsgNotification, "notificationbox", () => {
     });
 });
 
+var { OS } = ChromeUtils.import("resource://gre/modules/osfile.jsm");
+
 com.ktsystems.subswitch.OptionsTreeView = function(items, defaultsignature){
     this.items = items;
     this.defaultsignature = defaultsignature;
@@ -249,6 +251,10 @@ this.dumpStr (element);
                 }
             }
         }
+
+        // add OS as attribute to outer dialog
+        document.getElementById('subjects_prefix_switchoptions').setAttribute("OS", OS.Constants.Sys.Name);
+        this.dumpStr("Adding attribute 'OS' = '"+ OS.Constants.Sys.Name);
 
         this.initTree();
     },

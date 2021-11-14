@@ -5,6 +5,7 @@
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
 <?xml-stylesheet href="chrome://messenger/skin/dialogs.css" type="text/css"?>
 <?xml-stylesheet href="resource://subjects_prefix_switch/options.css" type="text/css" ?>
+<?xml-stylesheet href="resource://subjects_prefix_switch/subjects_prefix_switch.css" type="text/css" ?>
 
 <!DOCTYPE dialog SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
 
@@ -15,7 +16,7 @@
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
 	onload="com.ktsystems.subswitch.OptionsPanel.optionsOnLoad();"
-    style="height: 500px;     width: 480px;"
+    style="padding: 0px 0px 5px 0px; height: 500px; width: 480px;"
 	persist="width height screenX screenY sizemode"
 	title="&subjects_prefix_switch.label.options.windowtitle;">
 
@@ -41,7 +42,8 @@
 		<tabpanels flex="1" orient="vertical">
 		  <tabpanel id="maintabpanel" flex="1" orient="vertical">
 				<vbox>
-					<groupbox orient="vertical" align="stretch" flex="1" >
+					<fieldset>
+						<groupbox orient="vertical" align="stretch" flex="1" >
 						<hbox><legend class="insideTab">&subjects_prefix_switch.label.options.tree.rds;</legend></hbox>
 						<vbox>
 								<hbox flex="1">
@@ -92,6 +94,7 @@
 							</hbox>
 						</vbox>
 				</groupbox>
+					</fieldset>
 				<checkbox id="offbydefault" label="&subjects_prefix_switch.label.options.offbydefault;" prefstring="offbydefault" defaultpref="false"/>
 				<checkbox id="beforeMsgSubject" label="&subjects_prefix_switch.label.options.msgSubject;" prefstring="beforeMsgSubject" defaultpref="true"/>
 				<checkbox id="contextmenu" label="&subjects_prefix_switch.label.options.contextmenu;" prefstring="contextmenu" defaultpref="true"/>
@@ -181,7 +184,7 @@
 		  <tabpanel id="helptabpanel">
 			  <vbox flex="1">
 					<hbox>
-						<image src="resource://subjects_prefix_switch/sub_switch232.png" id="dtbAboutLogo" />
+						<image src="resource://subjects_prefix_switch/sub_switch232.png" class="optionsImage" />
 						<spacer width="15"/>
 						<description value="SubSwitch" style="font-weight: bold; font-size: x-large;"/>
 					</hbox>
@@ -191,8 +194,10 @@
 
 					<separator class="thin"/>
 
-					<description value="&subjects_prefix_switch.label.options.createdBy;" style="font-weight: bold;"/>
-					<label value="{auther} / {contactToEmail}" class="text-link" onclick="com.ktsystems.subswitch.Utils.openMailURL('mailto:{contactToEmail}');"/>
+					<hbox>
+				  		<description value="&subjects_prefix_switch.label.options.createdBy;" style="font-weight: bold;"/>
+						<label value="{auther} / {contactToEmail}" class="text-link" onclick="com.ktsystems.subswitch.Utils.openMailURL('mailto:{contactToEmail}');"/>
+					</hbox>
 
 					<separator class="thin"/>
 

@@ -30,7 +30,19 @@ com.ktsystems.subswitch.SubSwitchMOToolbar = {
                     subMain.insertMenuItem(menuPopup, rdData[j].description, rdData[j].rd, j, rdData[j].addresses);
                 }
             }
-        } catch(e) {
+
+             var buttonNewMsg = document.getElementById("button-newmsg");
+             buttonNewMsg.setAttribute("type", "menu-button")
+
+             for (var i = buttonNewMsg.childNodes.length - 1; i >= 0; i--) {
+                 item = buttonNewMsg.childNodes[i];
+                 com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar -> '+item.nodeName);
+                 if ((item.nodeName == "image")||(item.nodeName == "label")) {
+                     buttonNewMsg.removeChild(item);
+                 }
+             }
+
+         } catch(e) {
             com.ktsystems.subswitch.Utils.dumpStr('SubSwitchMOToolbar.initMsgWindowToolbar-> '+e);
         }
     },

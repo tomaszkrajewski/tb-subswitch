@@ -1,3 +1,10 @@
+.optionsImage {
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  margin-left: 6px;
+}
 
 .optionsButton {
     min-width: 16px;
@@ -72,19 +79,13 @@
 #maintab {
   list-style-image: url("resource://subjects_prefix_switch/general.png");
 }
+
 #othertab {
   list-style-image: url("resource://subjects_prefix_switch/advanced.png");
 }
 
 #helptab {
   list-style-image: url("resource://subjects_prefix_switch/about.png");
-}
-
-dialog[OS=WINNT] legend.insideTab {
-  padding-right: 5px;
-  padding-left: 5px;
-  margin-bottom:5px;
-  background-color: -moz-Field;
 }
 
 prefwindow[type="child"] {

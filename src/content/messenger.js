@@ -21,21 +21,29 @@ function onLoad(activatedWhileWindowOpen) {
         ["chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd"]);
 
     //FIXME: It doesn't work in 78 :/ Somehow the newMsg button is 'protected'
-    /*WL.injectCSS("resource://subjects_prefix_switch/messenger-overlay-toolbar.css");
+    //   <toolbarbutton id="button-newmsg"
+    //                    class="toolbarbutton-1"
+    //                    label="&newMsgButton.label;"
+    //                    tooltiptext="&newMsgButton.tooltip;"
+    //                    command="cmd_newMessage"/>
+    WL.injectCSS("resource://subjects_prefix_switch/messenger-overlay-toolbar.css");
     WL.injectElements(`
-        <toolbarbutton is="toolbarbutton-menu-button" id="button-newmsg" type="menu-button" wantdropmarker="true" >
+        <toolbarbutton id="button-newmsg" type="menu" class="inline-toolbar chromeclass-toolbar themeable-full">
             <menupopup id="button-newMsgPopup" onpopupshowing="com.ktsystems.subswitch.SubSwitchMOToolbar.initMsgWindowToolbar()">
               <menuitem id="newMsgButton-mail-menuitem"
-                        label="&newMessageCmd.label;"
+                        label="&newMsgButton.label;"
                         class="menuitem-iconic"
-                        oncommand="event.stopPropagation(); MsgNewMessage(event)"/>
+                        command="cmd_newMessage"/>
               <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="subjects_prefix_switch_RD_0" />
             </menupopup>
+            <toolbarbutton class="box-inherit toolbarbutton-menubutton-button" flex="1" allowevents="true" label="&newMsgButton.label;" tooltiptext="&newMsgButton.tooltip;" />
+            <dropmarker type="menu-button" class="toolbarbutton-menubutton-dropmarker"></dropmarker>
         </toolbarbutton>`,
-        ["chrome://messenger/locale/mailOverlay.dtd"]);
+        ["chrome://messenger/locale/messenger.dtd"]);
+
 
     window.com.ktsystems.subswitch.SubSwitchMOToolbar.initMsgWindowToolbar();
-    */
+
     console.log("Init of subswitch - onLoad - END");
 }
 

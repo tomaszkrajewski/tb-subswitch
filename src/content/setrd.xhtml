@@ -91,18 +91,38 @@
                                         <menuitem value="BCC:" label="&bccField4.label;" />
                                     </menupopup>
                                 </menulist>
-                                <html:input id="address" flex="1"
-                                            type="autocomplete"
+                                <hbox align="center" flex="1" class="input-container wrap-container address-container" >
+                                    <html:input id="address"
+                                            type="text"
+                                            class="address-input mail-input mail-primary-input"
                                             autocompletesearch="mydomain addrbook"
-                                            timeout="300" maxrows="4"
-                                            completedefaultindex="true" forcecomplete="false"
-                                            minresultsforpopup="3" ignoreblurwhilesearching="true"
-                                            ontextentered="awRecipientTextCommand(eventParam, this)"
-                                            onerrorcommand="awRecipientErrorCommand(eventParam, this)"
-                                            oninput="gContentChanged=true; setupAutocomplete();"
-                                            disableonsend="true"
-                                            onkeypress="awRecipientKeyPress(event, this)"
-                                            onkeydown="awRecipientKeyDown(event, this)" />
+                                            autocompletesearchparam="{}"
+                                            timeout="300"
+                                            maxrows="4"
+                                            completedefaultindex="true"
+                                            forcecomplete="true"
+                                            completeselectedindex="true"
+                                            minresultsforpopup="2"
+                                            ignoreblurwhilesearching="true"
+                                            onfocus="addressInputOnFocus(this);"
+                                            onblur="addressInputOnBlur(this);"
+                                             flex="1" />
+                                </hbox>
+
+                                <!--   <html:input id="address" flex="1"
+                                               type="autocomplete"
+                                               autocompletesearch="mydomain addrbook"
+                                               timeout="300" maxrows="4"
+                                               completedefaultindex="true" forcecomplete="false"
+                                               minresultsforpopup="3" ignoreblurwhilesearching="true"
+                                               ontextentered="awRecipientTextCommand(eventParam, this)"
+                                               onerrorcommand="awRecipientErrorCommand(eventParam, this)"
+                                               oninput="gContentChanged=true; setupAutocomplete();"
+                                               disableonsend="true"
+                                               onkeypress="awRecipientKeyPress(event, this)"
+                                               onkeydown="awRecipientKeyDown(event, this)" />
+
+                                               -->
                             </hbox>
                             <hbox align="center">
                                 <spacer flex="1"/>

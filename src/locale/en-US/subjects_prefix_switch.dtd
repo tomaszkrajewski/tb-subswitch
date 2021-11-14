@@ -11,7 +11,7 @@
 <!ENTITY  subjects_prefix_switch.label.options.offbydefault "Switch Prefix off by default">
 <!ENTITY  subjects_prefix_switch.label.options.msgSubject "Show 'SubSwitch' before Subject field">
 <!ENTITY  subjects_prefix_switch.label.options.contextmenu "Show 'SubSwitch' in context-menu">
-<!ENTITY  subjects_prefix_switch.label.options.createdBy "Created By">
+<!ENTITY  subjects_prefix_switch.label.options.createdBy "Created by">
 <!ENTITY  subjects_prefix_switch.label.setrd.title "Set Prefix">
 <!ENTITY  subjects_prefix_switch.label.setrd.description "Description">
 <!ENTITY  subjects_prefix_switch.label.setrd.path "Prefix">
