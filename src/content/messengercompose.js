@@ -54,10 +54,11 @@ function onLoad(activatedWhileWindowOpen) {
          <popup id="msgComposeContext">
             <menu   id="subjects_prefix_switchContext"
                     label="&subjects_prefix_switch.label.context;"
-                    insertbefore="context-cut,spellCheckNoSuggestions">
+                    insertbefore="context-cut"
+                    insertafter="spellCheckSuggestionsSeparator">
                         <menupopup id="subjects_prefix_switchMenuPopup-context" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('context');"/>
             </menu>
-            <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="context-cut,spellCheckNoSuggestions" />
+            <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="context-cut,spellCheckSuggestionsSeparator" insertafter="subjects_prefix_switchContext" />
          </popup>
         `,
         ["chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd"]);

@@ -13,7 +13,7 @@ XPCOMUtils.defineLazyGetter(ssMsgNotification, "notificationbox", () => {
     });
 });
 
-var { OS } = ChromeUtils.import("resource://gre/modules/osfile.jsm");
+const Services = globalThis.Services || ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
 
 com.ktsystems.subswitch.OptionsTreeView = function(items, defaultsignature){
     this.items = items;
@@ -173,9 +173,12 @@ com.ktsystems.subswitch.OptionsPanel = {
                 nb.removeNotification(notification);
             }
 
-            nb.appendNotification(msg, "ssMsgNotification",
-                "chrome://global/skin/icons/information-16.png",
-                nb.PRIORITY_INFO_MEDIUM, null);
+            notification =  nb.appendNotification("ssMsgNotification", {
+                label: msg,
+                priority: nb.PRIORITY_INFO_MEDIUM
+            }, null);
+
+            //notification.messageImage.src = "chrome://global/skin/icons/info.svg";
         }
     },
 
@@ -253,8 +256,8 @@ this.dumpStr (element);
         }
 
         // add OS as attribute to outer dialog
-        document.getElementById('subjects_prefix_switchoptions').setAttribute("OS", OS.Constants.Sys.Name);
-        this.dumpStr("Adding attribute 'OS' = '"+ OS.Constants.Sys.Name);
+        document.getElementById('subjects_prefix_switchoptions').setAttribute("OS", Services.appinfo.OS);
+        this.dumpStr("Adding attribute 'OS' = '"+ Services.appinfo.OS);
 
         this.initTree();
     },
@@ -478,6 +481,7 @@ this.dumpStr('initTree2');
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportSuccess"));
                         } catch (e) {
+                            com.ktsystems.subswitch.Utils.dumpStr(file.leafName);
                             com.ktsystems.subswitch.OptionsPanel.showMessage(
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportTitle"),
                                 com.ktsystems.subswitch.Utils.getLocalizedMessage("options.pickExportError")+e);
