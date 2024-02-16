@@ -1,5 +1,6 @@
 // Import any needed modules.
-const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
+var Services = globalThis.Services ||
+    ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
 
 function onLoad(activatedWhileWindowOpen) {
     console.log("Init of customizeToolbar - onLoad - START");

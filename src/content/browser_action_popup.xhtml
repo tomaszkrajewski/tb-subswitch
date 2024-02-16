@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, you can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html id="aboutDialog" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      role="dialog">
+<head>
+    <script type="application/x-javascript" src="/chrome/content/const.js"></script>
+    <script type="application/x-javascript" src="/chrome/content/utils.js"></script>
+    <script type="application/x-javascript" src="/chrome/content/date_utils.js"></script>
+    <script type="application/x-javascript" src="/chrome/content/items.js"></script>
+    <script type="application/x-javascript" src="/chrome/content/subjects_prefix_switch.js"></script>
+    <script type="application/x-javascript" src="/chrome/content/messenger-overlay-toolbar.js"></script>
+</head>
+
+<body>
+
+<form id="inputform">
+    <div>
+        <menupopup id="toolbarSubSwitchPopup"
+               onpopupshowing="console.log('DUPA ZWIERZA');">
+
+            <stringbundleset id="stringbundleset">
+                <stringbundle id="subjects_prefix_switch.locale" src="chrome://subjects_prefix_switch/locale/subjects_prefix_switch.properties"></stringbundle>
+            </stringbundleset>
+
+            <menuitem id="newMsgButton-mail-menuitem"
+                      label="newMsgButton.label;"
+                      class="menuitem-iconic"
+                      command="cmd_newMessage"></menuitem>
+            <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="subjects_prefix_switch_RD_0" ></menuseparator>
+
+        </menupopup>
+
+        <input id="button_ok" type="submit" data="ok" value="Add" ></input>
+        <input id="button_new" type="button" data="new" value="Create + add" onclick="console.log('DUPA ZWIERZA');" ></input>
+    </div>
+</form>
+</body>
+</html>
+
+
