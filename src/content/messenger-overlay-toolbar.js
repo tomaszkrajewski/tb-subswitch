@@ -8,42 +8,48 @@ com.ktsystems.subswitch.SubSwitchMOToolbar = {
 
     initMsgWindowToolbar : function() {
          try {
-            var subMain = com.ktsystems.subswitch.SubSwitchMOToolbar;
-            var separator = document.getElementById("subjects_prefix_switchContextSeparator");
-            var menuPopup = separator.parentNode;
-            var item;
+             console.log("Init of subswitch toolbar messenger - onLoad - START");
 
-            for (var i = menuPopup.childNodes.length - 1; i >= 0; i--) {
-                item = menuPopup.childNodes[i];
-                com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar -> '+item.id);
-                if (item.id.substring(0, subMain.rdi_prefix.length) == subMain.rdi_prefix) {
-                    menuPopup.removeChild(item);
-                }
-            }
-            separator.hidden = true;
-            var rdData = subMain.loadRDProperty();
+             var subMain = com.ktsystems.subswitch.SubSwitchMOToolbar;
+             var separator = document.getElementById("subjects_prefix_switchMenuPopup-menu");
+             //var menuPopup = separator.parentNode;
+             var menuPopup = separator;
+             var item;
 
-            for (var j = 0; j < rdData.length; j++) {
-                com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar -> '+rdData[j]+' '+rdData[j].showInNewMsgPopup);
-                if (rdData[j].showInNewMsgPopup) {
-                    separator.hidden = false;
-                    subMain.insertMenuItem(menuPopup, rdData[j].description, rdData[j].rd, j, rdData[j].addresses);
-                }
-            }
-
-             var buttonNewMsg = document.getElementById("button-newmsg");
-             buttonNewMsg.setAttribute("type", "menu-button")
-
-             for (var i = buttonNewMsg.childNodes.length - 1; i >= 0; i--) {
-                 item = buttonNewMsg.childNodes[i];
-                 com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar -> '+item.nodeName);
-                 if ((item.nodeName == "image")||(item.nodeName == "label")) {
-                     buttonNewMsg.removeChild(item);
+             for (var i = menuPopup.childNodes.length - 1; i >= 0; i--) {
+                 item = menuPopup.childNodes[i];
+                 com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar 1 -> '+item.id);
+                 if (item.id.substring(0, subMain.rdi_prefix.length) == subMain.rdi_prefix) {
+                     menuPopup.removeChild(item);
                  }
              }
+             //separator.hidden = true;
+             var rdData = subMain.loadRDProperty();
+
+             for (var j = 0; j < rdData.length; j++) {
+                 com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar 2 -> '+rdData[j]+' '+rdData[j].showInNewMsgPopup);
+                 if (rdData[j].showInNewMsgPopup) {
+                     separator.hidden = false;
+                     subMain.insertMenuItem(menuPopup, rdData[j].description, rdData[j].rd, j, rdData[j].addresses);
+                     com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar 22 -> '+rdData[j]+' '+rdData[j].showInNewMsgPopup);
+                 }
+             }
+/*
+              var buttonNewMsg = document.getElementById("button-newmsg");
+              buttonNewMsg.setAttribute("type", "menu-button")
+
+              for (var i = buttonNewMsg.childNodes.length - 1; i >= 0; i--) {
+                  item = buttonNewMsg.childNodes[i];
+                  com.ktsystems.subswitch.Utils.dumpStr('initMsgWindowToolbar 3 -> '+item.nodeName);
+                  if ((item.nodeName == "image")||(item.nodeName == "label")) {
+                      buttonNewMsg.removeChild(item);
+                  }
+              }
+*/
+             console.log("Init of subswitch toolbar messenger - onLoad - END");
 
          } catch(e) {
-            com.ktsystems.subswitch.Utils.dumpStr('SubSwitchMOToolbar.initMsgWindowToolbar-> '+e);
+            com.ktsystems.subswitch.Utils.dumpStr('SubSwitchMOToolbar.initMsgWindowToolbar E-> '+e);
         }
     },
 
@@ -100,11 +106,16 @@ com.ktsystems.subswitch.SubSwitchMOToolbar = {
     },
 
     insertMenuItem : function(menu, label, tooltip, idx) {
+        com.ktsystems.subswitch.Utils.dumpStr("Init of insertMenuItem - START");
         var item = com.ktsystems.subswitch.Utils.createMenuItem(
             this.rdi_prefix + idx, label, tooltip,
             "event.stopPropagation(); com.ktsystems.subswitch.SubSwitchMOToolbar.MsgNewSubSwitchMessage(" + idx + ");");
         item.setAttribute("class", "menuitem-iconic");
 
+        com.ktsystems.subswitch.Utils.dumpStr('Init of insertMenuItem - 1'+item);
+        com.ktsystems.subswitch.Utils.dumpStr('Init of insertMenuItem - 2'+menu);
+
         menu.appendChild(item);
+        com.ktsystems.subswitch.Utils.dumpStr("Init of insertMenuItem - END");
     }
 };

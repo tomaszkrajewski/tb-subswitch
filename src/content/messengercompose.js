@@ -1,5 +1,8 @@
 // Import any needed modules.
-const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
+var Services = globalThis.Services ||
+    ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
+
+
 
 // Load an additional JavaScript file.
 Services.scriptloader.loadSubScript("chrome://subjects_prefix_switch/content/const.js", window, "UTF-8");

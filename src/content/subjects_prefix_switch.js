@@ -1,6 +1,8 @@
 var { MsgHdrToMimeMessage } = ChromeUtils.import("resource:///modules/gloda/MimeMessage.jsm");
 var { mimeMsgToContentSnippetAndMeta } = ChromeUtils.import("resource:///modules/gloda/GlodaContent.jsm");
 
+var { MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm");
+
 if(!com.ktsystems.subswitch.SubSwitchMain) com.ktsystems.subswitch.SubSwitchMain={};
 
 com.ktsystems.subswitch.SubSwitchMain = {
@@ -342,7 +344,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
         let msgURI = gMsgCompose.originalMsgURI;
         com.ktsystems.subswitch.Utils.dumpStr('loadOriginalMsgSSHeader; originalMsgURI->'+msgURI);
         if (msgURI) {
-            let msgHdr = messenger.messageServiceFromURI(msgURI).messageURIToMsgHdr(msgURI);
+            let msgSvc = MailServices.messageServiceFromURI(msgURI) || messenger.messageServiceFromURI(msgURI);
+
+            let msgHdr = msgSvc.messageURIToMsgHdr(msgURI);
 
             if (com.ktsystems.subswitch.SubSwitchMain.isAddressOnIgnoreList(msgHdr.author) != true) {
                 try {
