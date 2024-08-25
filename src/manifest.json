@@ -1,13 +1,13 @@
 {
   "manifest_version": 2,
-  "name": "{appdisplayname}",
-  "description": "{appdescription}",
-  "version": "{appversion}",
-  "author": "{auther}",
+  "name": "SubSwitch",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.0.1",
+  "author": "Tomasz Krajewski",
   "homepage_url": "https://github.com/tomaszkrajewski/tb-SubSwitch",
   "browser_specific_settings": {
     "gecko": {
-      "id": "{appid}",
+      "id": "{957509b1-217a-46c7-b08b-f67d08d53883}",
       "strict_min_version": "115.0",
       "strict_max_version": "130.*"
     }
@@ -22,6 +22,7 @@
       "background.js"
     ]
   },
+  "default_locale": "en-US",
   "experiment_apis": {
     "WindowListener": {
       "schema": "api/WindowListener/schema.json",
