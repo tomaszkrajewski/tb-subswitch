@@ -1,5 +1,218 @@
 {
+    "discovery.confirmHeader": {
+        "message": "Nouveau préfixe"
+    },
+    "discovery.confirmMessage": {
+        "message": "Un nouveau préfixe a été trouvé. \\n\\nVoulez-vous l'ajouter ŕ votre liste?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch / Nouveau préfixe trouvé"
+    },
     "extensionDescription": {
         "message": "Activer/Désactiver le préfixe dans le sujet ou choisssez en un nouveau depuis votre liste prédéfinie."
+    },
+    "menuItem.onOff": {
+        "message": "Préfixe on/off"
+    },
+    "menuItem.options": {
+        "message": "SubSwitch Options"
+    },
+    "options.duplicateAddress": {
+        "message": "L'adresse est déjŕ listée!"
+    },
+    "options.invalidAddress": {
+        "message": "Adresse invalide!"
+    },
+    "options.pickExportSuccess": {
+        "message": "L'export de la configuration dans un fichier est terminé."
+    },
+    "options.pickExportTitle": {
+        "message": "Enregistrer la configuration dans un fichier"
+    },
+    "options.pickImportError": {
+        "message": "Le chargement de la configuration depuis un fichier est en erreur:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "Format de fichier non reconnu"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "Opération invalide sur le fichier"
+    },
+    "options.pickImportSuccess": {
+        "message": "Le chargement de la configuration depuis un fichier est terminé."
+    },
+    "options.pickImportTitle": {
+        "message": "Charger la configuration depuis un fichier"
+    },
+    "options.prefixCopy": {
+        "message": "COPIER"
+    },
+    "setRD.duplicateAlias": {
+        "message": "Alias déjŕ listé!"
+    },
+    "setRD.invalidAlias": {
+        "message": "Alias invalide/manquant!"
+    },
+    "setRD.invalidDescription": {
+        "message": "Description invalide/manquante!"
+    },
+    "setRD.invalidPath": {
+        "message": "Préfixe invalide/manquant!"
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "Choisissez votre préfixe..."
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "Ajouter les détails du préfixe ŕ l'entęte"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "Supprimer"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "Copier"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "Editer"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "Nouveau"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "Afficher 'SubSwitch' dans le menu contextuel"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "Crée par"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "Si l'adresse de lémetteur correspond ŕ une de la liste, la reconnaissance automatique des préfixes sera désactivée."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "Ajouter"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "Address Email:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "Enlever"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "Le caractčre '?' peut ętre utilisé comme joker (wildcard). (Exemple: '?@mozilla.com', 'test@?.com' or 't?t@m?a.c?' vont marcher quand 'test@mozilla.com' sera l'émetteur)"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "Signes devant ętre éviter lors de la comparaison de préfixes"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "Expression réguličre pour trouver des Préfixes dans le sujet"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "A propos"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "Rechercher les nouveaux préfixes lors de la réponse"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "Principal"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "Afficher 'SubSwitch' avant le sujet de l'email"
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "Désactiver les préfixes par défaut"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "Découverte des préfixes"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "Exporter"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "Importer"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "Importer / Exporter des Préfixes"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "Autre"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "Supporter SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "On/Off:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "Je recherche de l'aide pour la traduction. Si vous voulez que votre langue soit disponible dans SubSwitch - écrivez moi pour avoir la façon de procéder:"
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "Défaut"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "Description"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "Préfixe"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "Préfixes"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "Nouveau message"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "Actuellement nous n'avons pas d'aide de disponible, n'hésitez pas ŕ me contacter pour me poser vos questions ou me laisser vos commentaires:"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "SubSwitch Options"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "Addresses pour les préfixes"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "Ajouter"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "Enlever"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "Alias pour le Préfixe"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "Ajouter"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "Enlever"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "Description"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "Ne pas ajouter. C'est juste un alias pour ..."
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "Préfixe"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "Numéro de séquence"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "Appliquer le Préfixe"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "Activer/Désactiver le préfixe"
+    },
+    "toolTip.enterOptions": {
+        "message": "Ouvrir la boite de dialogue de SubSwitch"
+    },
+    "toolTip.onOff": {
+        "message": "Activer/Désactiver le préfixe"
     }
 }

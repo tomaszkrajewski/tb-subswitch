@@ -1,5 +1,218 @@
 {
+    "discovery.confirmHeader": {
+        "message": "新的前置字元"
+    },
+    "discovery.confirmMessage": {
+        "message": "新的前置字元已於此訊息找到. \\n\\n你想要加入此前置字元到你的清單內嗎?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch / 找到新的前置字元"
+    },
     "extensionDescription": {
         "message": "切換標題的前置字元 開/關 或 從你預先設定中選擇一個新的."
+    },
+    "menuItem.onOff": {
+        "message": "前置字元 開/關"
+    },
+    "menuItem.options": {
+        "message": "SubSwitch 選項"
+    },
+    "options.duplicateAddress": {
+        "message": "地址已存在列表!"
+    },
+    "options.invalidAddress": {
+        "message": "錯誤地址!"
+    },
+    "options.pickExportSuccess": {
+        "message": "匯出設置到檔案結束成功."
+    },
+    "options.pickExportTitle": {
+        "message": "儲存設置到檔案"
+    },
+    "options.pickImportError": {
+        "message": "從檔案載入設置結束並有錯誤:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "檔案格式未組織"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "檔案的有誤作業"
+    },
+    "options.pickImportSuccess": {
+        "message": "從檔案載入設置結束成功."
+    },
+    "options.pickImportTitle": {
+        "message": "從檔案載入設置"
+    },
+    "options.prefixCopy": {
+        "message": "複製"
+    },
+    "setRD.duplicateAlias": {
+        "message": "別名已在列表中!"
+    },
+    "setRD.invalidAlias": {
+        "message": "遺失/有誤的別名!"
+    },
+    "setRD.invalidDescription": {
+        "message": "遺失/有誤的說明!"
+    },
+    "setRD.invalidPath": {
+        "message": "遺失/有誤的前置字元!"
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "選擇你的前置字元..."
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "新增前置字元內容到訊息檔頭內"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "刪除"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "複製"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "編輯"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "新增"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "顯示 'SubSwitch' 在內容選單內"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "建立由"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "如果傳送者郵件地址符合清單中其中一個, 將自動辨識關閉前置字元."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "新增"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "郵件地址:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "移除"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "使用 '?'-字元 可以使用萬用字元. (例如: '?@mozilla.com', 'test@?.com' or 't?t@m?a.c?' 當使用 'test@mozilla.com' 將會符合為傳送者)"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "當比對前置字元時，標記應該被忽略"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "於標題中使用正規化搜尋前置字元"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "關於"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "當回應時，搜尋新的前置字元於訊息內"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "主要"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "顯示 'SubSwitch' 在標題欄位之後"
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "預設切換前置關閉"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "前置字元探索"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "匯出"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "匯入"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "前置字元匯入 / 匯出"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "其它"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "支援 SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "開/關:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "我正在尋找 SubSwitch 介面翻譯. 如果你的語言需要翻譯而且你可以幫忙翻譯 SubSwitch - 請寫封信給我:"
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "預設"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "備註說明"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "前置"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "前置字元"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "新訊息"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "目前我們不需要任何幫助, 若您有任何問題與建議麻煩與我們聯繫 :"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "SubSwitch 選項"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "地址前置字元"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "新增"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "移除"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "前置字元別名"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "新增"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "移除"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "備註說明"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "不要新增. 這只是別名給 ..."
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "前置字元"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "序列號"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "設置前置字元"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "切換前置字元 開/關"
+    },
+    "toolTip.enterOptions": {
+        "message": "輸入 SubSwitch 選項對話框"
+    },
+    "toolTip.onOff": {
+        "message": "切換前置字元 開/關"
     }
 }

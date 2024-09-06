@@ -17,10 +17,6 @@ function onLoad(activatedWhileWindowOpen) {
 
     WL.injectCSS("resource://subjects_prefix_switch/subjects_prefix_switch.css");
     WL.injectElements(`
-         <stringbundleset id="stringbundleset">
-            <stringbundle id="subjects_prefix_switch.locale" src="chrome://subjects_prefix_switch/locale/subjects_prefix_switch.properties"/>
-         </stringbundleset>
-        
          <toolbarpalette id="MsgComposeToolbarPalette">
             <toolbarbutton
                 is="toolbarbutton-menu-button"
@@ -62,9 +58,7 @@ function onLoad(activatedWhileWindowOpen) {
                         <menupopup id="subjects_prefix_switchMenuPopup-context" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('context');"/>
             </menu>
             <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="context-cut,spellCheckSuggestionsSeparator" insertafter="subjects_prefix_switchContext" />
-         </popup>
-        `,
-        ["chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd"]);
+         </popup>`);
 
     window.com.ktsystems.subswitch.SubSwitchMain.onLoad();
 

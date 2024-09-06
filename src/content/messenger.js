@@ -27,8 +27,7 @@ function onLoad(activatedWhileWindowOpen) {
         <menupopup id="taskPopup">
           <menuitem id="subjects_prefix_switch-settings" label="&subjects_prefix_switch.label.toolbar;" 
             oncommand="subswitchOptionsHandler.openSettings();" insertbefore="prefSep" class="menu-iconic subjects_prefix_switch-icon menuitem-iconic" />
-        </menupopup>`,
-        ["chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd"]);
+        </menupopup>`);
 
     //FIXME: It doesn't work in 78 :/ Somehow the newMsg button is 'protected'
     //   <toolbarbutton id="button-newmsg"

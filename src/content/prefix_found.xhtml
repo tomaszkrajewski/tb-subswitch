@@ -7,7 +7,7 @@
 <?xml-stylesheet href="chrome://messenger/skin/accountManage.css" type="text/css"?>
 
 
-<!DOCTYPE dialog SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
+<!DOCTYPE dialog>
 
 <dialog id="prefixFoundDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -18,10 +18,6 @@
                 com.ktsystems.subswitch.SetPrefix.setRDOnLoad();
                 com.ktsystems.subswitch.PrefixFound.prefixFoundOnLoad()"
         style="min-width: 29em; min-height: 8.5em; -moz-user-focus: ignore;">
-
-  <stringbundleset id="stringbundleset">
-    <stringbundle id="subjects_prefix_switch.locale" src="chrome://subjects_prefix_switch/locale/subjects_prefix_switch.properties"/>
-  </stringbundleset>
 
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/const.js"/>
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/utils.js"/>

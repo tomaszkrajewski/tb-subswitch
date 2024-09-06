@@ -1,5 +1,218 @@
 {
+    "discovery.confirmHeader": {
+        "message": "New prefix"
+    },
+    "discovery.confirmMessage": {
+        "message": "New prefix has been found in this message. \\n\\nDo you want to add this prefix to your list?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch / New prefix found"
+    },
     "extensionDescription": {
         "message": "Switch on or off the message's prefix. Choose a new one from your predefined set."
+    },
+    "menuItem.onOff": {
+        "message": "Prefix on/off"
+    },
+    "menuItem.options": {
+        "message": "SubSwitch Options"
+    },
+    "options.duplicateAddress": {
+        "message": "Address already listed!"
+    },
+    "options.invalidAddress": {
+        "message": "Invalid address!"
+    },
+    "options.pickExportSuccess": {
+        "message": "Export of settings to file finished successfully."
+    },
+    "options.pickExportTitle": {
+        "message": "Save settings to file"
+    },
+    "options.pickImportError": {
+        "message": "Loading settings from file finished with error:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "Not recognized file format"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "Invalid operation on file"
+    },
+    "options.pickImportSuccess": {
+        "message": "Loading settings from file finished successfully."
+    },
+    "options.pickImportTitle": {
+        "message": "Load settings from file"
+    },
+    "options.prefixCopy": {
+        "message": "COPY"
+    },
+    "setRD.duplicateAlias": {
+        "message": "Alias already listed!"
+    },
+    "setRD.invalidAlias": {
+        "message": "Missing/invalid alias!"
+    },
+    "setRD.invalidDescription": {
+        "message": "Missing/invalid description!"
+    },
+    "setRD.invalidPath": {
+        "message": "Missing/invalid prefix!"
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "Choose your prefix..."
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "Add details of the prefix to message headers"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "Delete"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "Copy"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "Edit"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "New"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "Show 'SubSwitch' in context-menu"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "Created by"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "If the sender's address match one of the entries in the list, the automatic recognition of the prefix will be turned off."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "Add"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "Email-address:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "Remove"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "The '?'-character can be used as a wildcard. (Example: '?@mozilla.com', 'test@?.com' or 't?t@m?a.c?' will match when 'test@mozilla.com' is a sender)"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "Signs that should be ignored when comparing prefixes"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "Regex for finding prefix in subject"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "About"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "Search for new prefixes in message when answering"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "Main"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "Show 'SubSwitch' before Subject field"
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "Switch Prefix off by default"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "Prefixes discovery"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "Export"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "Import"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "Prefixes Import / Export"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "Other"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "Support SubSwitch via PayPal"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "On/Off:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "I'm looking for help with SubSwitch translation. If you want to have your language's version of SubSwitch - write for detailed instructions:"
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "Default"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "Description"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "Prefix"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "Prefixes"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "New message"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "Currently we don't have any help, please feel free to contact me if you have any questions or comments:"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "SubSwitch Options"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "Addresses for prefix"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "Add"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "Remove"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "Aliases for prefix"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "Add"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "Remove"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "Description"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "Don't add. It's just alias for ..."
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "Prefix"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "Sequence Number"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "Set Prefix"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "Switch the Prefix on/off"
+    },
+    "toolTip.enterOptions": {
+        "message": "Enter the options-dialog of SubSwitch"
+    },
+    "toolTip.onOff": {
+        "message": "Switch the prefix on/off"
     }
 }

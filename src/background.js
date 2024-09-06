@@ -6,13 +6,6 @@ async function main() {
             ["content",  "subjects_prefix_switch",           "content/"],
             ["resource", "subjects_prefix_switch",           "/"],
             ["resource", "subjects_prefix_switch",           "skin/classic/"],
-            ["locale",   "subjects_prefix_switch", "en-US", "locale/en-US/"],
-            ["locale",   "subjects_prefix_switch", "de-DE", "locale/de-DE/"],
-            ["locale",   "subjects_prefix_switch", "pl-PL", "locale/pl-PL/"],
-            ["locale",   "subjects_prefix_switch", "es-ES", "locale/es-ES/"],
-            ["locale",   "subjects_prefix_switch", "sv-SE", "locale/sv-SE/"],
-            ["locale",   "subjects_prefix_switch", "fr-FR", "locale/fr-FR/"],
-            ["locale",   "subjects_prefix_switch", "zh-TW", "locale/zh-TW/"]
         ]
     );
 
