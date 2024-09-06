@@ -16,7 +16,7 @@
         minwidth="300"
         onload="return com.ktsystems.subswitch.SetPrefix.setRDOnLoad();"
         buttons="accept,cancel"
-        title="&subjects_prefix_switch.label.setrd.title;">
+        title="__MSG_subjects_prefix_switch.label.setrd.title__">
 
     <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/const.js"/>
     <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/utils.js"/>
@@ -29,7 +29,7 @@
         <html:tr>
             <html:td width="80">
                 <hbox align="center">
-                    <label control="description" value="&subjects_prefix_switch.label.setrd.description;"/>
+                    <label control="description" value="__MSG_subjects_prefix_switch.label.setrd.description__"/>
                 </hbox>
             </html:td>
             <html:td flex="1">
@@ -41,7 +41,7 @@
         <html:tr>
             <html:td width="80">
                 <hbox align="center">
-                    <label control="rd" value="&subjects_prefix_switch.label.setrd.path;"/>
+                    <label control="rd" value="__MSG_subjects_prefix_switch.label.setrd.path__"/>
                 </hbox>
             </html:td>
             <html:td flex="1">
@@ -55,9 +55,9 @@
      <separator style="margin-bottom:5px;"/>
      <tabbox>
                 <tabs>
-                    <tab label="&subjects_prefix_switch.label.setrd.aliases;"/>
-                    <tab label="&subjects_prefix_switch.label.setrd.addresses;"/>
-                    <tab label="&subjects_prefix_switch.label.options.othertab;"/>
+                    <tab label="__MSG_subjects_prefix_switch.label.setrd.aliases__"/>
+                    <tab label="__MSG_subjects_prefix_switch.label.setrd.addresses__"/>
+                    <tab label="__MSG_subjects_prefix_switch.label.options.othertab__"/>
                 </tabs>
                 <tabpanels>
                     <tabpanel id="aliasestab">
@@ -65,9 +65,9 @@
                             <html:input id="alias" />
                             <hbox align="center">
                                 <spacer flex="1"/>
-                                <button class="new optionsButton" id="addAlias" label="&subjects_prefix_switch.label.setrd.aliasesAdd;"
+                                <button class="new optionsButton" id="addAlias" label="__MSG_subjects_prefix_switch.label.setrd.aliasesAdd__"
                                         oncommand="com.ktsystems.subswitch.SetPrefix.addAlias('address');"/>
-                                <button class="delete optionsButton" id="removeAlias" label="&subjects_prefix_switch.label.setrd.aliasesRemove;"
+                                <button class="delete optionsButton" id="removeAlias" label="__MSG_subjects_prefix_switch.label.setrd.aliasesRemove__"
                                         oncommand="com.ktsystems.subswitch.SetPrefix.removeAlias('address');"/>
                                 <spacer flex="1"/>
                             </hbox>
@@ -121,9 +121,9 @@
                             </hbox>
                             <hbox align="center">
                                 <spacer flex="1"/>
-                                <button class="new optionsButton" id="addAddress" label="&subjects_prefix_switch.label.setrd.addressesAdd;"
+                                <button class="new optionsButton" id="addAddress" label="__MSG_subjects_prefix_switch.label.setrd.addressesAdd__"
                                         oncommand="com.ktsystems.subswitch.SetPrefix.addAddress();"/>
-                                <button class="delete optionsButton" id="removeAddress" label="&subjects_prefix_switch.label.setrd.addressesRemove;"
+                                <button class="delete optionsButton" id="removeAddress" label="__MSG_subjects_prefix_switch.label.setrd.addressesRemove__"
                                         oncommand="com.ktsystems.subswitch.SetPrefix.removeAddress();"/>
                                 <spacer flex="1"/>
                             </hbox>
@@ -136,7 +136,7 @@
                         <vbox>
                             <row >
                                 <hbox align="center">
-                                    <label control="rdSequenceValue" value="&subjects_prefix_switch.label.setrd.sequence;"/>
+                                    <label control="rdSequenceValue" value="__MSG_subjects_prefix_switch.label.setrd.sequence__"/>
                                 </hbox>
                                 <hbox align="center">
                                     <html:input type="number" min="0"
