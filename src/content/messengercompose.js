@@ -2,7 +2,8 @@
 var Services = globalThis.Services ||
     ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
 
-
+var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
+var extension = ExtensionParent.GlobalManager.getExtension("{957509b1-217a-46c7-b08b-f67d08d53883}");
 
 // Load an additional JavaScript file.
 Services.scriptloader.loadSubScript("chrome://subjects_prefix_switch/content/const.js", window, "UTF-8");
@@ -17,18 +18,14 @@ function onLoad(activatedWhileWindowOpen) {
 
     WL.injectCSS("resource://subjects_prefix_switch/subjects_prefix_switch.css");
     WL.injectElements(`
-         <stringbundleset id="stringbundleset">
-            <stringbundle id="subjects_prefix_switch.locale" src="chrome://subjects_prefix_switch/locale/subjects_prefix_switch.properties"/>
-         </stringbundleset>
-        
          <toolbarpalette id="MsgComposeToolbarPalette">
             <toolbarbutton
                 is="toolbarbutton-menu-button"
                 id="subjects_prefix_switchButton"
                 type="menu-button"
                 class="toolbarbutton-1"
-                label="&subjects_prefix_switch.label.toolbar;"
-                tooltiptext="&subjects_prefix_switch.tooltip.toolbar;"
+                label="${extension.localeData.localizeMessage("subjects_prefix_switch.label.toolbar")}"
+                tooltiptext="${extension.localeData.localizeMessage("subjects_prefix_switch.tooltip.toolbar")}"
                 oncommand="com.ktsystems.subswitch.SubSwitchMain.subjects_prefix_switch();">
                 <menupopup id="subjects_prefix_switchMenuPopup-toolbar" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('toolbar');"/>
             </toolbarbutton>
@@ -36,7 +33,7 @@ function onLoad(activatedWhileWindowOpen) {
         
          <menupopup id="optionsMenuPopup">
             <menu   id="subjects_prefix_switchMenu"
-                    label="&subjects_prefix_switch.label.menu;"
+                    label="${extension.localeData.localizeMessage("subjects_prefix_switch.label.menu")}"
                     insertbefore="returnReceiptMenu"
                     class="menu-iconic subjects_prefix_switch-icon menuitem-iconic">
                 <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('menu');" />
@@ -56,15 +53,13 @@ function onLoad(activatedWhileWindowOpen) {
          
          <popup id="msgComposeContext">
             <menu   id="subjects_prefix_switchContext"
-                    label="&subjects_prefix_switch.label.context;"
+                    label="${extension.localeData.localizeMessage("subjects_prefix_switch.label.context")}"
                     insertbefore="context-cut"
                     insertafter="spellCheckSuggestionsSeparator">
                         <menupopup id="subjects_prefix_switchMenuPopup-context" onpopupshowing="com.ktsystems.subswitch.SubSwitchMain.initMenuPopup('context');"/>
             </menu>
             <menuseparator id="subjects_prefix_switchContextSeparator" insertbefore="context-cut,spellCheckSuggestionsSeparator" insertafter="subjects_prefix_switchContext" />
-         </popup>
-        `,
-        ["chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd"]);
+         </popup>`);
 
     window.com.ktsystems.subswitch.SubSwitchMain.onLoad();
 

@@ -7,7 +7,7 @@
 <?xml-stylesheet href="chrome://messenger/skin/accountManage.css" type="text/css"?>
 
 
-<!DOCTYPE dialog SYSTEM "chrome://subjects_prefix_switch/locale/subjects_prefix_switch.dtd">
+<!DOCTYPE dialog>
 
 <dialog id="prefixFoundDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -19,16 +19,13 @@
                 com.ktsystems.subswitch.PrefixFound.prefixFoundOnLoad()"
         style="min-width: 29em; min-height: 8.5em; -moz-user-focus: ignore;">
 
-  <stringbundleset id="stringbundleset">
-    <stringbundle id="subjects_prefix_switch.locale" src="chrome://subjects_prefix_switch/locale/subjects_prefix_switch.properties"/>
-  </stringbundleset>
-
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/const.js"/>
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/utils.js"/>
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/items.js"/>
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/setrd.js"/>
   <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/prefix_found.js"/>
-
+  <script type="application/x-javascript" src="chrome://subjects_prefix_switch/content/i18n.js"/>
+  
   <commandset id="selectEditMenuItems">
     <command id="cmd_copy" oncommand="goDoCommand('cmd_copy')" disabled="true"/>
     <command id="cmd_selectAll" oncommand="goDoCommand('cmd_selectAll')"/>
@@ -54,7 +51,7 @@
                 <html:tr>
                     <html:th>
                         <label id="description.label"
-                               value="&subjects_prefix_switch.label.setrd.description;"
+                               value="__MSG_subjects_prefix_switch.label.setrd.description__"
                                control="description"/>
                     </html:th>
                     <html:td>
@@ -68,7 +65,7 @@
                 <html:tr>
                     <html:th>
                         <label id="rd.label"
-                               value="&subjects_prefix_switch.label.setrd.path;"
+                               value="__MSG_subjects_prefix_switch.label.setrd.path__"
                                control="rd"/>
                     </html:th>
                     <html:td>
@@ -82,7 +79,7 @@
                 </html:table>
                 <separator class="thin"/>
                 <hbox flex="1">
-                    <checkbox id="aliasCheckbox" label="&subjects_prefix_switch.label.setrd.justAlias;"
+                    <checkbox id="aliasCheckbox" label="__MSG_subjects_prefix_switch.label.setrd.justAlias__"
                               oncommand="com.ktsystems.subswitch.PrefixFound.updateAliasButton();" flex="1"/>
                     <menulist id="aliasButton" disabled="true" size="30" aria-labelledby="aliasCheckbox" flex="1">
                         <menupopup id="aliasMenuPopup" onpopupshowing="com.ktsystems.subswitch.PrefixFound.initAliasMenuPopup();" />

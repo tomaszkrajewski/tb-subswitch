@@ -1,6 +1,9 @@
 
 if(!com.ktsystems.subswitch.Utils) com.ktsystems.subswitch.Utils={};
 
+var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
+var extension = ExtensionParent.GlobalManager.getExtension("{957509b1-217a-46c7-b08b-f67d08d53883}");
+
 var subswitchOptionsHandler = {
     onLoadOptions: function () {
         window.close();
@@ -24,7 +27,7 @@ com.ktsystems.subswitch.Utils = {
     },
 
     getLocalizedMessage : function(msg) {
-        return document.getElementById("subjects_prefix_switch.locale").getString(msg);
+        return extension.localeData.localizeMessage(msg);
     },
 
     openMailURL : function(aURL) {

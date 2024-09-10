@@ -1,5 +1,218 @@
 {
+    "discovery.confirmHeader": {
+        "message": "Neues Etikett"
+    },
+    "discovery.confirmMessage": {
+        "message": "In dieser Nachricht wurde ein nues Etikett gefunden \\n\\nMöchten Sie dieses Etikett Ihrer Sammlung hinzufügen?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch | Neues Etikett gefunden"
+    },
     "extensionDescription": {
         "message": "Ermöglicht das Einschalten oder Ausschalten von Etiketten oder Wählen eines Etikett aus der Sammlung."
+    },
+    "menuItem.onOff": {
+        "message": "Etikett ein/aus"
+    },
+    "menuItem.options": {
+        "message": "SubSwitch | Einstellungen"
+    },
+    "options.duplicateAddress": {
+        "message": "Warnung! Eintrag existiert bereits"
+    },
+    "options.invalidAddress": {
+        "message": "Warnung! Adresse ungültig"
+    },
+    "options.pickExportSuccess": {
+        "message": "Einstellungen erfolgreich in Datei geschrieben."
+    },
+    "options.pickExportTitle": {
+        "message": "Einstellungen in Datei sichern"
+    },
+    "options.pickImportError": {
+        "message": "Fehler! Übernehmen der Einstellungen aus Datei wurde mit folgendem Fehler abgeschlossen:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "Warnung! Dateiformat nicht erkannt"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "Warnung! Ungültiger Vorgang an Datei"
+    },
+    "options.pickImportSuccess": {
+        "message": "Übernehmen der Einstellungen aus Datei erfolgreich"
+    },
+    "options.pickImportTitle": {
+        "message": "Einstellungen von Datei einlesen"
+    },
+    "options.prefixCopy": {
+        "message": "KOPIE"
+    },
+    "setRD.duplicateAlias": {
+        "message": "Dieser Alias wird bereits verwendet."
+    },
+    "setRD.invalidAlias": {
+        "message": "Alias fehlt oder ist ungültig."
+    },
+    "setRD.invalidDescription": {
+        "message": "Beschreibung fehlt oder ist ungültig."
+    },
+    "setRD.invalidPath": {
+        "message": "Etikett fehlt oder ist ungültig."
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "Wählen Sie hier bitte das passende Etikett..."
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "Etikettendetails in Nachrichtenkopf einfügen"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "Entfernen"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "Klonen"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "Bearbeiten"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "Erstellen"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "&quot;SubSwitch&quot; im Kontextmenü anzeigen"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "Entwickelt von"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "Stimmt die Adresse des Absenders mit einem Eintrag der Liste überein, wird die automatische Erkennung ausgeschaltet."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "hinzufügen"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "E-Mail-Adresse:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "entfernen"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "Das Fragezeichen '?' können Sie als Joker (Wildcard) verwenden. (Als Beispiel: '?@mozilla.com', 'test@?.com' oder 't?t@m?a.c?' erzielen beispielsweise einen Treffer bei einem Absender wie 'test@mozilla.com')"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "Diese Zeichen beim Vergleich von Etiketten ignorieren"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "Reguläre Ausdrücke für die Suche nach neuen Etiketten"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "Über"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "Bei Antwort in der Nachricht nach neuen Etiketten suchen"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "Grundeinstellungen"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "Vor Betreffzeile &quot;SubSwitch&quot; anzeigen"
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "Entiketten standardmäßig deaktivieren"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "Weitere Etiketten finden"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "Export"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "Import"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "Etiketten  importieren oder exportieren"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "Weitere Einstellungen"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "Unterstützen Sie die Weiterentwicklung von SubSwitch mit einer Spende"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "Ein/Aus:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "Sie möchten SubSwitch in Ihrer Sprache verwenden? Schreiben Sie uns. Wir verraten Ihnen dann wie."
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "Als standard verwenden"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "Beschreibung"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "Etikett"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "Etikett"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "Neue Nachricht"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "Derzeit hat das Projekt noch keine Helfer. Sie dürfen dem Autor gerne Fragen stellen oder Anregungen geben (nur auf Englisch):"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "SubSwitch anpassen"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "Addressen für Etiketten"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "Hinzufügen"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "Entfernen"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "Aliasse für Etikett"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "Hinzufügen"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "Entfernen"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "Beschreibung"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "Dieses Etikett wird bereits als Alias verwendet."
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "Etikett"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "Sequenz-Nummer"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "Etikett setzen"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "Etikett ein- oder ausschalten"
+    },
+    "toolTip.enterOptions": {
+        "message": "Einstellungen von SubSwitch ändern"
+    },
+    "toolTip.onOff": {
+        "message": "Etikett ein- oder ausschalten"
     }
 }

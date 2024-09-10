@@ -1,5 +1,221 @@
 {
+    "discovery.confirmHeader": {
+        "message": "Nowy prefiks"
+    },
+    "discovery.confirmMessage": {
+        "message": "Nowy prefiks został znaleziony w wiadomości. \\n\\nCzy chcesz dodać ten prefiks do swojej listy?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch / Znaleziono nowy prefiks"
+    },
     "extensionDescription": {
         "message": "Wstaw/usuń domyślny prefiks do tytułu maila lub wybierz jeden ze zdefiniowanego zbioru prefiksów.\n"
+    },
+    "menuItem.onOff": {
+        "message": "Wstaw/usuń prefiks"
+    },
+    "menuItem.options": {
+        "message": "Opcje SubSwitch"
+    },
+    "options.duplicateAddress": {
+        "message": "Adres już istnieje!"
+    },
+    "options.invalidAddress": {
+        "message": "Błędny adres!"
+    },
+    "options.pickExportSuccess": {
+        "message": "Eksport ustawień do pliku zakończony pomyślnie."
+    },
+    "options.pickExportTitle": {
+        "message": "Zapisz ustawienia w pliku"
+    },
+    "options.pickImportError": {
+        "message": "Import ustawień z pliku zakończony błędęm:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "Niewłaściwy format pliku"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "Niewłaściwy operacja na pliku"
+    },
+    "options.pickImportSuccess": {
+        "message": "Import ustawień z pliku zakończony pomyślnie."
+    },
+    "options.pickImportTitle": {
+        "message": "Wczytaj ustawienia z pliku"
+    },
+    "options.prefixCopy": {
+        "message": "KOPIA"
+    },
+    "setRD.duplicateAlias": {
+        "message": "Alias już istnieje!"
+    },
+    "setRD.invalidAlias": {
+        "message": "Brakujący/zły alias!"
+    },
+    "setRD.invalidDescription": {
+        "message": "Brakujący/zły opis!"
+    },
+    "setRD.invalidPath": {
+        "message": "Brakujący/zły prefiks!"
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "Wybierz Prefiks..."
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "Dodawaj opis prefiksu do nagłówków wysyłanych wiadomości"
+    },
+    "subjects_prefix_switch.label.options.advancedtab": {
+        "message": "Zaawansowane"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "Usuń"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "Utw. kopię"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "Edytuj"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "Nowy"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "Pokaż SubSwitch w menu kontekstowym"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "Autorem jest"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "Wyłącz automatyczne rozpoznawanie prefiksu, gdy adres nadawcy będzie pasował do jednego z wpisów na liście."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "Dodaj"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "Adresy email:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "Usuń"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "Znak '?' może być użyty jako znak wieloznaczny. (na przykład: '?@mozilla.com', 'test@?.com' lub 't?t@m?a.c?' będzie pasowało do 'test@mozilla.com' podanego jako nadawca)"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "Znaki, które mają być ignorowane podczas porównywania prefiksów pomiędzy ustwieniami lokalnymi a przesłanymi"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "Wyrażenie regularne dla dopasowywania tematu wiadomości"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "O programie"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "Szukaj prefiksów w wiadomości podczas odpowiadania"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "Główne"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "Pokaż SubSwitch przed polem z Tematem "
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "Wyłącz domyślne wstawianie prefiksu"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "Rozpoznawanie prefiksów"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "Export"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "Import"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "Import / Export prefiksów"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "Różne"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "Wesprzyj SubSwitch przez wpłatę na PayPal"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "On/Off:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "I'm looking for help with SubSwitch translation. If you want to have your language's version of SubSwitch - write for detailed instructions:"
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "Domyślny"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "Opis"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "Prefiks"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "Lista prefiksów"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "Nowa wiadomość"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "Pomoc będzie wkrótce, wszelkie uwagi, pomysły i spostrzeżenia proszę przesyłać na adres:"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "Opcje SubSwitch"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "Adresy dla prefiksu"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "Dodaj"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "Usuń"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "Aliasy dla prefiksu"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "Dodaj"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "Usuń"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "Opis prefiksu"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "Nie twórz nowego. To jest alias dla ..."
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "Prefiks"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "Numer kolejny"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "Ustaw prefiks"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "Wstaw/usuń prefiks"
+    },
+    "toolTip.enterOptions": {
+        "message": "Zmień ustawienia SubSwitch"
+    },
+    "toolTip.onOff": {
+        "message": "Wstaw/usuń prefiks"
     }
 }

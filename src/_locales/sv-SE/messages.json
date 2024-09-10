@@ -1,5 +1,221 @@
 {
+    "discovery.confirmHeader": {
+        "message": "Nytt prefix"
+    },
+    "discovery.confirmMessage": {
+        "message": "Ett nytt prefix har identifierats i detta meddelande. \\n\\nVill du lägga till detta prefix i din lista?"
+    },
+    "discovery.confirmTitle": {
+        "message": "SubSwitch: Nytt prefix identifierat"
+    },
     "extensionDescription": {
         "message": "Visa/dölj ämnesprefixet eller välj ett nytt ur din fördefinierade uppsättning."
+    },
+    "menuItem.onOff": {
+        "message": "Visa/dölj prefix"
+    },
+    "menuItem.options": {
+        "message": "Inställningar för SubSwitch"
+    },
+    "options.duplicateAddress": {
+        "message": "Adressen finns redan i listan!"
+    },
+    "options.invalidAddress": {
+        "message": "Ogiltig adress!"
+    },
+    "options.pickExportError": {
+        "message": "Exporten av inställningarna till fil har slutförts, med fel:"
+    },
+    "options.pickExportSuccess": {
+        "message": "Exporten av inställningarna till fil har slutförts."
+    },
+    "options.pickExportTitle": {
+        "message": "Spara inställningar till fil"
+    },
+    "options.pickImportError": {
+        "message": "Inläsning av inställningarna från fil har slutförts, med fel:"
+    },
+    "options.pickImportInvalidFormat": {
+        "message": "Okänt filformat"
+    },
+    "options.pickImportInvalidOperation": {
+        "message": "Ogiltig åtgärd på fil"
+    },
+    "options.pickImportSuccess": {
+        "message": "Inläsning av inställningarna från fil har slutförts."
+    },
+    "options.pickImportTitle": {
+        "message": "Läs in inställningar från fil"
+    },
+    "options.prefixCopy": {
+        "message": "KOPIA"
+    },
+    "setRD.duplicateAlias": {
+        "message": "Detta alias finns redan i listan!"
+    },
+    "setRD.invalidAlias": {
+        "message": "Saknat/ogiltigt alias!"
+    },
+    "setRD.invalidDescription": {
+        "message": "Saknad/ogiltig beskrivning!"
+    },
+    "setRD.invalidPath": {
+        "message": "Saknat/ogiltigt prefix!"
+    },
+    "setSignature.setSignatureTitle": {
+        "message": "Välj ditt prefix…"
+    },
+    "subjects_prefix_switch.label.context": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.menu": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.addRDtoEmail": {
+        "message": "Lägg till information om prefixet i meddelandehuvuden"
+    },
+    "subjects_prefix_switch.label.options.button.delete": {
+        "message": "Ta bort"
+    },
+    "subjects_prefix_switch.label.options.button.duplicate": {
+        "message": "Kopiera"
+    },
+    "subjects_prefix_switch.label.options.button.edit": {
+        "message": "Redigera"
+    },
+    "subjects_prefix_switch.label.options.button.new": {
+        "message": "Nytt"
+    },
+    "subjects_prefix_switch.label.options.contextmenu": {
+        "message": "Visa &quot;SubSwitch&quot; i snabbmenyn"
+    },
+    "subjects_prefix_switch.label.options.createdBy": {
+        "message": "Skapat av"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description": {
+        "message": "Om avsändarens adress matchar en av posterna i listan, kommer den automatiska identifieringen av prefixet att stängas av."
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.add": {
+        "message": "Lägg till"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.address": {
+        "message": "E-postadress:"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.remove": {
+        "message": "Ta bort"
+    },
+    "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
+        "message": "Frågetecken ( ? ) kan användas som ett jokertecken. (Exempel: &quot;?@mozilla.com&quot;, &quot;test@?.com&quot; eller &quot;t?t@m?a.c?&quot; kommer att matchas när &quot;test@mozilla.com&quot; är avsändare)"
+    },
+    "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
+        "message": "Tecken som skall ignoreras när prefix jämförs"
+    },
+    "subjects_prefix_switch.label.options.discoveryItemRegex": {
+        "message": "RegEx för identifiering av prefix i ämnesraden"
+    },
+    "subjects_prefix_switch.label.options.helptab": {
+        "message": "Om"
+    },
+    "subjects_prefix_switch.label.options.loadRDfromEmail": {
+        "message": "Sök efter nya prefix i meddelanden du besvarar"
+    },
+    "subjects_prefix_switch.label.options.maintab": {
+        "message": "Allmänt"
+    },
+    "subjects_prefix_switch.label.options.msgSubject": {
+        "message": "Visa &quot;SubSwitch&quot; före ämnesfältet"
+    },
+    "subjects_prefix_switch.label.options.offbydefault": {
+        "message": "Dölj prefix som standard"
+    },
+    "subjects_prefix_switch.label.options.other.autodiscovery": {
+        "message": "Identifiera prefix automatiskt"
+    },
+    "subjects_prefix_switch.label.options.other.exp": {
+        "message": "Exportera"
+    },
+    "subjects_prefix_switch.label.options.other.imp": {
+        "message": "Importera"
+    },
+    "subjects_prefix_switch.label.options.other.impexp": {
+        "message": "Import/export av prefix"
+    },
+    "subjects_prefix_switch.label.options.othertab": {
+        "message": "Övrigt"
+    },
+    "subjects_prefix_switch.label.options.settings.support": {
+        "message": "Stöd SubSwitch"
+    },
+    "subjects_prefix_switch.label.options.shortcut.onoff": {
+        "message": "Visa/Dölj:"
+    },
+    "subjects_prefix_switch.label.options.translate": {
+        "message": "Jag letar efter personer som vill översätta SubSwitch. Om du vill ha SubSwitch på ditt eget språk, skriv till mig för närmare instruktioner:"
+    },
+    "subjects_prefix_switch.label.options.tree.default": {
+        "message": "Standard"
+    },
+    "subjects_prefix_switch.label.options.tree.description": {
+        "message": "Beskrivning"
+    },
+    "subjects_prefix_switch.label.options.tree.rd": {
+        "message": "Prefix"
+    },
+    "subjects_prefix_switch.label.options.tree.rds": {
+        "message": "Prefix"
+    },
+    "subjects_prefix_switch.label.options.tree.showInNewMsgPopup": {
+        "message": "Nytt meddelande"
+    },
+    "subjects_prefix_switch.label.options.website": {
+        "message": "För närvarande har vi ingen hjälpfunktion. Men tveka inte att kontakta mig om du har frågor eller kommentarer:"
+    },
+    "subjects_prefix_switch.label.options.windowtitle": {
+        "message": "Inställningar för SubSwitch"
+    },
+    "subjects_prefix_switch.label.setrd.addresses": {
+        "message": "Adresser för prefix"
+    },
+    "subjects_prefix_switch.label.setrd.addressesAdd": {
+        "message": "Lägg till"
+    },
+    "subjects_prefix_switch.label.setrd.addressesRemove": {
+        "message": "Ta bort"
+    },
+    "subjects_prefix_switch.label.setrd.aliases": {
+        "message": "Alias för prefix"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesAdd": {
+        "message": "Lägg till"
+    },
+    "subjects_prefix_switch.label.setrd.aliasesRemove": {
+        "message": "Ta bort"
+    },
+    "subjects_prefix_switch.label.setrd.description": {
+        "message": "Beskrivning"
+    },
+    "subjects_prefix_switch.label.setrd.justAlias": {
+        "message": "Lägg inte till. Det är bara ett alias för…"
+    },
+    "subjects_prefix_switch.label.setrd.path": {
+        "message": "Prefix"
+    },
+    "subjects_prefix_switch.label.setrd.sequence": {
+        "message": "Sekvensnummer"
+    },
+    "subjects_prefix_switch.label.setrd.title": {
+        "message": "Ange prefix"
+    },
+    "subjects_prefix_switch.label.toolbar": {
+        "message": "SubSwitch"
+    },
+    "subjects_prefix_switch.tooltip.toolbar": {
+        "message": "Visa/dölj prefixet"
+    },
+    "toolTip.enterOptions": {
+        "message": "Öppna SubSwitchs inställningsdialogruta"
+    },
+    "toolTip.onOff": {
+        "message": "Visa/dölj prefixet"
     }
 }

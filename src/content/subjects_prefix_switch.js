@@ -3,6 +3,9 @@ var { mimeMsgToContentSnippetAndMeta } = ChromeUtils.import("resource:///modules
 
 var { MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm");
 
+var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
+var extension = ExtensionParent.GlobalManager.getExtension("{957509b1-217a-46c7-b08b-f67d08d53883}");
+
 if(!com.ktsystems.subswitch.SubSwitchMain) com.ktsystems.subswitch.SubSwitchMain={};
 
 com.ktsystems.subswitch.SubSwitchMain = {
@@ -487,11 +490,9 @@ com.ktsystems.subswitch.SubSwitchMain = {
     },
 
     displayConfirm : function (remotePrefixItem) {
-        var strbundle = document.getElementById("subjects_prefix_switch.locale");
-
-        var title = strbundle.getString("discovery.confirmTitle");
-        var msg = strbundle.getString("discovery.confirmMessage");
-        var header = strbundle.getString("discovery.confirmHeader");
+        var title = extension.localeData.localizeMessage("discovery.confirmTitle");
+        var msg = extension.localeData.localizeMessage("discovery.confirmMessage");
+        var header = extension.localeData.localizeMessage("discovery.confirmHeader");
         var params = Components.classes["@mozilla.org/embedcomp/dialogparam;1"].createInstance(Components.interfaces.nsIDialogParamBlock);
         params.SetNumberStrings(30);
 
