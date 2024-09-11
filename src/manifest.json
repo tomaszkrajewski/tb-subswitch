@@ -23,6 +23,9 @@
     ]
   },
   "default_locale": "en-US",
+  "options_ui": {
+    "page": "options/options.html"
+  },
   "permissions": [
     "menus"
   ],
