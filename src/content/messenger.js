@@ -26,10 +26,6 @@ function onLoad(activatedWhileWindowOpen) {
              insertafter="subjects_prefix_switchContextSeparator" class="menu-iconic subjects_prefix_switch-icon menuitem-iconic" >
                 <menupopup id="subjects_prefix_switchMenuPopup-menu" onpopupshowing="window.com.ktsystems.subswitch.SubSwitchMOToolbar.initMsgWindowToolbar();" />
           </menu>
-        </menupopup>
-        <menupopup id="taskPopup">
-          <menuitem id="subjects_prefix_switch-settings" label="${extension.localeData.localizeMessage("subjects_prefix_switch.label.toolbar")}" 
-            oncommand="subswitchOptionsHandler.openSettings();" insertbefore="prefSep" class="menu-iconic subjects_prefix_switch-icon menuitem-iconic" />
         </menupopup>`);
 
     //FIXME: It doesn't work in 78 :/ Somehow the newMsg button is 'protected'
