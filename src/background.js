@@ -3,9 +3,8 @@ async function main() {
     await messenger.WindowListener.registerDefaultPrefs("defaults/preferences/subjects_prefix_switch.js");
 //FIXME: maybe someday. handle different skins
     messenger.WindowListener.registerChromeUrl([
-            ["content",  "subjects_prefix_switch",           "content/"],
-            ["resource", "subjects_prefix_switch",           "/"],
-            ["resource", "subjects_prefix_switch",           "skin/classic/"],
+            ["content",  "subjects_prefix_switch",  "content/"],
+            ["resource", "subjects_prefix_switch",  "assets/"],
         ]
     );
 
