@@ -5,13 +5,6 @@ var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionPa
 var extension = ExtensionParent.GlobalManager.getExtension("{957509b1-217a-46c7-b08b-f67d08d53883}");
 
 var subswitchOptionsHandler = {
-    onLoadOptions: function () {
-        window.close();
-    },
-    onUnloadOptions: function () {
-        this.openSettings();
-    },
-    //FIXME: maybe someday. keep instead of reload settings
     openSettings: function() {
         var settingsDialog = window.open("chrome://subjects_prefix_switch/content/options.xhtml",
             "subjects_prefix_switch_options", "chrome,centerscreen,resizable");
