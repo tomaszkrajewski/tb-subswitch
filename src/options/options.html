@@ -5,52 +5,259 @@
     <title>__MSG_subjects_prefix_switch.label.options.windowtitle__</title>
 
     <!-- Not sure if all of these are needed -->
-    <!-- link rel="stylesheet" href="chrome://global/skin/" -->
-    <!-- link rel="stylesheet" href="chrome://messenger/skin/input-fields.css" -->
-    <!-- link rel="stylesheet" href="chrome://messenger/skin/messenger.css" -->
-    <!-- link rel="stylesheet" href="chrome://global/skin/global.css" -->
-    <!-- link rel="stylesheet" href="chrome://messenger/skin/dialogs.css" -->
-    <!-- link rel="stylesheet" href="../assets/options.css" -->
-    <!-- link rel="stylesheet" href="../assets/subjects_prefix_switch.css" -->
+    <link rel="stylesheet" href="chrome://global/skin/">
+    <link rel="stylesheet" href="chrome://messenger/skin/messenger.css">
 
+    <link rel="stylesheet" href="chrome://messenger/skin/input-fields.css">
+    <link rel="stylesheet" href="chrome://global/skin/global.css">
+    <!-- link rel="stylesheet" href="chrome://messenger/skin/dialogs.css" -->
+
+    <link rel="stylesheet" href="../assets/options.css">
+    <link rel="stylesheet" href="../assets/subjects_prefix_switch.css">
+
+    <script type="module" src="items_migrated.js"></script>
     <script type="module" src="options.js"></script>
 </head>
 
 <body>
-    <h2>__MSG_subjects_prefix_switch.label.options.maintab__</h2>
-    
+<form>
     <div>
-        <input type="checkbox" id="offbydefault" data-preference="offbydefault"/>
-        <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
-    </div>
-    
-    <div>
-        <input type="checkbox" id="beforeMsgSubject" data-preference="beforeMsgSubject"/>
-        <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
+        <h3>__MSG_subjects_prefix_switch.label.options.maintab__</h3>
+        <fieldset>
+            <legend class="insideTab">__MSG_subjects_prefix_switch.label.options.tree.rds__</legend>
+
+            <groupbox orient="vertical" align="stretch">
+                <div class="vbox">
+                    <div class="hbox">
+                        <table id="subjects_prefix_switchTree" align="stretch" rows="8">
+                            <!--
+                             onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
+                              ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();"
+                              -->
+                            <thead>
+                                <tr class="cs-color">
+                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.default__</th>
+                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.description__</th>
+                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.rd__</th>
+                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.showInNewMsgPopup__</th>
+                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.setrd.aliases__</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subjects_prefix_switchTable" align="stretch" rows="8">
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <tree id="subjects_prefix_switchTree" align="stretch" rows="8" >
+                            <treecols>
+                                <treecol id="default"
+                                         label=""
+                                         persist="width" cycler="true" />
+                                <splitter class="tree-splitter" />
+                                <treecol id="description"
+                                         label=""
+                                         persist="width" />
+                                <splitter class="tree-splitter" />
+                                <treecol id="rd"
+                                         label=""
+                                         persist="width" />
+                                <splitter class="tree-splitter" />
+                                <treecol id="showInNewMsgPopup"
+                                         label=""
+                                         persist="width" cycler="true" />
+                                <splitter class="tree-splitter" />
+                                <treecol id="aliases"
+                                         label=""
+                                         persist="width" />
+                            </treecols>
+                            <treechildren />
+                        </tree>
+                        <div class="vbox">
+                            <input type="button"   class="new optionsButton"
+                                   value="__MSG_subjects_prefix_switch.label.options.button.new__" id="new"
+                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"></input>
+                            <input type="button"   class="edit optionsButton"
+                                   value="__MSG_subjects_prefix_switch.label.options.button.edit__" id="edit"
+                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"></input>
+                            <input type="button"   class="delete optionsButton"
+                                   value="__MSG_subjects_prefix_switch.label.options.button.delete__"
+                                   id="delete"
+                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"></input>
+                            <input type="button"   class="duplicate optionsButton"
+                                   value="__MSG_subjects_prefix_switch.label.options.button.duplicate__"
+                                   id="duplicate"
+                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"></input>
+                            <div class="hbox">
+                                <input type="button"   class="up" id="up"
+                                       oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"></input>
+                                <div class="spacer">
+                                    <input type="button"   class="down" id="down"
+                                           oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"></input>
+                                </div>
+                                <div class="spacer">
+                                </div>
+                            </div>
+                        </div>
+            </groupbox>
+
+        </fieldset>
+
+
+        <div class="hbox">
+            <div class="vbox">
+                <fieldset>
+                    <div>
+                        <input type="checkbox" id="offbydefault" data-preference="offbydefault"/>
+                        <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="beforeMsgSubject" data-preference="beforeMsgSubject"/>
+                        <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="contextmenu" data-preference="contextmenu"/>
+                        <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+        <hr/>
     </div>
 
     <div>
-        <input type="checkbox" id="contextmenu" data-preference="contextmenu"/>
-        <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>    
+        <h3>__MSG_subjects_prefix_switch.label.options.othertab__</h3>
+        <div class="hbox">
+            <div class="vbox">
+                <fieldset>
+                    <legend>__MSG_subjects_prefix_switch.label.options.other.autodiscovery__</legend>
+                    <div class="vbox">
+                        <div class="hbox">
+                            <div>
+                                <input type="checkbox" id="addRDtoEmail" data-preference="addRDtoEmail"/>
+                                <label for="addRDtoEmail">__MSG_subjects_prefix_switch.label.options.addRDtoEmail__</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="loadRDfromEmail" data-preference="loadRDfromEmail"/>
+                                <label for="loadRDfromEmail">__MSG_subjects_prefix_switch.label.options.loadRDfromEmail__</label>
+                            </div>
+                            <div>
+                                <label for="discoveryIgnoreSigns">__MSG_subjects_prefix_switch.label.options.discoveryIgnoreSigns__</label>
+                                <input type="text" align="center"  id="discoveryIgnoreSigns" data-preference="discoveryIgnoreSigns"/>
+                            </div>
+                            <div>
+                                <label for="discoveryItemPattern">__MSG_subjects_prefix_switch.label.options.discoveryItemRegex__</label>
+                                <input type="text" align="center"  id="discoveryItemPattern" data-preference="discoveryItemPattern"/>
+                            </div>
+                            <div>
+                                <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description__</p>
+                                <div class="hbox">
+                                    <label for="address">__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.address__</label>
+                                    <input id="address" size="10" />
+                                    <div class="vbox">
+                                        <input type="button" id="addAddress" class="addAddress optionsButton"
+                                                value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.add__"
+                                        >
+                                        <input type="button" id="removeAddress" class="addAddress optionsButton"
+                                                value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.remove__"
+                                        >
+                                    </div>
+                                    <select id="discoveryIgnoreList"
+                                            data-preference="discoveryIgnoreList" defaultpref="-"
+                                            rows="4" >
+                                    </select>
+                                </div>
+
+
+                                <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1__</p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>__MSG_subjects_prefix_switch.label.options.other.impexp__</legend>
+                    <div class="vbox">
+                        <div class="hbox">
+                            <div class="vbox" align="center">
+                                <div class="hbox">
+                                    <input type="button"  class="browse optionsButton" id="button-composer-pick"
+                                            value="__MSG_subjects_prefix_switch.label.options.other.imp__"></input>
+                                    <input type="button"  class="browse optionsButton" id="button-composer-pick"
+                                            value="__MSG_subjects_prefix_switch.label.options.other.exp__"></input>
+
+                                    <!--
+                                    oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
+                                           oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
+
+                                           -->
+                                </div>
+                            </div>
+                            <div class="hbox" id="ssMsg-notification">
+                                <!-- notificationbox will be added here lazily. -->
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <hr/>
     </div>
-    
+
+    <div>
+        <h3>__MSG_subjects_prefix_switch.label.options.helptab__</h3>
+        <h1>
+            <image src="/assets/sub_switch232.png" class="optionsImage" />
+            <span style="font-weight: bold; font-size: x-large;">SubSwitch</span>
+        </h1>
+
+        <div class="hbox">
+            <p style="font-weight: bold;">
+                Version {appversion}
+            </p>
+            <p style="font-weight: bold;">
+                Build {appversion} ({distDate})
+            </p>
+        </div>
+
+        <div class="hbox">
+          <p style="font-weight: bold;">
+              __MSG_subjects_prefix_switch.label.options.createdBy__ <a href="mailto:{contactToEmail}" class="text-link">{auther} / {contactToEmail}</a>
+          </p>
+        </div>
+
+        <div class="hbox">
+            <p style="font-weight: bold;">
+                __MSG_subjects_prefix_switch.label.options.website__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
+            </p>
+        </div>
+
+        <div class="hbox">
+            <p style="font-weight: bold;">
+                __MSG_subjects_prefix_switch.label.options.translate__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
+            </p>
+        </div>
+
+        <div class="hbox">
+            <p style="font-weight: bold;">
+                __MSG_subjects_prefix_switch.label.options.settings.support__ <a
+                    href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3ZHGJ9QSHRZNW">
+                <img src="/assets/btn_donate_SM.gif" style="margin-left:25px;" />
+            </a>
+            </p>
+        </div>
+    </div>
+
+
     <hr style="width:90%; margin:5ex">
     <!-- The following is the original options.xhtml with some basic updates, but this is what will need some work -->
     <tabbox>
-        <tabs>
-            <tab id="maintab" label="__MSG_subjects_prefix_switch.label.options.maintab__" />
-            <tab id="othertab" label="__MSG_subjects_prefix_switch.label.options.othertab__" />
-            <tab id="helptab" label="__MSG_subjects_prefix_switch.label.options.helptab__" />
-        </tabs>
-
         <tabpanels orient="vertical">
             <tabpanel id="maintabpanel" orient="vertical">
                 <div class="vbox">
                     <fieldset>
                         <groupbox orient="vertical" align="stretch">
-                            <div class="hbox">
-                                <legend class="insideTab">__MSG_subjects_prefix_switch.label.options.tree.rds__</legend>
-                            </div>
                             <div class="vbox">
                                 <div class="hbox">
                                     <tree id="subjects_prefix_switchTree" align="stretch" rows="8"
@@ -79,208 +286,14 @@
                                         </treecols>
                                         <treechildren />
                                     </tree>
-                                    <div class="vbox">
-                                        <button class="new optionsButton"
-                                            label="__MSG_subjects_prefix_switch.label.options.button.new__" id="new"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"></button>
-                                        <button class="edit optionsButton"
-                                            label="__MSG_subjects_prefix_switch.label.options.button.edit__" id="edit"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"></button>
-                                        <button class="delete optionsButton"
-                                            label="__MSG_subjects_prefix_switch.label.options.button.delete__"
-                                            id="delete"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"></button>
-                                        <button class="duplicate optionsButton"
-                                            label="__MSG_subjects_prefix_switch.label.options.button.duplicate__"
-                                            id="duplicate"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"></button>
-                                        <div class="hbox">
-                                            <button class="up" id="up"
-                                                oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"></button>
-                                            <div class="spacer">
-                                                <button class="down" id="down"
-                                                    oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"></button>
-                                            </div>
-                                            <div class="spacer">
-                                            </div>
-                                        </div>
-                                    </div>
+
                         </groupbox>
                     </fieldset>
-                    <!--checkbox id="offbydefault" label="__MSG_subjects_prefix_switch.label.options.offbydefault__"
-                        prefstring="offbydefault" defaultpref="false" />
-                    <checkbox id="beforeMsgSubject" label="__MSG_subjects_prefix_switch.label.options.msgSubject__"
-                        prefstring="beforeMsgSubject" defaultpref="true" />
-                    <checkbox id="contextmenu" label="__MSG_subjects_prefix_switch.label.options.contextmenu__"
-                        prefstring="contextmenu" defaultpref="true" /-->
-                    <input id="initdelay" prefstring="extensions.subjects_prefix_switch.initdelay"
-                        defaultpref="1000" hidden="true" />
-                </div>
-            </tabpanel>
-            <tabpanel id="othertabpanel">
-                <div class="hbox">
-                    <div class="vbox">
-                        <fieldset>
-                            <div class="vbox">
-                                <div class="vbox">
-                                    <div class="hbox">
-                                        <legend class="insideTab">
-                                            __MSG_subjects_prefix_switch.label.options.other.autodiscovery__</legend>
-                                    </div>
-
-                                    <checkbox id="addRDtoEmail"
-                                        label="__MSG_subjects_prefix_switch.label.options.addRDtoEmail__"
-                                        prefstring="addRDtoEmail" defaultpref="true" />
-                                    <checkbox id="loadRDfromEmail"
-                                        label="__MSG_subjects_prefix_switch.label.options.loadRDfromEmail__"
-                                        prefstring="loadRDfromEmail" defaultpref="true" />
-                                    <div class="spacer">
-                                        <div class="spacer">
-                                            <table>
-                                                <tr>
-                                                    <td width="150">
-                                                        <description>
-                                                            __MSG_subjects_prefix_switch.label.options.discoveryIgnoreSigns__
-                                                        </description>
-                                                    </td>
-                                                    <td>
-                                                        <div class="hbox" class="input-container">
-                                                            <input align="center" id="discoveryIgnoreSigns"
-                                                                prefstring="discoveryIgnoreSigns" defaultpref="[]\/ " />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="150">
-                                                        <description width="300">
-                                                            __MSG_subjects_prefix_switch.label.options.discoveryItemRegex__
-                                                        </description>
-                                                    </td>
-                                                    <td>
-                                                        <div class="hbox" class="input-container">
-                                                            <input align="center" id="discoveryItemPattern"
-                                                                prefstring="discoveryItemPattern"
-                                                                defaultpref="\[.+\]" />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <description width="200" style="margin-bottom:10px;">
-                                            __MSG_subjects_prefix_switch.label.options.discovery.autodisable.description__
-                                        </description>
-                                        <div class="hbox" align="top">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <div class="hbox" align="center">
-                                                            <label
-                                                                value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.address__" />
-                                                            <input id="address" size="10" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="vbox">
-                                                            <button id="addAddress" class="addAddress optionsButton"
-                                                                label="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.add__"
-                                                                oncommand="com.ktsystems.subswitch.OptionsPanel.addAutoSwitch('address');"></button>
-                                                            <button id="removeAddress"
-                                                                class="removeAddress optionsButton"
-                                                                label="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.remove__"
-                                                                oncommand="com.ktsystems.subswitch.OptionsPanel.removeAutoswitch('address');"></button>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-
-                                            </table>
-                                            <div class="hbox">
-                                                <div class="vbox">
-                                                    <richlistbox id="discoveryIgnoreList"
-                                                        prefstring="discoveryIgnoreList" defaultpref="-"
-                                                        seltype="single" rows="3" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <description style="margin-top:10px;margin-bottom:10px;">
-                                            __MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1__
-                                        </description>
-                                    </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="vbox">
-                                <div class="hbox">
-                                    <legend class="insideTab">__MSG_subjects_prefix_switch.label.options.other.impexp__
-                                    </legend>
-                                </div>
-                                <div class="vbox" align="center">
-                                    <div class="hbox">
-                                        <button class="browse optionsButton" id="button-composer-pick"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
-                                            label="__MSG_subjects_prefix_switch.label.options.other.imp__"></button>
-                                        <button class="browse optionsButton" id="button-composer-pick"
-                                            oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
-                                            label="__MSG_subjects_prefix_switch.label.options.other.exp__"></button>
-                                    </div>
-                                </div>
-                                <div class="hbox" id="ssMsg-notification">
-                                    <!-- notificationbox will be added here lazily. -->
-                                </div>
-
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-            </tabpanel>
-            <tabpanel id="helptabpanel">
-                <div class="vbox">
-                    <div class="hbox">
-                        <image src="/assets/sub_switch232.png" class="optionsImage" />
-                        <div class="spacer" style="width:15px"></div>
-                        <description value="SubSwitch" style="font-weight: bold; font-size: x-large;" />
-                    </div>
-
-                    <description value="Version {appversion}" />
-                    <description value="Build {appversion} ({distDate})" style="font-size: 10px; color: #666666;" />
-
-                    <separator class="thin" />
-
-                    <div class="hbox">
-                        <description value="__MSG_subjects_prefix_switch.label.options.createdBy__"
-                            style="font-weight: bold;" />
-                        <label value="{auther} / {contactToEmail}" data-to="{contactToEmail}" class="text-link"
-                            id='created-by-label'>
-                        </label>
-                    </div>
-
-                    <separator class="thin" />
-
-                    <description style="margin-top:10px; font-weight: bold;">
-                        __MSG_subjects_prefix_switch.label.options.website__</description>
-                    <label class="text-link" data-link="{issuesSite}" style="margin-left:25px;" value="{issuesSite}">
-                    </label>
-
-                    <separator class="thin" />
-
-                    <description style="margin-top:10px; font-weight: bold;">
-                        __MSG_subjects_prefix_switch.label.options.translate__</description>
-                    <label class="text-link" data-link="{issuesSite}" style="margin-left:25px;" value="{issuesSite}">
-                    </label>
-
-                    <separator class="thin" />
-
-                    <description style="margin-top:10px; font-weight: bold;">
-                        __MSG_subjects_prefix_switch.label.options.settings.support__</description>
-                    <div class="hbox" align="left">
-                        <a
-                            href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3ZHGJ9QSHRZNW">
-                            <img src="/assets/btn_donate_SM.gif" style="margin-left:25px;" />
-                        </a>
-                    </div>
                 </div>
             </tabpanel>
         </tabpanels>
     </tabbox>
+</form>
 </body>
 
 </html>

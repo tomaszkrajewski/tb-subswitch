@@ -6,7 +6,7 @@
   margin-left: 6px;
 }
 
-.optionsButton {
+#optionsButton {
     min-width: 16px;
     -moz-image-region: rect(0px, 20px, 16px, 0px);
 }
@@ -104,3 +104,5 @@ prefpane {
   -moz-padding-start: 8px;
   -moz-padding-end: 10px;
 }
+
+

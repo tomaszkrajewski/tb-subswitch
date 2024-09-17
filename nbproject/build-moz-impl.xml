@@ -40,6 +40,9 @@
                 <include name="ui/**" />
                 <include name="utils/**" />
                 <include name="components/**" />
+                <include name="assets/**" />
+                <include name="modules/**" />
+                <include name="options/**" />
                 <include name="*" />
                 <exclude name="skin/**/*.css" />
                 <exclude name="**/*.manifest" />
@@ -113,6 +116,9 @@
                 <include name="defaults/**" />
                 <include name="content/**" />
                 <include name="locale/**" />
+                <include name="assets/**" />
+                <include name="modules/**" />
+                <include name="options/**" />
                 <include name="skin/**" />
                 <include name="icons/**" />
                 <include name="api/**" />
