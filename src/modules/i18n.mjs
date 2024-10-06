@@ -15,7 +15,7 @@
 
 const keyPrefix = "__MSG_";
 
-function updateString(string) {
+export function updateString(string) {
   let re = new RegExp(keyPrefix + "(.+?)__", "g");
   return string.replace(re, (matched) => {
     const key = matched.slice(keyPrefix.length, -2);

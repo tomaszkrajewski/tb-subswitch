@@ -1,7 +1,10 @@
 import * as i18n from "../modules/i18n.mjs"
 import * as utils from "../modules/utils.mjs"
+import * as items from "./items_migrated.js"
 
 i18n.localizeDocument();
+
+const PREFIX_ROW_LOCALISED = i18n.updateString(PREFIX_ROW);
 
 let linkElements = document.querySelectorAll('[data-link]');
 linkElements.forEach(linkElement => {
@@ -68,36 +71,89 @@ for (let prefElement of prefElements) {
 async function initPrefixesTable() {
     utils.dumpStr("initPrefixesTable START");
 
-    utils.dumpStr("initPrefixesTable " + prefixesDataString);
+    await items.loadPrefixesDataString();
 
-/*
-    let list = com.ktsystems.subswitch.PrefixesListSingleton.getInstance();
-    let treeData = list.prefixesList;
+    let addPrefixRow = function (prefix, index) {
+        let tableRow = document.createElement("tr");
+        // tableRow.setAttribute("data-prefix-id", prefix.id);
+        tableRow.innerHTML = Mustache.render(PREFIX_ROW_LOCALISED, {
+            id: index,
+            prefix: prefix.prefix,
+            description: prefix.description
+        });
+        document.getElementById("subjects_prefix_switchTable").appendChild(tableRow);
+    };
 
-    let defaultRD = -1;
+    let list = items.getPrefixesData();
+    let defaultRD = list.defaultPrefixIndex;
 
-    try {
-        defaultRD = parseInt(com.ktsystems.subswitch.Const.subswitch_prefs.getCharPref("defaultrd"));
-    } catch(e) {}
+    for (let [index, prefix] of list.entries()) {
+        addPrefixRow(prefix, index);
+    }
 
-    utils.dumpStr("initPrefixesTable Populate table");
+    utils.dumpStr("initPrefixesTable getPrefixesData " + list);
+    utils.dumpStr("initPrefixesTable defaultRD " + defaultRD);
 
-    let rdTable = document.getElementById("subjects_prefix_switchTable");
-    let rdTableView = new com.ktsystems.subswitch.OptionsTreeView(treeData, defaultRD);
+    let prefixDefaultElement = document.getElementById("prefixDefault-" + defaultRD)
+    if (prefixDefaultElement) {
+        prefixDefaultElement.setAttribute("checked", "true");
+    }
 
-        this.rdTree.view = this.rdTreeView;this.dumpStr('initTree5');
-        this.rdTreeView.invalidate();this.dumpStr('initTree6');
-        this.onSelectItem();this.dumpStr('initTree7');
-*/
+    registerPrefixTableEventListeners();
+    createModals();
+
     utils.dumpStr("initPrefixesTable END");
 };
 
-function registerEventListeners() {
+
+function createModals() {
+}
+
+function registerGeneralEventListeners() {
     document.getElementById("addAddress").addEventListener("click", (event) => {
         addAutoSwitch();
     });
     document.getElementById("removeAddress").addEventListener("click", (event) => {
         removeAutoswitch();
+    });
+};
+
+
+function registerPrefixTableEventListeners() {
+   document.querySelectorAll('input[name="defaultRD"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            let item = event.target;
+            let prefixDefault = item.id.substring(14) // prefixDefault-
+            let list = items.getPrefixesData();
+
+            list.defaultPrefix = prefixDefault;
+
+            saveDefaultPrefix(prefixDefault);
+        });
+    });
+
+    document.querySelectorAll('input[id^="up-"]').forEach((elem) => {
+        elem.addEventListener("click", function(event) {
+            var item = event.target;
+            let index = item.id.substring(3) // up-
+            movePrefixUp(index);
+        });
+    });
+
+    document.querySelectorAll('input[id^="down-"]').forEach((elem) => {
+        elem.addEventListener("click", function(event) {
+            var item = event.target;
+            let index = item.id.substring(5) // down-
+            movePrefixDown(index);
+        });
+    });
+
+    document.querySelectorAll('input[id^="delete-"]').forEach((elem) => {
+        elem.addEventListener("click", function(event) {
+            var item = event.target;
+            let index = item.id.substring(7) // delete-
+            deletePrefix(index);
+        });
     });
 };
 
@@ -142,6 +198,58 @@ function removeAutoswitch() {
         browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.discoveryIgnoreList`, getStringFromListbox(listbox));
     }
 };
+
+function saveDefaultPrefix(prefixDefault) {
+    utils.dumpStr("saveDefaultPrefix START prefixDefault" + prefixDefault);
+
+    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.defaultrd`, prefixDefault);
+
+    utils.dumpStr("saveDefaultPrefix END");
+};
+
+
+function deletePrefix(index) {
+    let list = items.getPrefixesData();
+    list.remove(index);
+
+    document.getElementById("subjects_prefix_switchTable").textContent = '';
+
+    initPrefixesTable();
+};
+
+function movePrefixUp(index) {
+    moveItem(index,true);
+};
+
+function movePrefixDown(index) {
+    moveItem(index,false);
+};
+
+function moveItem(index, moveUp) {
+    let fromIdx = Number(index);
+    let toIdx;
+    let list = items.getPrefixesData();
+
+    if (moveUp) {
+        if (fromIdx <= 0)
+            return;
+
+        toIdx = fromIdx - 1;
+    } else {
+        if (fromIdx >= list.length - 1)
+            return;
+
+        toIdx = fromIdx + 1;
+    }
+
+    list.swap(fromIdx, toIdx);
+
+    document.getElementById("subjects_prefix_switchTable").textContent = '';
+
+    initPrefixesTable();
+};
+
+
 
 function validateAutoswitch(input) {
     if (input.indexOf("?") > -1) {
@@ -208,10 +316,13 @@ function getStringFromListbox(listbox){
 };
 
 
-
 async function init() {
+    utils.dumpStr("options -> init START");
+
     initPrefixesTable();
-    registerEventListeners();
+    registerGeneralEventListeners();
+
+    utils.dumpStr("options -> init END");
 }
 
 init();

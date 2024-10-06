@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../assets/options.css">
     <link rel="stylesheet" href="../assets/subjects_prefix_switch.css">
 
-    <script type="module" src="items_migrated.js"></script>
+    <script src="/modules/mustache.min.js"></script>
+    <script src="/options/prefixes_templates.js"></script>
+
     <script type="module" src="options.js"></script>
 </head>
 
@@ -30,78 +32,29 @@
                 <div class="vbox">
                     <div class="hbox">
                         <table id="subjects_prefix_switchTree" align="stretch" rows="8">
-                            <!--
-                             onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
-                              ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();"
-                              -->
                             <thead>
                                 <tr class="cs-color">
                                     <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.default__</th>
                                     <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.description__</th>
                                     <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.rd__</th>
-                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.showInNewMsgPopup__</th>
-                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.setrd.aliases__</th>
+                                    <th class="cs-th"></th>
                                 </tr>
                             </thead>
                             <tbody id="subjects_prefix_switchTable" align="stretch" rows="8">
-                                <tr>
-                                </tr>
                             </tbody>
                         </table>
-                        <tree id="subjects_prefix_switchTree" align="stretch" rows="8" >
-                            <treecols>
-                                <treecol id="default"
-                                         label=""
-                                         persist="width" cycler="true" />
-                                <splitter class="tree-splitter" />
-                                <treecol id="description"
-                                         label=""
-                                         persist="width" />
-                                <splitter class="tree-splitter" />
-                                <treecol id="rd"
-                                         label=""
-                                         persist="width" />
-                                <splitter class="tree-splitter" />
-                                <treecol id="showInNewMsgPopup"
-                                         label=""
-                                         persist="width" cycler="true" />
-                                <splitter class="tree-splitter" />
-                                <treecol id="aliases"
-                                         label=""
-                                         persist="width" />
-                            </treecols>
-                            <treechildren />
-                        </tree>
                         <div class="vbox">
                             <input type="button"   class="new optionsButton"
                                    value="__MSG_subjects_prefix_switch.label.options.button.new__" id="new"
                                    oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"></input>
-                            <input type="button"   class="edit optionsButton"
-                                   value="__MSG_subjects_prefix_switch.label.options.button.edit__" id="edit"
-                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.editItem();"></input>
-                            <input type="button"   class="delete optionsButton"
-                                   value="__MSG_subjects_prefix_switch.label.options.button.delete__"
-                                   id="delete"
-                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.deleteItem();"></input>
-                            <input type="button"   class="duplicate optionsButton"
-                                   value="__MSG_subjects_prefix_switch.label.options.button.duplicate__"
-                                   id="duplicate"
-                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.duplicateItem();"></input>
-                            <div class="hbox">
-                                <input type="button"   class="up" id="up"
-                                       oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(true);"></input>
-                                <div class="spacer">
-                                    <input type="button"   class="down" id="down"
-                                           oncommand="return com.ktsystems.subswitch.OptionsPanel.moveItem(false);"></input>
-                                </div>
-                                <div class="spacer">
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
             </groupbox>
-
+            <!-- modals -->
+            <span id="itemsModals">
+            </span>
         </fieldset>
-
 
         <div class="hbox">
             <div class="vbox">
@@ -169,37 +122,33 @@
                                             rows="4" >
                                     </select>
                                 </div>
-
-
                                 <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1__</p>
                             </div>
                         </div>
                     </div>
                 </fieldset>
+                <!--
                 <fieldset>
                     <legend>__MSG_subjects_prefix_switch.label.options.other.impexp__</legend>
                     <div class="vbox">
                         <div class="hbox">
                             <div class="vbox" align="center">
                                 <div class="hbox">
-                                    <input type="button"  class="browse optionsButton" id="button-composer-pick"
+                                    <input type="button"  class="browse optionsButton" id="button-composer-pick-import"
                                             value="__MSG_subjects_prefix_switch.label.options.other.imp__"></input>
-                                    <input type="button"  class="browse optionsButton" id="button-composer-pick"
+                                    <input type="button"  class="browse optionsButton" id="button-pick-export"
                                             value="__MSG_subjects_prefix_switch.label.options.other.exp__"></input>
 
-                                    <!--
-                                    oncommand="return com.ktsystems.subswitch.OptionsPanel.onImportPressed();"
-                                           oncommand="return com.ktsystems.subswitch.OptionsPanel.onExportPressed();"
-
-                                           -->
                                 </div>
                             </div>
                             <div class="hbox" id="ssMsg-notification">
                                 <!-- notificationbox will be added here lazily. -->
+                <!--
                             </div>
                         </div>
                     </div>
                 </fieldset>
+                -->
             </div>
         </div>
         <hr/>
@@ -249,50 +198,6 @@
         </div>
     </div>
 
-
-    <hr style="width:90%; margin:5ex">
-    <!-- The following is the original options.xhtml with some basic updates, but this is what will need some work -->
-    <tabbox>
-        <tabpanels orient="vertical">
-            <tabpanel id="maintabpanel" orient="vertical">
-                <div class="vbox">
-                    <fieldset>
-                        <groupbox orient="vertical" align="stretch">
-                            <div class="vbox">
-                                <div class="hbox">
-                                    <tree id="subjects_prefix_switchTree" align="stretch" rows="8"
-                                        onselect="return com.ktsystems.subswitch.OptionsPanel.onSelectItem();"
-                                        ondblclick="return com.ktsystems.subswitch.OptionsPanel.editItem();">
-                                        <treecols>
-                                            <treecol id="default"
-                                                label="__MSG_subjects_prefix_switch.label.options.tree.default__"
-                                                persist="width" cycler="true" />
-                                            <splitter class="tree-splitter" />
-                                            <treecol id="description"
-                                                label="__MSG_subjects_prefix_switch.label.options.tree.description__"
-                                                persist="width" />
-                                            <splitter class="tree-splitter" />
-                                            <treecol id="rd"
-                                                label="__MSG_subjects_prefix_switch.label.options.tree.rd__"
-                                                persist="width" />
-                                            <splitter class="tree-splitter" />
-                                            <treecol id="showInNewMsgPopup"
-                                                label="__MSG_subjects_prefix_switch.label.options.tree.showInNewMsgPopup__"
-                                                persist="width" cycler="true" />
-                                            <splitter class="tree-splitter" />
-                                            <treecol id="aliases"
-                                                label="__MSG_subjects_prefix_switch.label.setrd.aliases__"
-                                                persist="width" />
-                                        </treecols>
-                                        <treechildren />
-                                    </tree>
-
-                        </groupbox>
-                    </fieldset>
-                </div>
-            </tabpanel>
-        </tabpanels>
-    </tabbox>
 </form>
 </body>
 

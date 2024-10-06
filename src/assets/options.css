@@ -63,6 +63,16 @@
   opacity: 0.5;
 }
 
+
+.edit_up {
+  list-style-image: url("/assets/edit_s.png");
+}
+
+.edit_up[disabled="true"] {
+  list-style-image: url("/assets/edit_s.png");
+  opacity: 0.5;
+}
+
 .delete {
   list-style-image: url("resource://subjects_prefix_switch/delete_s.png");
 }
