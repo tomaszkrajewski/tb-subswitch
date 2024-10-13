@@ -47,9 +47,11 @@ async function loadPrefixes() {
 
     let entriesSplitSign = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.entries_split_sign`);
     // com.ktsystems.subswitch.Const.ENTRIES_SPLIT_SIGN
+    ENTRIES_SPLIT_SIGN = entriesSplitSign;
 
     let entrySplitSign = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.entry_split_sign`);
     // com.ktsystems.subswitch.Const.ENTRY_SPLIT_SIGN
+    ENTRY_SPLIT_SIGN = entrySplitSign;
 
     let prefixesDataString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds`);
     let prefixesAddressesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_addresses`);
@@ -82,16 +84,12 @@ async function loadPrefixes() {
                 var itemData = itemStrings[i].split(entrySplitSign);
                 // pre 0.9.16 upgrade
                 var item;
-                if (itemData[2] == null || itemData[2] == '' || (itemData[2] != 'true' && itemData[2] != 'false')) {
-                    utils.dumpStr('>>>>> ' + itemData[2] + ' ' + 1);
-                    item = new SubswitchPrefixItem(itemData.shift(), itemData.shift());
-                    tem.showInNewMsgPopup = 'true';
-                } else {
-                    utils.dumpStr('>>>>> ' + itemData[2] + ' ' + 2);
-                    item = new SubswitchPrefixItem(itemData.shift(), itemData.shift());
-                    item.showInNewMsgPopup = itemData.shift();
-                }
+
+                utils.dumpStr('>>>>> ' + itemData[2] + ' ' + 2);
+                item = new SubswitchPrefixItem(itemData.shift(), itemData.shift());
+                item.showInNewMsgPopup = itemData.shift();
                 item.aliases = itemData;
+
                 items.push(item);
 
                 if (addressesStrings != null && addressesStrings[i] != null) {
@@ -175,7 +173,54 @@ async function loadPrefixes() {
     return items;
 };
 
+export function savePrefixes() {
+    utils.dumpStr('-> savePrefixes START');
+
+    const entriesSplitSign = ENTRIES_SPLIT_SIGN;
+    const entrySplitSign = ENTRY_SPLIT_SIGN;
+
+    var writer = {
+        sb:         [],
+        sb_address: [],
+        sb_seq: [],
+        writeItem:    function (s) {
+            var entry;
+            var entry_address;
+            entry = s.description + entrySplitSign
+                + s.prefix + entrySplitSign
+                + s.showInNewMsgPopup;
+            if (s.aliases && s.aliases.length > 0) {
+                entry += entrySplitSign + s.aliases.join(entrySplitSign);
+            }
+            if (s.addresses && s.addresses.length > 0) {
+                entry_address = s.addresses.join(entrySplitSign);
+            }
+            this.sb.push(entry);
+            this.sb_address.push(entry_address);
+            this.sb_seq.push(s.currentSeqValue);
+        },
+        toString: function () {  return this.sb.join(entriesSplitSign); },
+        toAddressesString: function () {  return this.sb_address.join(entriesSplitSign); },
+        toSeqString: function () {  return this.sb_seq.join(entriesSplitSign); }
+    };
+
+    PREFIXES_LIST.forEach(writer.writeItem, writer);
+
+    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds`, writer.toString());
+    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_addresses`, writer.toAddressesString());
+    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_sequences`, writer.toSeqString());
+
+    if (PREFIXES_LIST.defaultPrefixIndex != undefined) {
+        browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.defaultrd`, PREFIXES_LIST.defaultPrefixIndex);
+    }
+
+    utils.dumpStr('-> savePrefixes END');
+};
+
+
 let PREFIXES_LIST;
+let ENTRIES_SPLIT_SIGN;
+let ENTRY_SPLIT_SIGN;
 
 export function loadPrefixesDataString() {
     if (PREFIXES_LIST != null) {
@@ -187,4 +232,5 @@ export function loadPrefixesDataString() {
 export function getPrefixesData() {
     return PREFIXES_LIST;
 };
+
 

@@ -5,200 +5,201 @@
     <title>__MSG_subjects_prefix_switch.label.options.windowtitle__</title>
 
     <!-- Not sure if all of these are needed -->
-    <link rel="stylesheet" href="chrome://global/skin/">
+    <!--<link rel="stylesheet" href="chrome://global/skin/">
     <link rel="stylesheet" href="chrome://messenger/skin/messenger.css">
 
     <link rel="stylesheet" href="chrome://messenger/skin/input-fields.css">
     <link rel="stylesheet" href="chrome://global/skin/global.css">
+    -->
     <!-- link rel="stylesheet" href="chrome://messenger/skin/dialogs.css" -->
+
+
+    <!-- new css !-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="../assets/options.css">
     <link rel="stylesheet" href="../assets/subjects_prefix_switch.css">
 
     <script src="/modules/mustache.min.js"></script>
     <script src="/options/prefixes_templates.js"></script>
+    <script src="/options/prefixes_utils.js"></script>
 
     <script type="module" src="options.js"></script>
 </head>
 
 <body>
 <form>
-    <div>
-        <h3>__MSG_subjects_prefix_switch.label.options.maintab__</h3>
-        <fieldset>
-            <legend class="insideTab">__MSG_subjects_prefix_switch.label.options.tree.rds__</legend>
+    <div class="w3-container">
 
-            <groupbox orient="vertical" align="stretch">
-                <div class="vbox">
-                    <div class="hbox">
-                        <table id="subjects_prefix_switchTree" align="stretch" rows="8">
-                            <thead>
-                                <tr class="cs-color">
-                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.default__</th>
-                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.description__</th>
-                                    <th class="cs-th">__MSG_subjects_prefix_switch.label.options.tree.rd__</th>
-                                    <th class="cs-th"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="subjects_prefix_switchTable" align="stretch" rows="8">
-                            </tbody>
-                        </table>
-                        <div class="vbox">
-                            <input type="button"   class="new optionsButton"
-                                   value="__MSG_subjects_prefix_switch.label.options.button.new__" id="new"
-                                   oncommand="return com.ktsystems.subswitch.OptionsPanel.newItem();"></input>
-                        </div>
+     <!-- Main Tab -->
+        <div id="main" class="w3-container">
+            <h3>__MSG_subjects_prefix_switch.label.options.maintab__</h3>
+            <fieldset class="w3-border" style="margin-bottom: 16px;">
+                <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.options.tree.rds__</legend>
+
+                <div class="w3-responsive">
+                    <table id="subjects_prefix_switchTree" class="w3-table w3-bordered w3-striped">
+                        <thead>
+                            <tr class="w3-blue">
+                                <th class="checkbox-cell">__MSG_subjects_prefix_switch.label.options.tree.default__</th>
+                                <th>__MSG_subjects_prefix_switch.label.options.tree.description__</th>
+                                <th>__MSG_subjects_prefix_switch.label.options.tree.rd__</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjects_prefix_switchTable" align="stretch" rows="8">
+
+                        </tbody>
+                    </table>
+                    <div class="w3-center w3-margin-top">
+                        <input type="button" class="w3-button w3-green" value="__MSG_subjects_prefix_switch.label.options.button.new__" id="new">
                     </div>
                 </div>
-            </groupbox>
-            <!-- modals -->
-            <span id="itemsModals">
-            </span>
-        </fieldset>
+            </fieldset>
 
-        <div class="hbox">
-            <div class="vbox">
-                <fieldset>
-                    <div>
-                        <input type="checkbox" id="offbydefault" data-preference="offbydefault"/>
-                        <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" id="beforeMsgSubject" data-preference="beforeMsgSubject"/>
-                        <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" id="contextmenu" data-preference="contextmenu"/>
-                        <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>
-                    </div>
-
-                </fieldset>
-            </div>
+            <fieldset class="w3-border" style="margin-bottom: 16px;">
+                <div class="w3-padding-16">
+                    <input type="checkbox" id="offbydefault" data-preference="offbydefault" checked="true">
+                    <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
+                </div>
+                <div class="w3-padding-16">
+                    <input type="checkbox" id="beforeMsgSubject" data-preference="beforeMsgSubject" checked="true">
+                    <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
+                </div>
+                <div class="w3-padding-16">
+                    <input type="checkbox" id="contextmenu" data-preference="contextmenu" checked="true">
+                    <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>
+                </div>
+            </fieldset>
         </div>
-        <hr/>
-    </div>
 
-    <div>
-        <h3>__MSG_subjects_prefix_switch.label.options.othertab__</h3>
-        <div class="hbox">
-            <div class="vbox">
-                <fieldset>
-                    <legend>__MSG_subjects_prefix_switch.label.options.other.autodiscovery__</legend>
-                    <div class="vbox">
-                        <div class="hbox">
-                            <div>
-                                <input type="checkbox" id="addRDtoEmail" data-preference="addRDtoEmail"/>
+        <!-- modals -->
+        <span id="itemsModals">
+            <div id="mypopover" popover>
+              <h2>Popover heading</h2>
+              <p>
+                This here is some very important content that we want to draw your
+                attention to before you light dismiss it. Read it all, do not delay!
+              </p>
+                 <input type="button" class="delete optionsButton"
+                        value="__MSG_subjects_prefix_switch.label.options.button.delete__" id="delete-{{id}}" popovertarget="mypopover" popovertargetaction="show" />
+            </div>
+        </span>
+
+        <div id="other" class="w3-container">
+            <h3>__MSG_subjects_prefix_switch.label.options.othertab__</h3>
+            <div class="w3-container">
+                <fieldset class="w3-border">
+                    <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.options.other.autodiscovery__</legend>
+                    <div class="w3-padding">
+                        <div class="w3-row">
+                            <div class="w3-col s6">
+                                <input type="checkbox" id="addRDtoEmail" data-preference="addRDtoEmail">
                                 <label for="addRDtoEmail">__MSG_subjects_prefix_switch.label.options.addRDtoEmail__</label>
                             </div>
-                            <div>
-                                <input type="checkbox" id="loadRDfromEmail" data-preference="loadRDfromEmail"/>
+                            <div class="w3-col s6">
+                                <input type="checkbox" id="loadRDfromEmail" data-preference="loadRDfromEmail">
                                 <label for="loadRDfromEmail">__MSG_subjects_prefix_switch.label.options.loadRDfromEmail__</label>
                             </div>
-                            <div>
-                                <label for="discoveryIgnoreSigns">__MSG_subjects_prefix_switch.label.options.discoveryIgnoreSigns__</label>
-                                <input type="text" align="center"  id="discoveryIgnoreSigns" data-preference="discoveryIgnoreSigns"/>
-                            </div>
-                            <div>
-                                <label for="discoveryItemPattern">__MSG_subjects_prefix_switch.label.options.discoveryItemRegex__</label>
-                                <input type="text" align="center"  id="discoveryItemPattern" data-preference="discoveryItemPattern"/>
-                            </div>
-                            <div>
-                                <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description__</p>
-                                <div class="hbox">
-                                    <label for="address">__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.address__</label>
-                                    <input id="address" size="10" />
-                                    <div class="vbox">
-                                        <input type="button" id="addAddress" class="addAddress optionsButton"
-                                                value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.add__"
-                                        >
-                                        <input type="button" id="removeAddress" class="addAddress optionsButton"
-                                                value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.remove__"
-                                        >
-                                    </div>
-                                    <select id="discoveryIgnoreList"
-                                            data-preference="discoveryIgnoreList" defaultpref="-"
-                                            rows="4" >
-                                    </select>
-                                </div>
-                                <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1__</p>
-                            </div>
                         </div>
-                    </div>
-                </fieldset>
-                <!--
-                <fieldset>
-                    <legend>__MSG_subjects_prefix_switch.label.options.other.impexp__</legend>
-                    <div class="vbox">
-                        <div class="hbox">
-                            <div class="vbox" align="center">
-                                <div class="hbox">
-                                    <input type="button"  class="browse optionsButton" id="button-composer-pick-import"
-                                            value="__MSG_subjects_prefix_switch.label.options.other.imp__"></input>
-                                    <input type="button"  class="browse optionsButton" id="button-pick-export"
-                                            value="__MSG_subjects_prefix_switch.label.options.other.exp__"></input>
+                        <div class="w3-padding-16">
+                            <label for="discoveryIgnoreSigns">__MSG_subjects_prefix_switch.label.options.discoveryIgnoreSigns__</label>
+                            <input type="text" id="discoveryIgnoreSigns" data-preference="discoveryIgnoreSigns" class="w3-input">
+                        </div>
+                        <div class="w3-padding-16">
+                            <label for="discoveryItemPattern">__MSG_subjects_prefix_switch.label.options.discoveryItemRegex__</label>
+                            <input type="text" id="discoveryItemPattern" data-preference="discoveryItemPattern" class="w3-input">
+                        </div>
+                        <div class="w3-padding-16">
+                            <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description__</p>
+                            <label for="address">__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.address__</label>
+                            <input id="address" size="10" type="email" class="w3-input">
+                            <div class="w3-center w3-margin-top">
+                                <input type="button" id="addAddress" class="w3-button w3-blue" value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.add__">
+                                <input type="button" id="removeAddress" class="w3-button w3-red" value="__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.remove__">
+                            </div>
+                            <select id="discoveryIgnoreList" data-preference="discoveryIgnoreList" class="w3-select w3-border" size="4">
 
-                                </div>
-                            </div>
-                            <div class="hbox" id="ssMsg-notification">
-                                <!-- notificationbox will be added here lazily. -->
-                <!--
-                            </div>
+                            </select>
+                            <p>__MSG_subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1__</p>
                         </div>
+
+
+                                <!--
+                        <fieldset>
+                            <legend>__MSG_subjects_prefix_switch.label.options.other.impexp__</legend>
+                            <div class="vbox">
+                                <div class="hbox">
+                                    <div class="vbox" align="center">
+                                        <div class="hbox">
+                                            <input type="button"  class="browse optionsButton" id="button-composer-pick-import"
+                                                    value="__MSG_subjects_prefix_switch.label.options.other.imp__"></input>
+                                            <input type="button"  class="browse optionsButton" id="button-pick-export"
+                                                    value="__MSG_subjects_prefix_switch.label.options.other.exp__"></input>
+
+                                        </div>
+                                    </div>
+                                    <div class="hbox" id="ssMsg-notification">
+                                        <!-- notificationbox will be added here lazily. -->
+                                <!--
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                -->
                     </div>
                 </fieldset>
-                -->
             </div>
         </div>
-        <hr/>
+
+        <div id="help" class="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue">
+            <h3>__MSG_subjects_prefix_switch.label.options.helptab__</h3>
+            <h1>
+                <image src="/assets/sub_switch232.png" class="optionsImage" />
+                <span style="font-weight: bold; font-size: x-large;">SubSwitch</span>
+            </h1>
+
+            <div class="hbox">
+                <p style="font-weight: bold;">
+                    Version {appversion}
+                </p>
+                <p style="font-weight: bold;">
+                    Build {appversion} ({distDate})
+                </p>
+            </div>
+
+            <div class="hbox">
+                <p style="font-weight: bold;">
+                    __MSG_subjects_prefix_switch.label.options.createdBy__ <a href="mailto:{contactToEmail}" class="text-link">{auther} / {contactToEmail}</a>
+                </p>
+            </div>
+
+            <div class="hbox">
+                <p style="font-weight: bold;">
+                    __MSG_subjects_prefix_switch.label.options.website__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
+                </p>
+            </div>
+
+            <div class="hbox">
+                <p style="font-weight: bold;">
+                    __MSG_subjects_prefix_switch.label.options.translate__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
+                </p>
+            </div>
+
+            <div class="hbox">
+                <p style="font-weight: bold;">
+                    __MSG_subjects_prefix_switch.label.options.settings.support__ <a
+                        href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3ZHGJ9QSHRZNW">
+                    <img src="/assets/btn_donate_SM.gif" style="margin-left:25px;" />
+                </a>
+                </p>
+            </div>
+        </div>
+
     </div>
-
-    <div>
-        <h3>__MSG_subjects_prefix_switch.label.options.helptab__</h3>
-        <h1>
-            <image src="/assets/sub_switch232.png" class="optionsImage" />
-            <span style="font-weight: bold; font-size: x-large;">SubSwitch</span>
-        </h1>
-
-        <div class="hbox">
-            <p style="font-weight: bold;">
-                Version {appversion}
-            </p>
-            <p style="font-weight: bold;">
-                Build {appversion} ({distDate})
-            </p>
-        </div>
-
-        <div class="hbox">
-          <p style="font-weight: bold;">
-              __MSG_subjects_prefix_switch.label.options.createdBy__ <a href="mailto:{contactToEmail}" class="text-link">{auther} / {contactToEmail}</a>
-          </p>
-        </div>
-
-        <div class="hbox">
-            <p style="font-weight: bold;">
-                __MSG_subjects_prefix_switch.label.options.website__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
-            </p>
-        </div>
-
-        <div class="hbox">
-            <p style="font-weight: bold;">
-                __MSG_subjects_prefix_switch.label.options.translate__ <a href="{issuesSite}" class="text-link">{issuesSite}</a>
-            </p>
-        </div>
-
-        <div class="hbox">
-            <p style="font-weight: bold;">
-                __MSG_subjects_prefix_switch.label.options.settings.support__ <a
-                    href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3ZHGJ9QSHRZNW">
-                <img src="/assets/btn_donate_SM.gif" style="margin-left:25px;" />
-            </a>
-            </p>
-        </div>
-    </div>
-
 </form>
+
 </body>
 
 </html>

@@ -115,4 +115,25 @@ prefpane {
   -moz-padding-end: 10px;
 }
 
+:popover-open {
+  /*width: 500px;
+  height: 400px;
+  */
+  padding: 0 10px;
+  border-radius: 10px;
+}
 
+::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+.errorMessage {
+  display: none;
+  margin-top: 10px;
+}
+
+.checkbox-cell {
+  vertical-align: middle; /* Center checkbox vertically */
+  width: 50px; /* Compact width for the checkbox column */
+  text-align: center; /* Center the checkbox horizontally */
+}
