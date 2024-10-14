@@ -137,3 +137,8 @@ prefpane {
   width: 50px; /* Compact width for the checkbox column */
   text-align: center; /* Center the checkbox horizontally */
 }
+
+/* Center content vertically in table cells */
+.w3-table td {
+  vertical-align: middle; /* Align content vertically */
+}

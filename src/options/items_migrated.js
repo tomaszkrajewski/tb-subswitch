@@ -233,4 +233,7 @@ export function getPrefixesData() {
     return PREFIXES_LIST;
 };
 
+export function createNewPrefix(aLabel, aPrefix) {
+    return new SubswitchPrefixItem(aLabel, aPrefix);
+}
 

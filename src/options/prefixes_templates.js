@@ -2,15 +2,15 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PREFIX_ROW = `
     <!-- default -->
-    <td class="checkbox-cell">
-        <input id="prefixDefault-{{id}}" type="radio" name="defaultRD">
+    <td>
+        <input id="prefixDefault-{{id}}" class="w3-radio" type="radio" name="defaultRD">
     </td>
     <!-- name -->
     <td>
-        <p id="description-{{id}}" style="font-weight: bold;">{{description}}</p>
+        <span id="description-{{id}}" style="font-weight: bold;">{{description}}</span>
     </td>
     <td>
-        <p id="prefix-{{id}}">{{prefix}}</p>
+        <span id="prefix-{{id}}">{{prefix}}</span>
     </td>
     <!-- edit -->
     <td>
@@ -32,15 +32,12 @@ const PREFIX_ROW = `
 `;
 
 const ALERT_TEMPLATE = `
-    <div>
-        <hbox align="center" id="alertBox">
-            <label>{{message}}</label>
-        </hbox>
-        <separator style="margin-bottom:5px;"/> 
-        <input type="button" id="button1"
-                                   value="{{button1Label}}" />
-        <input type="button" id="button2"
-                                   value="{{button2Label}}" />
+    <div class="w3-panel w3-yellow">
+        <p>{{message}}</p>
+        <div class="w3-center w3-margin-top w3-margin-bottom">
+            <input type="button" class="w3-button w3-red" id="button1" value="{{button1Label}}" />
+            <input type="button" class="w3-button w3-green" id="button2" value="{{button2Label}}" /> 
+        </div>
     </div>
 `;
 
@@ -54,25 +51,22 @@ const MESSAGE_TEMPLATE = `
 `;
 
 const PREFIX_EDIT_TEMPLATE = `
-   <table class="w3-table w3-bordered">
-         <tbody>
-             <tr>
-                <td class="w3-padding-16">
-                    <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
-                    <input class="w3-input"  id="description" type="text" value="{{item.description}}"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="w3-padding-16">
-                    <label for="prefix">__MSG_subjects_prefix_switch.label.setrd.path__</label>
-                    <input class="w3-input" id="prefix" type="text" value="{{item.prefix}}"/>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+   <div class="w3-panel w3-grey">
+        <p>{{message}}</p>
+    </div>
+    <div class="w3-margin-bottom w3-margin-top">
+        <div class="w3-padding-16">
+            <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
+            <input class="w3-input"  id="description" type="text" value="{{item.description}}"/>
+        </div>
+        <div class="w3-padding-16">
+            <label for="prefix">__MSG_subjects_prefix_switch.label.setrd.path__</label>
+            <input class="w3-input" id="prefix" type="text" value="{{item.prefix}}"/>
+        </div>
+    </div>
     
     <div class="w3-margin-bottom w3-margin-top">
-        <fieldset class="w3-border">
+        <fieldset class="w3-border w3-margin-bottom">
             <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.setrd.aliases__</legend>
             <input class="w3-input" id="alias" type="text"/>
             <div class="w3-center w3-margin-top">
@@ -106,7 +100,7 @@ const PREFIX_EDIT_TEMPLATE = `
                     <input class="w3-input" id="address" type="email" placeholder="Enter address">
                 </div>
             </div>
-            <div class="w3-center w3-margin-top"">
+            <div class="w3-center w3-margin-top">
                  <button type="button" class="w3-button w3-blue" id="addAddress">
                     <i class="fas fa-plus"> __MSG_subjects_prefix_switch.label.setrd.addressesAdd__</i>
                  </button>

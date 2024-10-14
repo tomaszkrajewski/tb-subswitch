@@ -103,6 +103,8 @@ async function initPrefixesTable() {
     }
 
     utils.dumpStr("initPrefixesTable getPrefixesData " + list);
+
+    //FIXME APPLY ICON FOR default instead of regular checkbox
     utils.dumpStr("initPrefixesTable defaultRD " + defaultRD);
 
     let prefixDefaultElement = document.getElementById("prefixDefault-" + defaultRD)
@@ -111,14 +113,25 @@ async function initPrefixesTable() {
     }
 
     registerPrefixTableEventListeners();
-    createModals();
 
     utils.dumpStr("initPrefixesTable END");
 };
 
 
-function createModals() {
+function openTab(evt, tabName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-light-blue", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " w3-light-blue";
 }
+
 
 function registerGeneralEventListeners() {
     document.getElementById("addAddress").addEventListener("click", (event) => {
@@ -126,6 +139,17 @@ function registerGeneralEventListeners() {
     });
     document.getElementById("removeAddress").addEventListener("click", (event) => {
         removeAutoswitch();
+    });
+
+    //tabs
+    document.getElementById("main-button").addEventListener("click", (event) => {
+        openTab(event, "main");
+    });
+    document.getElementById("other-button").addEventListener("click", (event) => {
+        openTab(event, "other");
+    });
+    document.getElementById("help-button").addEventListener("click", (event) => {
+        openTab(event, "help");
     });
 };
 
@@ -173,6 +197,18 @@ function registerPrefixTableEventListeners() {
             let index = item.id.substring(5) // edit-
             editPrefix(index);
         });
+    });
+
+    document.querySelectorAll('input[id^="duplicate-"]').forEach((elem) => {
+        elem.addEventListener("click", function(event) {
+            var item = event.target;
+            let index = item.id.substring(10) // duplicate-
+            duplicatePrefix(index);
+        });
+    });
+
+    document.getElementById("new").addEventListener("click", (event) => {
+        addPrefix();
     });
 };
 
@@ -234,9 +270,9 @@ function checkDescription(){
     return isValid;
 };
 
-function checkRD() {
-    var rd = document.getElementById("rd");
-    var isValid = checkElem(rd, INVALID_PATH_LOCALISED);
+function checkPrefix() {
+    var prefix = document.getElementById("prefix");
+    var isValid = checkElem(prefix, INVALID_PATH_LOCALISED);
 
     return isValid;
 };
@@ -287,95 +323,167 @@ function removeAddress() {
     prefixModalAlertHide();
 };
 
+
 function editPrefix(index) {
     utils.dumpStr("editPrefix ->  START");
 
     let list = items.getPrefixesData();
     let item = list[index];
 
-    utils.dumpStr("editPrefix item ->  "+item);
+    editPrefixInternal(item, false);
+
+    utils.dumpStr("editPrefix ->  END");
+};
+
+function duplicatePrefix(index) {
+    utils.dumpStr("duplicatePrefix ->  START");
+    var selIdx = index;
+    if (selIdx < 0)
+        return;
+
+    let list = items.getPrefixesData();
+    let oldItem = list[selIdx];
+
+    var item = items.createNewPrefix(oldItem.description +  ' ('
+        + i18n.updateString("__MSG_options.prefixCopy__")
+            +')', oldItem.prefix);
+
+    item.aliasesList = oldItem.aliasesList;
+    item.addressesList = oldItem.addressesList;
+
+    editPrefixInternal(item, true);
+
+    utils.dumpStr("duplicatePrefix ->  END");
+};
+
+
+function addPrefix() {
+    utils.dumpStr("addPrefix ->  START");
+
+    var item = items.createNewPrefix('', '');
+
+   editPrefixInternal(item, true);
+
+    utils.dumpStr("addPrefix ->  END");
+};
+
+function editPrefixInternal(item, isNewPrefix) {
+    utils.dumpStr("editPrefixInternal ->  START");
+
+    utils.dumpStr("editPrefixInternal item ->  "+item);
 
     const popover = document.getElementById("mypopover");
     popover.innerHTML = Mustache.render(PREFIX_EDIT_LOCALISED, {
-        message: "ADSAD EDIT",
+        message: "CREATE/EDIT/DUPLICATE",
         item: item,
-        button1Label: "SAVE",
-        button2Label: "CANCEL"
+        button1Label: "Save",
+        button2Label: "Cancel"
     });
+    prefixModalAlertHide();
 
     document.getElementById("addAlias").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix addAlias click->  START");
+        utils.dumpStr("editPrefixInternal addAlias click->  START");
 
         addAlias();
 
-        utils.dumpStr("editPrefix addAlias click->  END");
+        utils.dumpStr("editPrefixInternal addAlias click->  END");
     });
 
     document.getElementById("removeAlias").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix removeAlias click->  START");
+        utils.dumpStr("editPrefixInternal removeAlias click->  START");
 
         removeAlias();
 
-        utils.dumpStr("editPrefix removeAlias click->  END");
+        utils.dumpStr("editPrefixInternal removeAlias click->  END");
     });
 
 
     document.getElementById("addAddress").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix addAddress click->  START");
+        utils.dumpStr("editPrefixInternal addAddress click->  START");
 
         addAddress();
 
-        utils.dumpStr("editPrefix addAddress click->  END");
+        utils.dumpStr("editPrefixInternal addAddress click->  END");
     });
 
     document.getElementById("removeAddress").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix removeAddress click->  START");
+        utils.dumpStr("editPrefixInternal removeAddress click->  START");
 
         removeAddress();
 
-        utils.dumpStr("editPrefix removeAddress click->  END");
+        utils.dumpStr("editPrefixInternal removeAddress click->  END");
     });
 
+    // save
     document.getElementById("button1").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix button1 click->  START");
+        utils.dumpStr("editPrefixInternal button1 click->  START");
 
-        //document.getElementById("subjects_prefix_switchTable").textContent = '';
-        //initPrefixesTable();
+        let isValid = checkDescription() && checkPrefix();
+        utils.dumpStr("editPrefixInternal button1 click->  validation " + isValid);
 
-        popover.hidePopover();
-        utils.dumpStr("editPrefix button1 click->  END");
+        if (isValid) {
+            item.description = document.getElementById("description").value.trim();
+            item.prefix = document.getElementById("prefix").value.trim();
+
+            item.aliases = getArrayFromListbox(document.getElementById("aliasesList"));
+            item.addresses = getArrayFromListbox(document.getElementById("addressList"));
+            item.currentSeqValue = document.getElementById("rdSequenceValue").value;
+
+            utils.dumpStr("editPrefixInternal item to save ->  "+item);
+
+            if (isNewPrefix) {
+                let list = items.getPrefixesData();
+                list.push(item);
+            }
+
+            items.savePrefixes();
+
+            document.getElementById("subjects_prefix_switchTable").textContent = '';
+
+            initPrefixesTable();
+
+            popover.hidePopover();
+        }
+
+        utils.dumpStr("editPrefixInternal button1 click->  END");
     });
+
+    // cancel
     document.getElementById("button2").addEventListener("click", (event) => {
-        utils.dumpStr("editPrefix button2 click->  START");
+        utils.dumpStr("editPrefixInternal button2 click->  START");
 
         popover.hidePopover();
-        utils.dumpStr("editPrefix button2 click->  END");
+        utils.dumpStr("editPrefixInternal button2 click->  END");
     });
 
     popover.showPopover();
 
-    utils.dumpStr("editPrefix ->  END");
+    utils.dumpStr("editPrefixInternal ->  END");
 };
+
 
 function deletePrefix(index) {
     utils.dumpStr("deletePrefix ->  START");
 
     let list = items.getPrefixesData();
+    let item = list[index];
 
     const popover = document.getElementById("mypopover");
     popover.innerHTML = Mustache.render(ALERT_TEMPLATE_LOCALISED, {
-        message: "ADSAD REMOVE",
+        message: "Do you want to remove selected prefix?",
         item: item,
-        button1Label: "TAK",
-        button2Label: "NIE"
+        button1Label: "Yes, Remove",
+        button2Label: "No, Cancel"
     });
 
     document.getElementById("button1").addEventListener("click", (event) => {
         utils.dumpStr("deletePrefix button1 click->  START");
 
-        //list.remove(index);
-        //document.getElementById("subjects_prefix_switchTable").textContent = '';
-        //initPrefixesTable();
+        list.remove(index);
+
+        items.savePrefixes();
+        document.getElementById("subjects_prefix_switchTable").textContent = '';
+        initPrefixesTable();
 
         popover.hidePopover();
         utils.dumpStr("deletePrefix button1 click->  END");
@@ -388,8 +496,6 @@ function deletePrefix(index) {
     });
 
     popover.showPopover();
-
-    //popover.innerHTML = Mustache.render(PREFIX_EDIT_LOCALISED);
 
     utils.dumpStr("deletePrefix ->  END");
 };
@@ -490,6 +596,7 @@ function getStringFromListbox(listbox){
 };
 
 
+
 async function init() {
     utils.dumpStr("options -> init START");
 
@@ -498,6 +605,8 @@ async function init() {
 
     utils.dumpStr("options -> init END");
 }
+
+
 
 init();
 

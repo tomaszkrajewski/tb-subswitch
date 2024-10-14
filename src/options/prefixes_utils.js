@@ -67,3 +67,13 @@ function removeItemFromListBox(where) {
         listbox.remove(selected);
 };
 
+function getArrayFromListbox(listbox){
+    var array = new Array();
+
+    if (listbox.length > 0) {
+        for (var i = 0; i < listbox.length; i++){
+            array.push(listbox[i].value);
+        }
+    }
+    return array;
+};

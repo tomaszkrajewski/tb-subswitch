@@ -4,16 +4,6 @@
 <head>
     <title>__MSG_subjects_prefix_switch.label.options.windowtitle__</title>
 
-    <!-- Not sure if all of these are needed -->
-    <!--<link rel="stylesheet" href="chrome://global/skin/">
-    <link rel="stylesheet" href="chrome://messenger/skin/messenger.css">
-
-    <link rel="stylesheet" href="chrome://messenger/skin/input-fields.css">
-    <link rel="stylesheet" href="chrome://global/skin/global.css">
-    -->
-    <!-- link rel="stylesheet" href="chrome://messenger/skin/dialogs.css" -->
-
-
     <!-- new css !-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,11 +19,19 @@
 </head>
 
 <body>
-<form>
-    <div class="w3-container">
 
-     <!-- Main Tab -->
-        <div id="main" class="w3-container">
+    <div class="w3-container">
+        <h2>__MSG_menuItem.options__</h2>
+
+        <!-- Tabs -->
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button w3-light-blue w3-border w3-left-align tablink" id="main-button">__MSG_subjects_prefix_switch.label.options.maintab__</button>
+            <button class="w3-bar-item w3-button w3-border w3-left-align tablink" id="other-button">__MSG_subjects_prefix_switch.label.options.othertab__</button>
+            <button class="w3-bar-item w3-button w3-border w3-left-align tablink" id="help-button">__MSG_subjects_prefix_switch.label.options.helptab__</button>
+        </div>
+        <form>
+        <!-- Main Tab -->
+        <div id="main" class="w3-container tab">
             <h3>__MSG_subjects_prefix_switch.label.options.maintab__</h3>
             <fieldset class="w3-border" style="margin-bottom: 16px;">
                 <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.options.tree.rds__</legend>
@@ -60,15 +58,15 @@
 
             <fieldset class="w3-border" style="margin-bottom: 16px;">
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="offbydefault" data-preference="offbydefault" checked="true">
+                    <input type="checkbox" id="offbydefault" class="w3-check" data-preference="offbydefault" checked="true">
                     <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
                 </div>
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="beforeMsgSubject" data-preference="beforeMsgSubject" checked="true">
+                    <input type="checkbox" id="beforeMsgSubject" class="w3-check" data-preference="beforeMsgSubject" checked="true">
                     <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
                 </div>
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="contextmenu" data-preference="contextmenu" checked="true">
+                    <input type="checkbox" id="contextmenu" class="w3-check" data-preference="contextmenu" checked="true">
                     <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>
                 </div>
             </fieldset>
@@ -87,23 +85,21 @@
             </div>
         </span>
 
-        <div id="other" class="w3-container">
+        <div id="other" class="w3-container tab" style="display:none;">
             <h3>__MSG_subjects_prefix_switch.label.options.othertab__</h3>
             <div class="w3-container">
                 <fieldset class="w3-border">
                     <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.options.other.autodiscovery__</legend>
                     <div class="w3-padding">
-                        <div class="w3-row">
-                            <div class="w3-col s6">
-                                <input type="checkbox" id="addRDtoEmail" data-preference="addRDtoEmail">
-                                <label for="addRDtoEmail">__MSG_subjects_prefix_switch.label.options.addRDtoEmail__</label>
-                            </div>
-                            <div class="w3-col s6">
-                                <input type="checkbox" id="loadRDfromEmail" data-preference="loadRDfromEmail">
-                                <label for="loadRDfromEmail">__MSG_subjects_prefix_switch.label.options.loadRDfromEmail__</label>
-                            </div>
+                        <div class="w3-padding-16">
+                            <input type="checkbox" id="addRDtoEmail" class="w3-check" data-preference="addRDtoEmail">
+                            <label for="addRDtoEmail">__MSG_subjects_prefix_switch.label.options.addRDtoEmail__</label>
                         </div>
                         <div class="w3-padding-16">
+                            <input type="checkbox" id="loadRDfromEmail" class="w3-check" data-preference="loadRDfromEmail">
+                            <label for="loadRDfromEmail">__MSG_subjects_prefix_switch.label.options.loadRDfromEmail__</label>
+                        </div>
+                       <div class="w3-padding-16">
                             <label for="discoveryIgnoreSigns">__MSG_subjects_prefix_switch.label.options.discoveryIgnoreSigns__</label>
                             <input type="text" id="discoveryIgnoreSigns" data-preference="discoveryIgnoreSigns" class="w3-input">
                         </div>
@@ -153,7 +149,7 @@
             </div>
         </div>
 
-        <div id="help" class="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue">
+        <div id="help" class="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue tab" style="display:none;">
             <h3>__MSG_subjects_prefix_switch.label.options.helptab__</h3>
             <h1>
                 <image src="/assets/sub_switch232.png" class="optionsImage" />
@@ -196,9 +192,9 @@
                 </p>
             </div>
         </div>
-
+        </form>
     </div>
-</form>
+
 
 </body>
 
