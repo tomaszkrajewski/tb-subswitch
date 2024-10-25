@@ -2,7 +2,6 @@
 function prefixModalAlertShow(alertMessageKey){
     document.getElementById('errorMessage').innerText = alertMessageKey;
     document.getElementById('errorMessage').style.display = 'block';
-
 };
 
 function prefixModalAlertHide(){

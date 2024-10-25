@@ -43,6 +43,7 @@
                                 <th class="checkbox-cell">__MSG_subjects_prefix_switch.label.options.tree.default__</th>
                                 <th>__MSG_subjects_prefix_switch.label.options.tree.description__</th>
                                 <th>__MSG_subjects_prefix_switch.label.options.tree.rd__</th>
+                                <th>__MSG_subjects_prefix_switch.label.options.tree.showInNewMsgPopup__</th>
                                 <th> </th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@
                     <input type="checkbox" id="offbydefault" class="w3-check" data-preference="offbydefault" checked="true">
                     <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
                 </div>
+                <!-- TODO TO REMOVE with msgSubject__ -->
                 <div class="w3-padding-16">
                     <input type="checkbox" id="beforeMsgSubject" class="w3-check" data-preference="beforeMsgSubject" checked="true">
                     <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
@@ -74,12 +76,7 @@
 
         <!-- modals -->
         <span id="itemsModals">
-            <div id="mypopover" popover>
-              <h2>Popover heading</h2>
-              <p>
-                This here is some very important content that we want to draw your
-                attention to before you light dismiss it. Read it all, do not delay!
-              </p>
+            <div id="mypopover" popover style="height: initial;">
                  <input type="button" class="delete optionsButton"
                         value="__MSG_subjects_prefix_switch.label.options.button.delete__" id="delete-{{id}}" popovertarget="mypopover" popovertargetaction="show" />
             </div>

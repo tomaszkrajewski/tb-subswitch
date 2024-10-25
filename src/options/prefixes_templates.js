@@ -12,6 +12,13 @@ const PREFIX_ROW = `
     <td>
         <span id="prefix-{{id}}">{{prefix}}</span>
     </td>
+    <td>
+        <input id="showInNewMsgPopup-{{id}}" class="w3-check" type="checkbox" 
+            {{#showInNewMsgPopup}} 
+                checked="true" 
+            {{/showInNewMsgPopup}} 
+        />
+    </td>
     <!-- edit -->
     <td>
         <input type="button" class="w3-button w3-blue" 
@@ -38,15 +45,6 @@ const ALERT_TEMPLATE = `
             <input type="button" class="w3-button w3-red" id="button1" value="{{button1Label}}" />
             <input type="button" class="w3-button w3-green" id="button2" value="{{button2Label}}" /> 
         </div>
-    </div>
-`;
-
-const MESSAGE_TEMPLATE = `
-    <div>
-        <hbox align="center" id="messageBox">
-            <label>{{message}}</label>
-        </hbox>
-        <separator style="margin-bottom:5px;"/> 
     </div>
 `;
 

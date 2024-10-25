@@ -13,7 +13,7 @@ const INVALID_PATH_LOCALISED = i18n.updateString("__MSG_setRD.invalidPath__");
 
 const INVALID_ALIAS_LOCALISED = i18n.updateString( "__MSG_setRD.invalidAlias__");
 const DUPLICATE_ALIAS_LOCALISED = i18n.updateString("__MSG_setRD.duplicateAlias__");
-const INVALID_ADDRESS_LOCALISED  = i18n.updateString("__MSG_setRD.invalidAddress__");
+const INVALID_ADDRESS_LOCALISED  = i18n.updateString("__MSG_options.invalidAddress__");
 const DUPLICATE_ADDRESS_LOCALISED = i18n.updateString( "__MSG_options.duplicateAddress__");
 
 
@@ -90,8 +90,10 @@ async function initPrefixesTable() {
         tableRow.innerHTML = Mustache.render(PREFIX_ROW_LOCALISED, {
             id: index,
             prefix: prefix.prefix,
-            description: prefix.description
+            description: prefix.description,
+            showInNewMsgPopup: prefix.showInNewMsgPopup
         });
+
         document.getElementById("subjects_prefix_switchTable").appendChild(tableRow);
     };
 
@@ -164,6 +166,20 @@ function registerPrefixTableEventListeners() {
             list.defaultPrefix = prefixDefault;
 
             saveDefaultPrefix(prefixDefault);
+        });
+    });
+
+    document.querySelectorAll('input[id^="showInNewMsgPopup-"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            let item = event.target;
+            let index = item.id.substring(18) // showInNewMsgPopup-
+
+            let list = items.getPrefixesData();
+            let listItem = list[index];
+
+            listItem.showInNewMsgPopup = !listItem.showInNewMsgPopup;
+
+            items.savePrefixes();
         });
     });
 
