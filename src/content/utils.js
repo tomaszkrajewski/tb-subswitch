@@ -4,14 +4,6 @@ if(!com.ktsystems.subswitch.Utils) com.ktsystems.subswitch.Utils={};
 var { ExtensionParent } = ChromeUtils.import("resource://gre/modules/ExtensionParent.jsm");
 var extension = ExtensionParent.GlobalManager.getExtension("{957509b1-217a-46c7-b08b-f67d08d53883}");
 
-var subswitchOptionsHandler = {
-    openSettings: function() {
-        var settingsDialog = window.open("chrome://subjects_prefix_switch/content/options.xhtml",
-            "subjects_prefix_switch_options", "chrome,centerscreen,resizable");
-        settingsDialog.focus();
-    }
-}
-
 
 com.ktsystems.subswitch.Utils = {
     createItem : function(description, rd) {
@@ -38,10 +30,6 @@ com.ktsystems.subswitch.Utils = {
 
         var protocolSvc = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"].getService(Components.interfaces.nsIExternalProtocolService);
         protocolSvc.loadURI(uri);
-    },
-
-    openOptions : function(ev, autosave) {
-        subswitchOptionsHandler.openSettings();
     },
 
     dumpStr : function(str) {

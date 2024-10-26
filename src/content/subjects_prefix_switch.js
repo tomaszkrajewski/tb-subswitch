@@ -135,11 +135,6 @@ com.ktsystems.subswitch.SubSwitchMain = {
         com.ktsystems.subswitch.Utils.dumpStr('selectedIndex->' + subtoolbar.selectedIndex+ ' ' + idx);
     },
 
-    afterOptionsResetPrefix : function() {
-        var subMain = com.ktsystems.subswitch.SubSwitchMain;
-        subMain.setPrefix(subMain.rdi_curr, true);
-    },
-
     searchRD : function(subjectElement) {
         var subMain = com.ktsystems.subswitch.SubSwitchMain;
         if (!subMain.rdi_curr)
@@ -240,7 +235,7 @@ com.ktsystems.subswitch.SubSwitchMain = {
         for (var i = 0; i < subConst.CONFIGURATION_IDS.length; i++) {
             if (subConst.subswitch_prefs.getPrefType(subConst.CONFIGURATION_IDS[i])
                     == subConst.subswitch_prefs.PREF_INVALID)  {
-                com.ktsystems.subswitch.Utils.openOptions(true);
+                //com.ktsystems.subswitch.Utils.openOptions(true);
                 return;
              }
         }
@@ -310,10 +305,6 @@ com.ktsystems.subswitch.SubSwitchMain = {
             menuPopup.appendChild(document.createXULElement("menuseparator"));
         }
 
-        subMain.insertOptionsItem(menuPopup,
-            com.ktsystems.subswitch.Utils.getLocalizedMessage("menuItem.options"),
-            com.ktsystems.subswitch.Utils.getLocalizedMessage("toolTip.enterOptions"))
-
         console.log("Init of initMenuPopup - END");
     },
 
@@ -323,11 +314,6 @@ com.ktsystems.subswitch.SubSwitchMain = {
 
     insertMenuItem : function(menu, label, tooltip, idx) {
         var item = com.ktsystems.subswitch.Utils.createMenuItem("subjects_prefix_switch_RD_" + idx, label, tooltip, "com.ktsystems.subswitch.SubSwitchMain.loadRD(" + idx + ", true); event.stopPropagation();");
-		menu.appendChild(item);
-    },
-
-    insertOptionsItem : function(menu, label, tooltip) {
-        var item = com.ktsystems.subswitch.Utils.createMenuItem("subjects_prefix_switch_openOptions", label, tooltip, "com.ktsystems.subswitch.SubSwitchMain.afterOptionsResetPrefix(); com.ktsystems.subswitch.Utils.openOptions(event, false); event.stopPropagation();");
 		menu.appendChild(item);
     },
 

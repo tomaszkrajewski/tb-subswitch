@@ -19,8 +19,7 @@ async function main() {
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_sequences", "");
     
 
-    // Add entry to the tools menu to open old XUL options. The actual onclick
-    // function can later be replaced by 
+    // replaced by
     //    () => browser.runtime.openOptionsPage()
     // to open the new WebExtension options page. However, this is actually bad
     // practice. Users are now used to find options in the add-on manager and the
@@ -29,7 +28,7 @@ async function main() {
         id: "oldOptions",
         contexts: ["tools_menu"],
         title: browser.i18n.getMessage("subjects_prefix_switch.label.toolbar"),
-        onclick: () => browser.WindowListener.openDialog("chrome://subjects_prefix_switch/content/options.xhtml")
+        onclick: () => browser.runtime.openOptionsPage()
     })
 
     console.log("Init of subswitch - START");
@@ -43,79 +42,9 @@ async function main() {
         "chrome://messenger/content/messengercompose/messengercompose.xhtml",
         "content/messengercompose.js");
 
-    messenger.WindowListener.registerWindow(
-        "chrome://messenger/content/messenger.xhtml",
-        "content/messenger.js");
-
-    messenger.WindowListener.registerWindow(
-        "chrome://messenger/content/customizeToolbar.xhtml",
-        "content/customizetoolbar.js");
-
     messenger.WindowListener.startListening();
 
     console.log("Init of subswitch - END");
 }
-
-// Wrapper for handling errors during creation of menu items.
-async function addMenuEntry(createData) {
-    let { promise, resolve, reject } = Promise.withResolvers();
-    let error;
-    let id = browser.menus.create(createData, () => {
-        error = browser.runtime.lastError; // Either null or an Error object.
-        if (error) {
-            reject(error)
-        } else {
-            resolve();
-        }
-    });
-
-    try {
-        await promise;
-        console.info(`Successfully created menu entry <${id}>`);
-    } catch (error) {
-        if (error.message.includes("already exists")) {
-            console.info(`The menu entry <${id}> exists already and was not added again.`);
-        } else {
-            console.error("Failed to create menu entry:", createData, error);
-        }
-    }
-
-    return id;
-}
-
-browser.menus.onClicked.addListener((info, tab) => {
-    switch (info.menuItemId) {
-        case "abcd":
-            console.log("Clicked menu entry ABCD")
-            break;
-        case "private":
-            console.log("Clicked menu entry PRIVATE")
-            break;
-        case "org":
-            console.log("Clicked menu entry ORG")
-            break;
-    }
-    console.log({tab, info});
-})
-
-await addMenuEntry({
-    id: "abcd",
-    contexts: ["compose_action_menu"],
-    type: "radio",
-    title: "Project ABCD"
-})
-await addMenuEntry({
-    id: "private",
-    contexts: ["compose_action_menu"],
-    type: "radio",
-    title: "Private mail"
-});
-await addMenuEntry({
-    id: "org",
-    contexts: ["compose_action_menu"],
-    type: "radio",
-    title: "Organizational mail"
-});
-
 
 main();
