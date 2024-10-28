@@ -41,12 +41,6 @@ async function main() {
         ]
     );
 
-    messenger.WindowListener.registerWindow(
-        "chrome://messenger/content/messengercompose/messengercompose.xhtml",
-        "content/messengercompose.js");
-
-    messenger.WindowListener.startListening();
-
     console.log("Init of subswitch - END");
 }
 
