@@ -1,4 +1,7 @@
 import * as utils from "./modules/utils.mjs";
+import * as items from "./options/items_migrated.js";
+
+const SUBSWITCH_MIME_HEADER = 'X-SubSwitch';
 
 async function main() {
     // Prepare legacy prefs. The very last conversion step will migrate these to
@@ -46,5 +49,65 @@ async function main() {
 
     console.log("Init of subswitch - END");
 }
+
+
+async function getPrefixForTabId(tabid) {
+    const value = await utils.getFromSession(`currentPrefix-${tabid}`);
+
+    const prefixes = items.getPrefixesData();
+
+    var item = items.createNewPrefix(value, value);
+    let idx = prefixes.indexOf(item);
+
+    if (idx >= 0) {
+        return prefixes[idx];
+    } else {
+        return null;
+    }
+}
+
+async function customSendAction(tab, composeDetails) {
+    // Perform any modifications or logging
+    utils.dumpStr("SubSwitch -> Sending email START");
+    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(composeDetails)}`);
+
+    items.loadPrefixesDataString();
+
+    const addRDtoEmail = await browser.LegacyPrefs.getPref("extensions.subjects_prefix_switch.addRDtoEmail");
+
+    utils.dumpStr(`SubSwitch -> Sending email addRDtoEmail ${addRDtoEmail}`);
+
+    if (addRDtoEmail) {
+        const selectedPrefix = await getPrefixForTabId(tab.id);
+
+        utils.dumpStr(`SubSwitch -> Sending email selectedPrefix ${selectedPrefix}`);
+
+        if (selectedPrefix) {
+            selectedPrefix.incSeqValue();
+
+           //savePrefixes
+           //com.ktsystems.subswitch.PrefixesListSingleton.getInstance().savePrefixesSequences();
+
+            if (!composeDetails.customHeaders) {
+                composeDetails.customHeaders = [];
+            }
+
+            let ch = {
+                name: SUBSWITCH_MIME_HEADER,
+                value: (selectedPrefix.description + "; " + selectedPrefix.prefixCode)
+            };
+
+            composeDetails.customHeaders.push(ch);
+        }
+    }
+
+    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(composeDetails)}`);
+    utils.dumpStr("SubSwitch -> Sending email END");
+    // Continue with sending the email
+    return true;
+}
+
+// Attach the custom send action
+browser.compose.onBeforeSend.addListener(customSendAction);
 
 main();

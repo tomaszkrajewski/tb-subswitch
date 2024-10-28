@@ -63,3 +63,29 @@ export async function getFromSession(key) {
         dumpError("Error retrieving from session storage:", error);
     }
 }
+
+
+export function insertAddress(composeDetails, prefixItem) {
+    dumpStr("utils -> insertAddress START");
+
+    dumpStr(`utils -> insertAddress ${JSON.stringify(composeDetails)}`);
+
+    if (prefixItem != null && prefixItem.addresses != null) {
+        for (var i = 0; i < prefixItem.addresses.length; i++) {
+            var address = prefixItem.addresses[i].split(':');
+            var addressType = address[0].toLowerCase();
+            if (addressType && address[1] != null) {
+
+                if (!composeDetails[addressType]) {
+                    composeDetails[addressType] = [];
+                }
+
+                composeDetails[addressType].push(address[1]);
+            }
+        }
+    }
+
+    dumpStr(`utils -> insertAddress ${JSON.stringify(composeDetails)}`);
+
+    dumpStr("utils -> insertAddress END");
+};

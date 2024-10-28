@@ -8,6 +8,10 @@ const PREFIX_ROW = `
         <input type="button" style="font-weight: bold;" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-pale-green" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
 `;
 
+const SELECTED_PREFIX_ROW = `
+        <input type="button" style="font-weight: bold;" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-cyan" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
+`;
+
 let currentPrefix;
 
 async function openOptions() {
@@ -80,23 +84,7 @@ function removeSubject(composeDetails, prefixItem) {
 };
 
 function insertAddress(tabId, composeDetails, prefixItem) {
-    utils.dumpStr("messenger -> insertAddress START");
-
-    utils.dumpStr(`messenger -> insertAddress ${JSON.stringify(composeDetails)}`);
-
-    if (prefixItem != null && prefixItem.addresses != null) {
-        for (var i = 0; i < prefixItem.addresses.length; i++) {
-            var address = prefixItem.addresses[i].split(':');
-            var addressType = address[0].toLowerCase();
-            if (addressType && address[1] != null) {
-                composeDetails[addressType].push(address[1]);
-            }
-        }
-    }
-
-    utils.dumpStr(`messenger -> insertAddress ${JSON.stringify(composeDetails)}`);
-
-    utils.dumpStr("messenger -> insertAddress END");
+    utils.insertAddress(composeDetails, prefixItem);
 };
 
 function removeAddress(composeDetails, prefixItem) {
@@ -174,9 +162,7 @@ async function init() {
     let defaultRD = list.defaultPrefixIndex;
 
     for (let [index, prefix] of list.entries()) {
-        if (prefix.showInNewMsgPopup) {
-            addPrefixRow(prefix, index);
-        }
+        addPrefixRow(prefix, index);
     }
 
     document.getElementById("optionsButton").addEventListener("click", (event) => {
@@ -224,7 +210,7 @@ async function updatePrefixForTabId(tabid, currentPrefix) {
 //TODO on_off_prefix
 //TODO loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
 //TODO onSend
-
+// --> WIP
 
 init();
 

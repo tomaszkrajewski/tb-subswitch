@@ -36,19 +36,24 @@ async function init() {
     }
 
     document.querySelectorAll('input[id^="newMessage-"]').forEach((elem) => {
-        elem.addEventListener("click", function(event) {
+        elem.addEventListener("click",  function(event) {
             let item = event.target;
             let index = item.id.substring(11) // newMessage-
 
             let list = items.getPrefixesData();
             let listItem = list[index];
 
-            browser.compose.beginNew({
-                subject: listItem.prefix
-            });
-
             utils.dumpStr("messenger -> newMessage " + listItem.prefixCode);
 
+            let composeDetails = {
+                subject: listItem.prefix
+                //,
+                //currentPrefix: listItem.prefix
+            };
+
+            utils.insertAddress(composeDetails, listItem);
+
+            browser.compose.beginNew(composeDetails);
         });
     });
 
