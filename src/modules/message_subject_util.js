@@ -60,11 +60,11 @@ function removeAddress(composeDetails, prefixItem) {
     utils.dumpStr("messenger -> removeAddress END");
 };
 
-async function updatePrefixForTabId(tabid, currentPrefix) {
+export async function updatePrefixForTabId(tabid, currentPrefix) {
     await utils.saveToSession(`currentPrefix-${tabid}`, currentPrefix.prefixCode);
 };
 
-async function getPrefixForTabId(tabid, itemsList) {
+export async function getPrefixForTabId(tabid, itemsList) {
     const value = await utils.getFromSession(`currentPrefix-${tabid}`);
 
     var item = items.createNewPrefix(value, value);

@@ -50,15 +50,40 @@ async function openOptions() {
 
 };
 
+async function getPreselectedPrefix(tabId, prefixesList) {
+    let selectedPrefix = await message_subject_util.getPrefixForTabId(tabId, prefixesList);
+    let defaultRD = prefixesList.defaultPrefixIndex;
+    let offbydefault = prefixesList.defaultPrefixOff;
+
+    if (selectedPrefix) {
+        return selectedPrefix;
+    }
+
+    var hasDefaultRD = defaultRD > -1;
+
+    if (!offbydefault && hasDefaultRD) {
+        return prefixesList[defaultRD];
+    } else {
+        return null;
+    }
+}
+
 async function init() {
     utils.dumpStr("messenger -> init START");
 
     await items.loadPrefixesDataString();
+    let tabs = await messenger.tabs.query({ active: true, currentWindow: true });
+    let tabId = tabs[0].id;
+
+    let list = items.getPrefixesData();
+
+    let selectedPrefix = await getPreselectedPrefix(tabId, list);
 
     let addPrefixRow = function (prefix, index) {
         let tableRow = document.createElement("li");
         // tableRow.setAttribute("data-prefix-id", prefix.id);
-        tableRow.innerHTML = Mustache.render(PREFIX_ROW, {
+        tableRow.innerHTML = Mustache.render(
+            (selectedPrefix === prefix ? SELECTED_PREFIX_ROW : PREFIX_ROW), {
             id: index,
             prefix: prefix.prefix,
             description: prefix.description,
@@ -67,9 +92,6 @@ async function init() {
 
         document.getElementById("subjects_prefix_switchList").appendChild(tableRow);
     };
-
-    let list = items.getPrefixesData();
-    let defaultRD = list.defaultPrefixIndex;
 
     for (let [index, prefix] of list.entries()) {
         addPrefixRow(prefix, index);
@@ -87,12 +109,10 @@ async function init() {
             let list = items.getPrefixesData();
             let listItem = list[index];
 
-            let tabs = await messenger.tabs.query({ active: true, currentWindow: true });
-            let tabId = tabs[0].id;
-
             utils.dumpStr("messenger -> newMessage " + listItem.prefixCode);
 
             await message_subject_util.alterSubject(tabId, listItem, list);
+            window.close();
         });
     });
 

@@ -88,7 +88,7 @@ async function getPrefixForTabId(tabid) {
 async function customSendAction(tab, composeDetails) {
     // Perform any modifications or logging
     utils.dumpStr("SubSwitch -> Sending email START");
-    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(composeDetails)}`);
+    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(composeDetails)}${JSON.stringify(composeDetails)}`);
 
     items.loadPrefixesDataString();
 
@@ -149,16 +149,43 @@ function registerListeners() {
         let list = items.getPrefixesData();
         let listItem = list[index];
 
-        utils.dumpStr("messenger -> newMessage " + listItem.prefixCode);
+        utils.dumpStr("messenger XXXX -> onClicked " + listItem.prefixCode);
 
         await message_subject_util.alterSubject(tab.id, listItem, list);
     })
 
+    //listener for new message & setting the subject;
+    messenger.compose.onComposeStateChanged.addListener( async (tab, state) => {
+            utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(tab)}`);
+            utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(state)}`);
+
+            const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
+            if (!value) {
+                let list = items.getPrefixesData();
+
+                if (!list.defaultPrefixOff && list.defaultPrefixIndex > 0) {
+                    let listItem = list[list.defaultPrefixIndex];
+
+                    await message_subject_util.alterSubject(tab.id, listItem, list);
+                }
+
+                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, items.defaultPrefixIndex);
+            }
+        }
+    );
+
+
 }
 
-//TODO initWithDefault
 //TODO on_off_prefix
 //TODO loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
+//TODO utils.prefixModalAlertShow(msgDuplicate);
 
+//TODO initWithDefault
 //TODO WIP initMenuPopup
 //TODO WIP onSend
+
+//
+// browser.menus.onShown.addListener((...args) => {
+//     console.log("onShown",...args)
+// });

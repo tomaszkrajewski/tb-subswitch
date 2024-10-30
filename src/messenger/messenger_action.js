@@ -1,6 +1,7 @@
 import * as i18n from "../modules/i18n.mjs"
 import * as utils from "../modules/utils.mjs"
 import * as items from "../options/items_migrated.js"
+import * as message_subject_util from "../modules/message_subject_util.js"
 
 i18n.localizeDocument();
 
@@ -27,7 +28,6 @@ async function init() {
     };
 
     let list = items.getPrefixesData();
-    let defaultRD = list.defaultPrefixIndex;
 
     for (let [index, prefix] of list.entries()) {
         if (prefix.showInNewMsgPopup) {
@@ -36,24 +36,29 @@ async function init() {
     }
 
     document.querySelectorAll('input[id^="newMessage-"]').forEach((elem) => {
-        elem.addEventListener("click",  function(event) {
+        elem.addEventListener("click",  async function(event) {
             let item = event.target;
             let index = item.id.substring(11) // newMessage-
 
             let list = items.getPrefixesData();
             let listItem = list[index];
 
-            utils.dumpStr("messenger -> newMessage " + listItem.prefixCode);
-
             let composeDetails = {
                 subject: listItem.prefix
-                //,
-                //currentPrefix: listItem.prefix
             };
 
             utils.insertAddress(composeDetails, listItem);
 
+            utils.dumpStr(`messenger -> newMessage for the prefix ${listItem.prefixCode} composeDetails: ${JSON.stringify(composeDetails)}`);
+try {
             browser.compose.beginNew(composeDetails);
+            //utils.dumpStr("messenger -> newMessage open compose window :", composeWindow);
+            //message_subject_util.updatePrefixForTabId(composeWindow.id, listItem);
+
+} catch (e) {
+    utils.dumpError("messenger -> newMessage open compose window:", e);
+}
+
         });
     });
 

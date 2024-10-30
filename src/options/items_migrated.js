@@ -162,12 +162,14 @@ async function loadPrefixes() {
     let prefixesAddressesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_addresses`);
     let prefixesSequencesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_sequences`);
 
+    let offbydefault = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.offbydefault`);
     let defaultRD = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.defaultrd`);
 
     utils.dumpStr('-> initPrefixesArray prefixesDataString ' + prefixesDataString);
     utils.dumpStr('-> initPrefixesArray prefixesAddressesString ' + prefixesAddressesString);
     utils.dumpStr('-> initPrefixesArray prefixesSequencesString ' + prefixesSequencesString);
     utils.dumpStr('-> initPrefixesArray defaultRD ' + defaultRD);
+    utils.dumpStr('-> initPrefixesArray defaultPrefixOff ' + offbydefault);
 
     let items = new Array();
 
@@ -210,6 +212,7 @@ async function loadPrefixes() {
         }
 
         items.defaultPrefixIndex = defaultRD;
+        items.defaultPrefixOff = offbydefault;
 
     } catch (e) {
         utils.dumpStr('-> loadPrefixes EXCEPTION');
