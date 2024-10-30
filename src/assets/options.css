@@ -142,3 +142,9 @@ prefpane {
 .w3-table td {
   vertical-align: middle; /* Align content vertically */
 }
+
+.custom-popover {
+  max-height: 90vh;  /* Adjust based on screen height */
+  overflow-y: auto;  /* Enable scrolling if content exceeds max height */
+  width: 500px;
+}

@@ -59,16 +59,16 @@
 
             <fieldset class="w3-border" style="margin-bottom: 16px;">
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="offbydefault" class="w3-check" data-preference="offbydefault" checked="true">
+                    <input type="checkbox" id="offbydefault" class="w3-check" data-preference="offbydefault" checked="checked">
                     <label for="offbydefault">__MSG_subjects_prefix_switch.label.options.offbydefault__</label>
                 </div>
                 <!-- TODO TO REMOVE with msgSubject__ -->
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="beforeMsgSubject" class="w3-check" data-preference="beforeMsgSubject" checked="true">
+                    <input type="checkbox" id="beforeMsgSubject" class="w3-check" data-preference="beforeMsgSubject" checked="checked" disabled>
                     <label for="beforeMsgSubject">__MSG_subjects_prefix_switch.label.options.msgSubject__</label>
                 </div>
                 <div class="w3-padding-16">
-                    <input type="checkbox" id="contextmenu" class="w3-check" data-preference="contextmenu" checked="true">
+                    <input type="checkbox" id="contextmenu" class="w3-check" data-preference="contextmenu" checked="checked">
                     <label for="contextmenu">__MSG_subjects_prefix_switch.label.options.contextmenu__</label>
                 </div>
             </fieldset>
@@ -76,7 +76,7 @@
 
         <!-- modals -->
         <span id="itemsModals">
-            <div id="mypopover" popover style="height: initial;">
+            <div id="mypopover" popover style="height: initial;" class="w3-modal-content custom-popover">
                  <input type="button" class="delete optionsButton"
                         value="__MSG_subjects_prefix_switch.label.options.button.delete__" id="delete-{{id}}" popovertarget="mypopover" popovertargetaction="show" />
             </div>

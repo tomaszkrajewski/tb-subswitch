@@ -86,7 +86,6 @@ export function insertAddress(composeDetails, prefixItem) {
     }
 
     dumpStr(`utils -> insertAddress ${JSON.stringify(composeDetails)}`);
-
     dumpStr("utils -> insertAddress END");
 };
 

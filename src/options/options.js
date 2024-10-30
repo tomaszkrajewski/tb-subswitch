@@ -46,7 +46,9 @@ for (let prefElement of prefElements) {
     // handle checkboxes
     if (prefElement.tagName == "INPUT" && prefElement.type == "checkbox") {
         if (value == true) {
-            prefElement.setAttribute("checked", "true");
+            prefElement.setAttribute("checked", "checked");
+        } else {
+            prefElement.removeAttribute("checked");
         }
         // enable auto save
         prefElement.addEventListener("change", () => {
@@ -236,13 +238,14 @@ function addAutoSwitch() {
     let msgDuplicate = messenger.i18n.getMessage("options.duplicateAddress");
 
     if (!validateAutoswitch(input.value)) {
-        utils.alert(msgInvalid);
+        //TODO
+        ///utils.prefixModalAlertShow(msgInvalid);
         return;
     }
 
     for (var i = 0; i < listbox.querySelectorAll('option').length; i++) {
         if (listbox.querySelectorAll('option')[i].value == input.value) {
-            utils.alert(msgDuplicate);
+            //TODO utils.prefixModalAlertShow(msgDuplicate);
             return;
         }
     }
