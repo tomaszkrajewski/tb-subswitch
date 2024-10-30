@@ -1,7 +1,34 @@
 import * as utils from "./modules/utils.mjs";
+import * as menus from "./modules/menus.mjs";
 import * as items from "./options/items_migrated.js";
+import * as message_subject_util from "./modules/message_subject_util.js";
 
 const SUBSWITCH_MIME_HEADER = 'X-SubSwitch';
+
+async function initMenu() {
+    await items.loadPrefixesDataString();
+
+    let list = items.getPrefixesData();
+    let defaultRD = list.defaultPrefixIndex;
+
+    for (let [index, prefix] of list.entries()) {
+        await menus.addMenuEntry({
+            id: `prefix-menu-${index}`,
+            contexts: ["compose_body"],
+            type: "radio",
+            title: prefix.description
+        });
+    }
+}
+
+async function settingsChangeAction(name, value) {
+    console.log(`Changed value in "subswitch.": ${name} = ${value}`);
+
+    await items.reloadPrefixesDataString();
+    //TODO TO TEST removeAll
+    await browser.menus.removeAll();
+    await initMenu();
+}
 
 async function main() {
     // Prepare legacy prefs. The very last conversion step will migrate these to
@@ -20,7 +47,6 @@ async function main() {
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds", "Organizational mail~~[ORG]~~false##Project ABCD~~[ABCD/{number:NN}][{date:yyyy/mm/dd}]~~true##Private mail~~[PRV]~~true~~[PRIV]");
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_addresses", "");
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_sequences", "");
-    
 
     // replaced by
     //    () => browser.runtime.openOptionsPage()
@@ -43,7 +69,6 @@ async function main() {
 
     console.log("Init of subswitch - END");
 }
-
 
 async function getPrefixForTabId(tabid) {
     const value = await utils.getFromSession(`currentPrefix-${tabid}`);
@@ -92,6 +117,7 @@ async function customSendAction(tab, composeDetails) {
             };
 
             composeDetails.customHeaders.push(ch);
+            browser.compose.setComposeDetails(tab.id, composeDetails);
         }
     }
 
@@ -101,7 +127,38 @@ async function customSendAction(tab, composeDetails) {
     return true;
 }
 
-// Attach the custom send action
-browser.compose.onBeforeSend.addListener(customSendAction);
 
 main();
+initMenu();
+registerListeners();
+
+function registerListeners() {
+
+    // Monitor the preferences
+    browser.LegacyPrefs.onChanged.addListener(
+        settingsChangeAction,
+        "extensions.subjects_prefix_switch."
+    );
+
+    // Attach the custom send action
+    browser.compose.onBeforeSend.addListener(customSendAction);
+
+    messenger.menus.onClicked.addListener(async (info, tab) => {
+        const index = info.menuItemId.substring(12);
+
+        let list = items.getPrefixesData();
+        let listItem = list[index];
+
+        utils.dumpStr("messenger -> newMessage " + listItem.prefixCode);
+
+        await message_subject_util.alterSubject(tab.id, listItem, list);
+    })
+
+}
+
+//TODO initWithDefault
+//TODO on_off_prefix
+//TODO loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
+
+//TODO WIP initMenuPopup
+//TODO WIP onSend

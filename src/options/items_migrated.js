@@ -328,11 +328,17 @@ let ENTRIES_SPLIT_SIGN;
 let ENTRY_SPLIT_SIGN;
 let IGNORE_SIGNS;
 
-export function loadPrefixesDataString() {
+export async function reloadPrefixesDataString() {
+    return await loadPrefixes();
+};
+
+
+export async function loadPrefixesDataString() {
     if (PREFIXES_LIST != null) {
         return;
     }
-    return loadPrefixes();
+    await loadPrefixes();
+    return PREFIXES_LIST;
 };
 
 export function getPrefixesData() {
