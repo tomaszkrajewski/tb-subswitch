@@ -118,8 +118,9 @@ prefpane {
 :popover-open {
   /*width: 500px;
   height: 400px;
-  */
+
   padding: 0 10px;
+  */
   border-radius: 10px;
 }
 
@@ -146,5 +147,6 @@ prefpane {
 .custom-popover {
   max-height: 90vh;  /* Adjust based on screen height */
   overflow-y: auto;  /* Enable scrolling if content exceeds max height */
-  width: 500px;
+  min-width: 600px;
+  max-width: 50vh;
 }

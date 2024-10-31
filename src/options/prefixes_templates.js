@@ -39,7 +39,7 @@ const PREFIX_ROW = `
 `;
 
 const ALERT_TEMPLATE = `
-    <div class="w3-panel w3-yellow">
+    <div class="w3-panel w3-yellow w3-padding-small" style="margin-top: 0px; margin-bottom: 0px;">
         <p>{{message}}</p>
         <div class="w3-center w3-margin-top w3-margin-bottom">
             <input type="button" class="w3-button w3-red" id="button1" value="{{button1Label}}" />
@@ -49,10 +49,10 @@ const ALERT_TEMPLATE = `
 `;
 
 const PREFIX_EDIT_TEMPLATE = `
-   <div class="w3-panel w3-grey">
+   <div class="w3-panel w3-grey w3-padding-small" style="margin-top: 0px; margin-bottom: 0px;">
         <p>{{message}}</p>
     </div>
-    <div class="w3-margin-bottom w3-margin-top">
+    <div class="w3-margin">
         <div class="w3-padding-16">
             <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
             <input class="w3-input"  id="description" type="text" value="{{item.description}}"/>
@@ -63,8 +63,8 @@ const PREFIX_EDIT_TEMPLATE = `
         </div>
     </div>
     
-    <div class="w3-margin-bottom w3-margin-top">
-        <fieldset class="w3-border w3-margin-bottom">
+    <div class="w3-margin">
+        <fieldset class="w3-border w3-section">
             <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.setrd.aliases__</legend>
             <input class="w3-input" id="alias" type="text"/>
             <div class="w3-center w3-margin-top">
@@ -82,7 +82,7 @@ const PREFIX_EDIT_TEMPLATE = `
              </select>
         </fieldset>
 
-        <fieldset class="w3-border" style="margin-bottom: 16px;">
+        <fieldset class="w3-border w3-section">
             <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.setrd.addresses__</legend>
             <div class="w3-row">
                 <div class="w3-col s4">
@@ -113,7 +113,7 @@ const PREFIX_EDIT_TEMPLATE = `
              </select>
         </fieldset>
         
-        <fieldset class="w3-border" style="margin-bottom: 16px;">
+        <fieldset class="w3-border w3-section">
             <legend class="w3-border w3-padding">__MSG_subjects_prefix_switch.label.options.othertab__</legend>
             <table class="w3-table w3-bordered">
                  <tbody>
@@ -127,7 +127,7 @@ const PREFIX_EDIT_TEMPLATE = `
             </table>
         </fieldset>
         
-        <div class="w3-center w3-margin-top" style="margin-bottom: 16px;">
+        <div class="w3-center w3-margin-top w3-section">
             <input type="button" class="w3-button w3-green" id="button1" value="{{button1Label}}" />
             <input type="button" class="w3-button w3-grey" id="button2" value="{{button2Label}}" /> 
         </div>
