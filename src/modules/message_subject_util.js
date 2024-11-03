@@ -74,6 +74,15 @@ export async function getPrefixForTabId(tabid, itemsList) {
 };
 
 
+export async function getPrefixIndexForTabId(tabid, itemsList) {
+    const value = await utils.getFromSession(`currentPrefix-${tabid}`);
+
+    var item = items.createNewPrefix(value, value);
+    let idx = itemsList.indexOf(item);
+
+    return idx;
+};
+
 export async function alterSubject(tabId, selectedOption, itemsList) {
     try {
         let composeDetails = await browser.compose.getComposeDetails(tabId);
@@ -106,3 +115,21 @@ export async function alterSubject(tabId, selectedOption, itemsList) {
         utils.dumpStr("messenger -> newMessage error " + error);
     }
 };
+
+export async function getPreselectedPrefix(tabId, prefixesList) {
+    let selectedPrefix = await getPrefixForTabId(tabId, prefixesList);
+    let defaultRD = prefixesList.defaultPrefixIndex;
+    let offbydefault = prefixesList.defaultPrefixOff;
+
+    if (selectedPrefix) {
+        return selectedPrefix;
+    }
+
+    var hasDefaultRD = defaultRD > -1;
+
+    if (!offbydefault && hasDefaultRD) {
+        return prefixesList[defaultRD];
+    } else {
+        return null;
+    }
+}

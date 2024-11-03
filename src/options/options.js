@@ -231,21 +231,20 @@ function registerPrefixTableEventListeners() {
 };
 
 function addAutoSwitch() {
-    let input = document.getElementById("address");
+    let input = document.getElementById("addressDiscovery");
     let listbox = document.getElementById("discoveryIgnoreList");
 
     let msgInvalid = messenger.i18n.getMessage("options.invalidAddress");
     let msgDuplicate = messenger.i18n.getMessage("options.duplicateAddress");
 
     if (!validateAutoswitch(input.value)) {
-        //TODO
-        ///utils.prefixModalAlertShow(msgInvalid);
+        optionsModalAlertShow(msgInvalid);
         return;
     }
 
     for (var i = 0; i < listbox.querySelectorAll('option').length; i++) {
         if (listbox.querySelectorAll('option')[i].value == input.value) {
-            //TODO utils.prefixModalAlertShow(msgDuplicate);
+            optionsModalAlertShow(msgDuplicate);
             return;
         }
     }
@@ -481,6 +480,30 @@ function editPrefixInternal(item, isNewPrefix) {
 };
 
 
+function optionsModalAlertShow(message)  {
+    utils.dumpStr("optionsModalAlertShow ->  START");
+
+    const popover = document.getElementById("mypopover");
+
+    //TODO: LOCALISE
+    popover.innerHTML = Mustache.render(ALERT_TEMPLATE_LOCALISED, {
+        message: message,
+        button1Label: "OK"
+    });
+
+    document.getElementById("button1").addEventListener("click", (event) => {
+        utils.dumpStr("optionsModalAlertShow button1 click->  START");
+
+        popover.hidePopover();
+        utils.dumpStr("optionsModalAlertShow button1 click->  END");
+    });
+
+    popover.showPopover();
+
+    utils.dumpStr("optionsModalAlertShow ->  END");
+};
+
+
 function deletePrefix(index) {
     utils.dumpStr("deletePrefix ->  START");
 
@@ -488,6 +511,8 @@ function deletePrefix(index) {
     let item = list[index];
 
     const popover = document.getElementById("mypopover");
+
+    //TODO: LOCALISE
     popover.innerHTML = Mustache.render(ALERT_TEMPLATE_LOCALISED, {
         message: "Do you want to remove selected prefix?",
         item: item,
@@ -624,8 +649,6 @@ async function init() {
 
     utils.dumpStr("options -> init END");
 }
-
-
 
 init();
 

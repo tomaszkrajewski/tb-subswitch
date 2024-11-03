@@ -43,7 +43,9 @@ const ALERT_TEMPLATE = `
         <p>{{message}}</p>
         <div class="w3-center w3-margin-top w3-margin-bottom">
             <input type="button" class="w3-button w3-red" id="button1" value="{{button1Label}}" />
-            <input type="button" class="w3-button w3-green" id="button2" value="{{button2Label}}" /> 
+            {{#button2Label}} 
+                <input type="button" class="w3-button w3-green" id="button2" value="{{button2Label}}" /> 
+            {{/button2Label}} 
         </div>
     </div>
 `;
@@ -52,6 +54,7 @@ const PREFIX_EDIT_TEMPLATE = `
    <div class="w3-panel w3-grey w3-padding-small" style="margin-top: 0px; margin-bottom: 0px;">
         <p>{{message}}</p>
     </div>
+    <div class="w3-container w3-yellow" id="errorMessage">Operation not valid. Please check your inputs.</div>
     <div class="w3-margin">
         <div class="w3-padding-16">
             <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
@@ -130,9 +133,6 @@ const PREFIX_EDIT_TEMPLATE = `
         <div class="w3-center w3-margin-top w3-section">
             <input type="button" class="w3-button w3-green" id="button1" value="{{button1Label}}" />
             <input type="button" class="w3-button w3-grey" id="button2" value="{{button2Label}}" /> 
-        </div>
-
-        <div class="w3-container w3-yellow" id="errorMessage">Operation not valid. Please check your inputs.</div>
-         
+        </div>  
     </div>
 `;

@@ -16,7 +16,7 @@ async function init() {
 
     let addPrefixRow = function (prefix, index) {
         let tableRow = document.createElement("li");
-        // tableRow.setAttribute("data-prefix-id", prefix.id);
+
         tableRow.innerHTML = Mustache.render(PREFIX_ROW, {
             id: index,
             prefix: prefix.prefix,
@@ -35,6 +35,14 @@ async function init() {
         }
     }
 
+    registerListeners();
+
+    utils.dumpStr("messenger -> init END");
+}
+
+function registerListeners(){
+    utils.dumpStr("messenger -> registerListeners START");
+
     document.querySelectorAll('input[id^="newMessage-"]').forEach((elem) => {
         elem.addEventListener("click",  async function(event) {
             let item = event.target;
@@ -50,20 +58,20 @@ async function init() {
             utils.insertAddress(composeDetails, listItem);
 
             utils.dumpStr(`messenger -> newMessage for the prefix ${listItem.prefixCode} composeDetails: ${JSON.stringify(composeDetails)}`);
-try {
-            browser.compose.beginNew(composeDetails);
-            //utils.dumpStr("messenger -> newMessage open compose window :", composeWindow);
-            //message_subject_util.updatePrefixForTabId(composeWindow.id, listItem);
+            try {
+                //TODO
+                browser.compose.beginNew(composeDetails);
+                //utils.dumpStr("messenger -> newMessage open compose window :", composeWindow);
+                //message_subject_util.updatePrefixForTabId(composeWindow.id, listItem);
 
-} catch (e) {
-    utils.dumpError("messenger -> newMessage open compose window:", e);
-}
+            } catch (e) {
+                utils.dumpError("messenger -> newMessage open compose window:", e);
+            }
 
         });
     });
 
-    utils.dumpStr("messenger -> init END");
+    utils.dumpStr("messenger -> registerListeners END");
 }
 
 init();
-

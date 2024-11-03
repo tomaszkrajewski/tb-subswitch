@@ -87,6 +87,8 @@ class SubswitchPrefixItem {
         return sb;
     }
 
+
+    //FIXME keep persistence of formated value?
     get lastFormattedPrefixValue() { return this.lastPrefixValue; }
     get formattedPrefixValue(){
         var d1 = new Date();
