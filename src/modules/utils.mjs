@@ -20,7 +20,7 @@ export function openMailWindow(to) {
 export function dumpStr(str) {
     // TODO: CONDITION FOR
     //  if (com.ktsystems.subswitch.Const.PUBLIC_DIST == 'true')
-    //             return;
+                 return;
     console.log((new Date()).getTime() + ": " + str);
 };
 

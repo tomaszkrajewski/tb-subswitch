@@ -3,9 +3,17 @@ import * as menus from "./modules/menus.mjs";
 import * as items from "./options/items_migrated.js";
 import * as message_subject_util from "./modules/message_subject_util.js";
 
+
+//FIXME const file
 const SUBSWITCH_MIME_HEADER = 'X-SubSwitch';
 
 async function initMenu() {
+    const contextmenu = await browser.LegacyPrefs.getPref("extensions.subjects_prefix_switch.contextmenu");
+
+    if (!contextmenu) {
+        return
+    }
+
     await items.loadPrefixesDataString();
 
     let list = items.getPrefixesData();
@@ -31,6 +39,8 @@ async function settingsChangeAction(name, value) {
 }
 
 async function main() {
+    console.log("Init of subswitch - START");
+
     // Prepare legacy prefs. The very last conversion step will migrate these to
     // WebExtension storage.
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.addRDtoEmail", true);
@@ -59,13 +69,6 @@ async function main() {
         title: browser.i18n.getMessage("subjects_prefix_switch.label.toolbar"),
         onclick: () => browser.runtime.openOptionsPage()
     })
-
-    console.log("Init of subswitch - START");
-    messenger.WindowListener.registerChromeUrl([
-            ["content",  "subjects_prefix_switch",  "content/"],
-            ["resource", "subjects_prefix_switch",  "assets/"],
-        ]
-    );
 
     console.log("Init of subswitch - END");
 }
@@ -128,10 +131,6 @@ async function customSendAction(tab, composeDetails) {
 }
 
 
-main();
-initMenu();
-registerListeners();
-
 function registerListeners() {
 
     // Monitor the preferences
@@ -156,36 +155,57 @@ function registerListeners() {
 
     //listener for new message & setting the subject;
     messenger.compose.onComposeStateChanged.addListener( async (tab, state) => {
-            utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(tab)}`);
-            utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(state)}`);
+        utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(tab)}`);
+        utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(state)}`);
 
-            const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
-            if (!value) {
-                let list = items.getPrefixesData();
+        const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
+        utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${value}`);
+        if (!value) {
+            let list = items.getPrefixesData();
 
-                if (!list.defaultPrefixOff && list.defaultPrefixIndex > 0) {
-                    let listItem = list[list.defaultPrefixIndex];
+            if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
+                let listItem = list[list.defaultPrefixIndex];
+                utils.dumpStr(`messenger XXXX -> onComposeStateChanged setting the ${listItem}`);
 
-                    await message_subject_util.alterSubject(tab.id, listItem, list);
-                }
-
-                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, items.defaultPrefixIndex);
+                await message_subject_util.alterSubject(tab.id, listItem, list);
             }
+
+            await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
+            utils.dumpStr(`messenger XXXX -> onComposeStateChanged saving the ${list.defaultPrefixIndex}`);
         }
-    );
+    });
 
+    browser.menus.onShown.addListener(async (info, tab) => {
+        utils.dumpStr(`messenger XXXX -> onShown ${JSON.stringify(info)}`);
+        utils.dumpStr(`messenger XXXX -> onShown ${JSON.stringify(tab)}`);
 
+        await items.loadPrefixesDataString();
+
+        let list = items.getPrefixesData();
+        let index = await message_subject_util.getPrefixIndexForTabId(tab.id, list);
+
+        utils.dumpStr(`messenger XXXX -> onShown0 ${index}`);
+
+        for (let [indexMenu, prefix] of info.menuIds.entries()) {
+            browser.menus.update(`prefix-menu-${indexMenu}`, {checked: indexMenu===index});
+            browser.menus.refresh();
+        }
+    });
 }
 
-//TODO on_off_prefix
+main();
+initMenu();
+registerListeners();
+
+//TODO WONT DO on_off_prefix button
+
 //TODO loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
-//TODO utils.prefixModalAlertShow(msgDuplicate);
+//TODO FORMAT DATE
+//TODO localize
 
-//TODO initWithDefault
-//TODO WIP initMenuPopup
-//TODO WIP onSend
+//DONE checkbox
+//DONE prefixModalAlertShow(msgDuplicate);
+//DONE  initWithDefault / on_off_prefix
+//DONE  initMenuPopup
+//DONE onSend
 
-//
-// browser.menus.onShown.addListener((...args) => {
-//     console.log("onShown",...args)
-// });
