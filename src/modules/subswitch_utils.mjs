@@ -4,6 +4,8 @@ export const     SEQ_MAX_VALUE = 9999999999;
 export const     PATTERN_NUMBER = /{number:(N+)}/gi;
 export const     PATTERN_DATE = /{(date|time|datetime):[\w\\\/\-: ]+}/gi;
 
+//FIXME RE-ORGANIZE
+const PUBLIC_DIST = true;
 
 export function openURL(link) {
     if (link) {
@@ -18,11 +20,24 @@ export function openMailWindow(to) {
 };
 
 export function dumpStr(str) {
-    // TODO: CONDITION FOR
-    //  if (com.ktsystems.subswitch.Const.PUBLIC_DIST == 'true')
-                 return;
+    if (PUBLIC_DIST)
+        return;
     console.log((new Date()).getTime() + ": " + str);
 };
+
+
+export function log(str) {
+    if (PUBLIC_DIST)
+        return;
+    console.log((new Date()).getTime() + ": " + str);
+};
+
+export function dumpDir(object) {
+    if (PUBLIC_DIST)
+        return;
+    console.dir(object);
+};
+
 
 export function dumpError(str) {
     console.error((new Date()).getTime() + ": " + str);

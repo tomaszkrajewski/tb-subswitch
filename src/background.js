@@ -1,6 +1,6 @@
-import * as utils from "./modules/utils.mjs";
+import * as utils from "./modules/subswitch_utils.mjs";
 import * as menus from "./modules/menus.mjs";
-import * as items from "./options/items_migrated.js";
+import * as items from "./modules/subswitch_items.js";
 import * as message_subject_util from "./modules/message_subject_util.js";
 
 
@@ -191,11 +191,64 @@ function registerListeners() {
             browser.menus.refresh();
         }
     });
+
+    // handle
+    // 1/ the opening the new message with subject
+    browser.runtime.onMessage.addListener((message, sender) => {
+        if (message && message.hasOwnProperty("command") ) {
+            return doHandleCommand(message, sender);
+        }
+    });
 }
 
 main();
 initMenu();
 registerListeners();
+
+/**
+ * Handles commands received from the compose script, to send make the
+ * ComposeDetails available to the compose script.
+ */
+async function doHandleCommand (message, sender) {
+    const { command } = message;
+    const { prefix } = message;
+
+    utils.log(`background -> doHandleCommand START ${command} `);
+
+    switch(command) {
+        case "composeWithPrefix":
+
+            let list = items.getPrefixesData();
+            let listItem = list[prefix];
+
+            let composeDetails = {
+                subject: listItem.formattedPrefixValue
+            };
+
+            utils.insertAddress(composeDetails, listItem);
+            utils.log(`background -> doHandleCommand composeWithPrefix for the prefix ${listItem.prefixCode} composeDetails: ${JSON.stringify(composeDetails)}`);
+
+            try {
+               browser.compose.beginNew(
+                    composeDetails
+                ).then((composeWindow) => {
+                   utils.log(`background -> doHandleCommand composeWithPrefix inside beginNew START`);
+                   utils.dumpDir(composeWindow);
+                   message_subject_util.updatePrefixForTabId(composeWindow.id, listItem);
+                   utils.log(`background -> doHandleCommand composeWithPrefix inside beginNew END`);
+               });
+
+                utils.log(`background -> doHandleCommand composeWithPrefix after beginNew `);
+            } catch (e) {
+                utils.dumpError("background -> doHandleCommand composeWithPrefix exception:" + e);
+            }
+
+            break;
+    }
+
+    utils.log(`background -> doHandleCommand END ${command} `);
+}
+
 
 //TODO WONT DO on_off_prefix button
 

@@ -1,6 +1,6 @@
 import * as i18n from "../modules/i18n.mjs"
-import * as utils from "../modules/utils.mjs"
-import * as items from "./items_migrated.js"
+import * as utils from "../modules/subswitch_utils.mjs"
+import * as items from "../modules/subswitch_items.js"
 
 i18n.localizeDocument();
 

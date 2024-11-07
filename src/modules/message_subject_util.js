@@ -1,5 +1,6 @@
-import * as utils from "./utils.mjs";
-import * as items from "../options/items_migrated.js";
+import * as utils from "./subswitch_utils.mjs";
+import * as items from "./subswitch_items.js";
+
 
 let currentPrefix;
 
@@ -8,7 +9,7 @@ export function searchSubject(composeDetails) {
     if (!currentPrefix)
         return false;
 
-    var indexOf = composeDetails.subject.indexOf(currentPrefix.lastFormattedPrefixValue);
+    var indexOf = composeDetails.subject.indexOf(currentPrefix.formattedPrefixValue);
     return (indexOf > -1);
 };
 
@@ -23,8 +24,8 @@ function insertSubject(tabId, composeDetails, prefixItem) {
 
 
 function removeSubject(composeDetails, prefixItem) {
-    var start = composeDetails.subject.indexOf(prefixItem.lastFormattedPrefixValue);
-    var len = prefixItem.lastFormattedPrefixValue.length
+    var start = composeDetails.subject.indexOf(prefixItem.formattedPrefixValue);
+    var len = prefixItem.formattedPrefixValue.length
 
     composeDetails.subject =
         // 0 - RD
@@ -41,9 +42,9 @@ function insertAddress(tabId, composeDetails, prefixItem) {
 };
 
 function removeAddress(composeDetails, prefixItem) {
-    utils.dumpStr("messenger -> removeAddress START");
+    utils.dumpStr("message_subject_util.js -> removeAddress START");
 
-    utils.dumpStr(`messenger -> removeAddress ${JSON.stringify(composeDetails)}`);
+    utils.dumpStr(`message_subject_util.js -> removeAddress ${JSON.stringify(composeDetails)}`);
 
     if (prefixItem != null && prefixItem.addresses != null) {
         for (var i = 0; i < prefixItem.addresses.length; i++) {
@@ -55,9 +56,9 @@ function removeAddress(composeDetails, prefixItem) {
         }
     }
 
-    utils.dumpStr(`messenger -> removeAddress ${JSON.stringify(composeDetails)}`);
+    utils.dumpStr(`message_subject_util.js -> removeAddress ${JSON.stringify(composeDetails)}`);
 
-    utils.dumpStr("messenger -> removeAddress END");
+    utils.dumpStr("message_subject_util.js -> removeAddress END");
 };
 
 export async function updatePrefixForTabId(tabid, currentPrefix) {
@@ -65,21 +66,25 @@ export async function updatePrefixForTabId(tabid, currentPrefix) {
 };
 
 export async function getPrefixForTabId(tabid, itemsList) {
+    utils.dumpStr(`message_subject_util.js -> getPrefixForTabId START`);
     const value = await utils.getFromSession(`currentPrefix-${tabid}`);
 
     var item = items.createNewPrefix(value, value);
     let idx = itemsList.indexOf(item);
 
+    utils.dumpStr(`message_subject_util.js -> getPrefixForTabId END`);
     return itemsList[idx];
 };
 
 
 export async function getPrefixIndexForTabId(tabid, itemsList) {
+    utils.dumpStr(`message_subject_util.js -> getPrefixIndexForTabId START`);
     const value = await utils.getFromSession(`currentPrefix-${tabid}`);
 
     var item = items.createNewPrefix(value, value);
     let idx = itemsList.indexOf(item);
 
+    utils.dumpStr(`message_subject_util.js -> getPrefixIndexForTabId END`);
     return idx;
 };
 
@@ -108,15 +113,16 @@ export async function alterSubject(tabId, selectedOption, itemsList) {
             await browser.compose.setComposeDetails(tabId, composeDetails);
 
         } else {
-            console.error("No message found to manipulate.");
+            console.error("message_subject_util.js -> No message found to manipulate.");
         }
 
     } catch (error) {
-        utils.dumpStr("messenger -> newMessage error " + error);
+        utils.error("message_subject_util.js -> newMessage error " + error);
     }
 };
 
 export async function getPreselectedPrefix(tabId, prefixesList) {
+    utils.dumpStr(`message_subject_util.js  -> getPreselectedPrefix START`);
     let selectedPrefix = await getPrefixForTabId(tabId, prefixesList);
     let defaultRD = prefixesList.defaultPrefixIndex;
     let offbydefault = prefixesList.defaultPrefixOff;
@@ -127,6 +133,7 @@ export async function getPreselectedPrefix(tabId, prefixesList) {
 
     var hasDefaultRD = defaultRD > -1;
 
+    utils.dumpStr(`message_subject_util.js  -> getPreselectedPrefix END`);
     if (!offbydefault && hasDefaultRD) {
         return prefixesList[defaultRD];
     } else {

@@ -1,4 +1,4 @@
-import * as utils from "../modules/utils.mjs";
+import * as utils from "./subswitch_utils.mjs";
 
 class SubswitchPrefixItem {
     constructor(aLabel, aPrefix) {
