@@ -5,7 +5,7 @@ export const     PATTERN_NUMBER = /{number:(N+)}/gi;
 export const     PATTERN_DATE = /{(date|time|datetime):[\w\\\/\-: ]+}/gi;
 
 //FIXME RE-ORGANIZE
-const PUBLIC_DIST = true;
+const PUBLIC_DIST = false;
 
 export function openURL(link) {
     if (link) {
