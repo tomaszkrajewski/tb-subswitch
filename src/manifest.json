@@ -2,14 +2,14 @@
   "manifest_version": 2,
   "name": "SubSwitch",
   "description": "__MSG_extensionDescription__",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Tomasz Krajewski",
   "homepage_url": "https://github.com/tomaszkrajewski/tb-SubSwitch",
   "browser_specific_settings": {
     "gecko": {
       "id": "{957509b1-217a-46c7-b08b-f67d08d53883}",
       "strict_min_version": "115.0",
-      "strict_max_version": "130.*"
+      "strict_max_version": "134.*"
     }
   },
   "icons": {
@@ -20,31 +20,40 @@
   "background": {
     "scripts": [
       "background.js"
-    ]
+    ],
+    "type": "module"
   },
   "default_locale": "en-US",
   "options_ui": {
     "open_in_tab": true,
     "page": "options/options.html"
   },
+  "browser_action": {
+    "default_title": "SubSwitch",
+    "default_icon" : {
+      "16": "assets/sub_switch216.png",
+      "24": "assets/sub_switch224.png",
+      "32": "assets/sub_switch232.png"
+    },
+    "default_popup": "messenger/browser_action_popup.html"
+  },
+  "compose_action": {
+    "default_title": "SubSwitch",
+    "default_icon" : {
+      "16": "assets/sub_switch216.png",
+      "24": "assets/sub_switch224.png",
+      "32": "assets/sub_switch232.png"
+    },
+    "default_popup": "messenger/composer_action_popup.html"
+  },
   "permissions": [
-    "menus"
+    "menus",
+    "compose",
+    "tabs",
+    "messagesRead",
+    "storage"
   ],
   "experiment_apis": {
-    "WindowListener": {
-      "schema": "api/WindowListener/schema.json",
-      "parent": {
-        "scopes": [
-          "addon_parent"
-        ],
-        "paths": [
-          [
-            "WindowListener"
-          ]
-        ],
-        "script": "api/WindowListener/implementation.js"
-      }
-    },
     "LegacyPrefs": {
       "schema": "api/LegacyPrefs/schema.json",
       "parent": {

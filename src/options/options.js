@@ -1,6 +1,6 @@
 import * as i18n from "../modules/i18n.mjs"
-import * as utils from "../modules/utils.mjs"
-import * as items from "./items_migrated.js"
+import * as utils from "../modules/subswitch_utils.mjs"
+import * as items from "../modules/subswitch_items.js"
 
 i18n.localizeDocument();
 
@@ -13,7 +13,7 @@ const INVALID_PATH_LOCALISED = i18n.updateString("__MSG_setRD.invalidPath__");
 
 const INVALID_ALIAS_LOCALISED = i18n.updateString( "__MSG_setRD.invalidAlias__");
 const DUPLICATE_ALIAS_LOCALISED = i18n.updateString("__MSG_setRD.duplicateAlias__");
-const INVALID_ADDRESS_LOCALISED  = i18n.updateString("__MSG_setRD.invalidAddress__");
+const INVALID_ADDRESS_LOCALISED  = i18n.updateString("__MSG_options.invalidAddress__");
 const DUPLICATE_ADDRESS_LOCALISED = i18n.updateString( "__MSG_options.duplicateAddress__");
 
 
@@ -46,7 +46,9 @@ for (let prefElement of prefElements) {
     // handle checkboxes
     if (prefElement.tagName == "INPUT" && prefElement.type == "checkbox") {
         if (value == true) {
-            prefElement.setAttribute("checked", "true");
+            prefElement.setAttribute("checked", "checked");
+        } else {
+            prefElement.removeAttribute("checked");
         }
         // enable auto save
         prefElement.addEventListener("change", () => {
@@ -90,8 +92,10 @@ async function initPrefixesTable() {
         tableRow.innerHTML = Mustache.render(PREFIX_ROW_LOCALISED, {
             id: index,
             prefix: prefix.prefix,
-            description: prefix.description
+            description: prefix.description,
+            showInNewMsgPopup: prefix.showInNewMsgPopup
         });
+
         document.getElementById("subjects_prefix_switchTable").appendChild(tableRow);
     };
 
@@ -167,6 +171,20 @@ function registerPrefixTableEventListeners() {
         });
     });
 
+    document.querySelectorAll('input[id^="showInNewMsgPopup-"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            let item = event.target;
+            let index = item.id.substring(18) // showInNewMsgPopup-
+
+            let list = items.getPrefixesData();
+            let listItem = list[index];
+
+            listItem.showInNewMsgPopup = !listItem.showInNewMsgPopup;
+
+            items.savePrefixes();
+        });
+    });
+
     document.querySelectorAll('input[id^="up-"]').forEach((elem) => {
         elem.addEventListener("click", function(event) {
             var item = event.target;
@@ -213,20 +231,20 @@ function registerPrefixTableEventListeners() {
 };
 
 function addAutoSwitch() {
-    let input = document.getElementById("address");
+    let input = document.getElementById("addressDiscovery");
     let listbox = document.getElementById("discoveryIgnoreList");
 
     let msgInvalid = messenger.i18n.getMessage("options.invalidAddress");
     let msgDuplicate = messenger.i18n.getMessage("options.duplicateAddress");
 
     if (!validateAutoswitch(input.value)) {
-        utils.alert(msgInvalid);
+        optionsModalAlertShow(msgInvalid);
         return;
     }
 
     for (var i = 0; i < listbox.querySelectorAll('option').length; i++) {
         if (listbox.querySelectorAll('option')[i].value == input.value) {
-            utils.alert(msgDuplicate);
+            optionsModalAlertShow(msgDuplicate);
             return;
         }
     }
@@ -462,6 +480,30 @@ function editPrefixInternal(item, isNewPrefix) {
 };
 
 
+function optionsModalAlertShow(message)  {
+    utils.dumpStr("optionsModalAlertShow ->  START");
+
+    const popover = document.getElementById("mypopover");
+
+    //TODO: LOCALISE
+    popover.innerHTML = Mustache.render(ALERT_TEMPLATE_LOCALISED, {
+        message: message,
+        button1Label: "OK"
+    });
+
+    document.getElementById("button1").addEventListener("click", (event) => {
+        utils.dumpStr("optionsModalAlertShow button1 click->  START");
+
+        popover.hidePopover();
+        utils.dumpStr("optionsModalAlertShow button1 click->  END");
+    });
+
+    popover.showPopover();
+
+    utils.dumpStr("optionsModalAlertShow ->  END");
+};
+
+
 function deletePrefix(index) {
     utils.dumpStr("deletePrefix ->  START");
 
@@ -469,6 +511,8 @@ function deletePrefix(index) {
     let item = list[index];
 
     const popover = document.getElementById("mypopover");
+
+    //TODO: LOCALISE
     popover.innerHTML = Mustache.render(ALERT_TEMPLATE_LOCALISED, {
         message: "Do you want to remove selected prefix?",
         item: item,
@@ -605,8 +649,6 @@ async function init() {
 
     utils.dumpStr("options -> init END");
 }
-
-
 
 init();
 

@@ -42,6 +42,7 @@
                 <include name="components/**" />
                 <include name="assets/**" />
                 <include name="modules/**" />
+                <include name="messenger/**" />
                 <include name="options/**" />
                 <include name="*" />
                 <exclude name="skin/**/*.css" />
@@ -49,6 +50,7 @@
                 <exclude name="**/*.properties" />
                 <exclude name="**/*.dtd" />
                 <exclude name="**/*.xhtml" />
+                <exclude name="**/*.html" />
                 <exclude name="**/.*" />
             </fileset>
         </copy>
@@ -59,6 +61,7 @@
                 <include name="content/**/*.properties" />
                 <include name="content/**/*.js" />
                 <include name="content/**/*.xhtml" />
+                <include name="**/*.html" />
                 <include name="content/**/*.dtd" />
                 <include name="components/**/*.manifest" />
                 <include name="components/**/*.properties" />
@@ -76,7 +79,6 @@
                 <include name="*.js" />
                 <include name="*.json" />
                 <include name="*.ini" />
-                <include name="*.xul" />
                 <exclude name=".*" />
             </fileset>
             <filterchain>
@@ -118,6 +120,7 @@
                 <include name="locale/**" />
                 <include name="assets/**" />
                 <include name="modules/**" />
+                <include name="messenger/**" />
                 <include name="options/**" />
                 <include name="skin/**" />
                 <include name="icons/**" />

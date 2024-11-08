@@ -1,4 +1,4 @@
-import * as utils from "../modules/utils.mjs"
+import * as utils from "./subswitch_utils.mjs";
 
 class SubswitchPrefixItem {
     constructor(aLabel, aPrefix) {
@@ -15,18 +15,122 @@ class SubswitchPrefixItem {
         return (this.prefixCode != "" && this.label != "");
     }
 
-    /*
-     incSeqValue : function()     {
-        if (com.ktsystems.subswitch.Utils.isTemplateWithSequence(this.prefix)) {
+    incSeqValue () {
+        if (utils.isTemplateWithSequence(this.prefix)) {
             this.currentSeqValue++;
-            if (this.currentSeqValue > com.ktsystems.subswitch.Const.SEQ_MAX_VALUE) {
+            if (this.currentSeqValue > utils.SEQ_MAX_VALUE) {
                 this.currentSeqValue = 0;
             }
         }
     }
-    */
 
     toString()   { return ('[' + this.description + " ## " + this.prefixCode + ']'); }
+
+    equals(otherItem, deep) {
+        if (this.compare(this.prefixCode, otherItem.prefixCode))
+            return true;
+
+        for (var i = 0; i < this.aliases.length; i++) {
+            if (this.compare(this.aliases[i], otherItem.prefixCode)) {
+                return true;
+            }
+            for (var j = 0; j < otherItem.aliases.length; j++) {
+                if (this.compare(this.prefixCode, otherItem.aliases[j])) {
+                    return true;
+                }
+                if (this.compare(this.aliases[i], otherItem.aliases[j])) {
+                    return true;
+                }
+            }
+        }
+
+        if (deep) {
+            let cleanThis = this.removeIgnoredSigns(this.prefixCode);
+            let rex = new RegExp(otherItem.removeIgnoredSigns(otherItem.patternPrefixString), "gi")
+
+            utils.dumpStr('-> equals; cleanThis:'+cleanThis+'; rex:'+rex);
+            if (cleanThis.match(rex)) {
+                utils.dumpStr('-> equals; matched');
+                return true
+            }
+
+            let cleanThat = otherItem.removeIgnoredSigns(otherItem.prefixCode);
+            let rexThis = new RegExp(this.removeIgnoredSigns(this.patternPrefixString), "gi")
+
+            utils.dumpStr('-> equals; cleanThat:'+cleanThat+'; rex:'+rexThis);
+            if (cleanThat.match(rexThis)) {
+                utils.dumpStr('-> equals; matched');
+                return true
+            }
+        }
+        return false;
+    }
+
+    compare(sb1, sb2) {
+        var sbi1 = this.removeIgnoredSigns(sb1);
+        var sbi2 = this.removeIgnoredSigns(sb2);
+
+        sbi1 = (sbi1 ? sbi1.toLowerCase().trim() : null);
+        sbi2 = (sbi2 ? sbi2.toLowerCase().trim() : null);
+
+        return (sbi1 == sbi2);
+    }
+
+    removeIgnoredSigns(sb) {
+        if (sb) {
+            let ignoreSigns = IGNORE_SIGNS;
+            for (var i = 0; i < ignoreSigns.length; i++) {
+                sb = sb.split(ignoreSigns.charAt(i)).join('');
+            }
+            sb = sb.split(' ').join('');
+        }
+        return sb;
+    }
+
+
+    //FIXME keep persistence of formated value?
+    get lastFormattedPrefixValue() { return this.lastPrefixValue; }
+    get formattedPrefixValue(){
+        var d1 = new Date();
+        var numberRE = new RegExp(utils.PATTERN_NUMBER);
+        var tmpPrefix = this.prefixCode;
+
+        utils.dumpStr('-> getFormattedPrefixValue; numberRE:'+numberRE+ '; tmpPrefix=' + tmpPrefix);
+
+        if (tmpPrefix.match(numberRE)) {
+            var numnerMatchArr = numberRE.exec(tmpPrefix);
+            var currnumber = this.currentSeqValue;
+
+            if (numnerMatchArr.length == 2) {
+                var numberFormat = numnerMatchArr[1];
+
+                var currNumberForm = utils.padNumber(currnumber, numberFormat.toString().length);
+
+                tmpPrefix = tmpPrefix.replace(numnerMatchArr[0], currNumberForm);
+            }
+        }
+
+    /*
+    TODO: DATE_UTILS
+            var dateRE       = new RegExp(utils.PATTERN_DATE);
+
+            var dtMatchArr = tmpPrefix.match(dateRE);
+            var dateValue = new Date();
+
+            if (dtMatchArr != null) {
+                for (var i=0; i<dtMatchArr.length; i++) {
+                    var dateFormatRE = new RegExp(/{(date|time|datetime):([\w\\\/\-: ]+)}/gi);
+                    var dateFormat = dateFormatRE.exec(dtMatchArr[i])[2];
+
+                    tmpPrefix = tmpPrefix.replace(dtMatchArr[i], com.ktsystems.subswitch.Utils.dateFormat(dateValue, dateFormat));
+                }
+            }
+     */
+
+        this.lastPrefixValue = tmpPrefix;
+
+        return tmpPrefix;
+    }
 
     get description()       { return this.label;  }
     get prefix()                { return this.prefixCode; }
@@ -53,16 +157,21 @@ async function loadPrefixes() {
     // com.ktsystems.subswitch.Const.ENTRY_SPLIT_SIGN
     ENTRY_SPLIT_SIGN = entrySplitSign;
 
+    let ignoreSigns = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryIgnoreSigns`);
+    IGNORE_SIGNS = ignoreSigns;
+
     let prefixesDataString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds`);
     let prefixesAddressesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_addresses`);
     let prefixesSequencesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_sequences`);
 
+    let offbydefault = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.offbydefault`);
     let defaultRD = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.defaultrd`);
 
     utils.dumpStr('-> initPrefixesArray prefixesDataString ' + prefixesDataString);
     utils.dumpStr('-> initPrefixesArray prefixesAddressesString ' + prefixesAddressesString);
     utils.dumpStr('-> initPrefixesArray prefixesSequencesString ' + prefixesSequencesString);
     utils.dumpStr('-> initPrefixesArray defaultRD ' + defaultRD);
+    utils.dumpStr('-> initPrefixesArray defaultPrefixOff ' + offbydefault);
 
     let items = new Array();
 
@@ -82,12 +191,12 @@ async function loadPrefixes() {
 
             for (var i = 0; i < itemStrings.length; i++) {
                 var itemData = itemStrings[i].split(entrySplitSign);
-                // pre 0.9.16 upgrade
+
                 var item;
 
                 utils.dumpStr('>>>>> ' + itemData[2] + ' ' + 2);
                 item = new SubswitchPrefixItem(itemData.shift(), itemData.shift());
-                item.showInNewMsgPopup = itemData.shift();
+                item.showInNewMsgPopup = (itemData.shift() === 'true');
                 item.aliases = itemData;
 
                 items.push(item);
@@ -105,6 +214,7 @@ async function loadPrefixes() {
         }
 
         items.defaultPrefixIndex = defaultRD;
+        items.defaultPrefixOff = offbydefault;
 
     } catch (e) {
         utils.dumpStr('-> loadPrefixes EXCEPTION');
@@ -221,12 +331,19 @@ export function savePrefixes() {
 let PREFIXES_LIST;
 let ENTRIES_SPLIT_SIGN;
 let ENTRY_SPLIT_SIGN;
+let IGNORE_SIGNS;
 
-export function loadPrefixesDataString() {
+export async function reloadPrefixesDataString() {
+    return await loadPrefixes();
+};
+
+
+export async function loadPrefixesDataString() {
     if (PREFIXES_LIST != null) {
         return;
     }
-    return loadPrefixes();
+    await loadPrefixes();
+    return PREFIXES_LIST;
 };
 
 export function getPrefixesData() {
