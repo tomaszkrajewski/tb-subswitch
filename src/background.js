@@ -158,6 +158,9 @@ function registerListeners() {
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(tab)}`);
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(state)}`);
 
+        let composeDetails = await browser.compose.getComposeDetails(tab.id);
+        utils.dumpDir(composeDetails);
+
         const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${value}`);
         if (!value) {
@@ -195,6 +198,7 @@ function registerListeners() {
     // handle
     // 1/ the opening the new message with subject
     browser.runtime.onMessage.addListener((message, sender) => {
+        utils.log(`background -> browser.runtime.onMessage START ${sender} `);
         if (message && message.hasOwnProperty("command") ) {
             return doHandleCommand(message, sender);
         }
@@ -209,7 +213,7 @@ registerListeners();
  * Handles commands received from the compose script, to send make the
  * ComposeDetails available to the compose script.
  */
-async function doHandleCommand (message, sender) {
+function doHandleCommand (message, sender) {
     const { command } = message;
     const { prefix } = message;
 
@@ -231,10 +235,12 @@ async function doHandleCommand (message, sender) {
             try {
                browser.compose.beginNew(
                     composeDetails
-                ).then((composeWindow) => {
+                ).then(async (composeWindow) => {
                    utils.log(`background -> doHandleCommand composeWithPrefix inside beginNew START`);
                    utils.dumpDir(composeWindow);
+                   await utils.saveToSession(`initiatedWithPrefix-${composeWindow.id}`, prefix);
                    message_subject_util.updatePrefixForTabId(composeWindow.id, listItem);
+
                    utils.log(`background -> doHandleCommand composeWithPrefix inside beginNew END`);
                });
 
@@ -247,6 +253,7 @@ async function doHandleCommand (message, sender) {
     }
 
     utils.log(`background -> doHandleCommand END ${command} `);
+    return true;
 }
 
 
