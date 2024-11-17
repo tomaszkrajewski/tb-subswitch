@@ -214,5 +214,11 @@
     },
     "toolTip.onOff": {
         "message": "Etikett ein- oder ausschalten"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Abbrechen"
     }
 }

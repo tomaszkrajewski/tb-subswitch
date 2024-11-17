@@ -217,5 +217,11 @@
     },
     "toolTip.onOff": {
         "message": "Visa/dölj prefixet"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Avbryt"
     }
 }

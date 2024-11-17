@@ -214,5 +214,11 @@
     },
     "toolTip.onOff": {
         "message": "Activer/Désactiver le préfixe"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Annuler"
     }
 }

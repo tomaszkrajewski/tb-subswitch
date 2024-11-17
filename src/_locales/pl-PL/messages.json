@@ -217,5 +217,11 @@
     },
     "toolTip.onOff": {
         "message": "Wstaw/usuń prefiks"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Anuluj"
     }
 }

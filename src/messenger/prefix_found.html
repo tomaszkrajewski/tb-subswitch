@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>__MSG_discovery.confirmTitle__</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/options.css">
+
+    <script src="/modules/mustache.min.js"></script>
+
+    <script type="module" src="prefix_found.js"></script>
+</head>
+
+<body>
+<div class="w3-panel w3-blue" style="margin-top: 0px; margin-bottom: 0px">
+    <h3>__MSG_discovery.confirmHeader__</h3>
+    <p>__MSG_discovery.confirmMessage__</p>
+</div>
+<div class="w3-panel">
+    <div class="w3-margin">
+        <div class="w3-padding-16">
+            <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
+            <input class="w3-input"  id="description" type="text" value="{{item.description}}"/>
+        </div>
+        <div class="w3-padding-16">
+            <label for="prefix">__MSG_subjects_prefix_switch.label.setrd.path__</label>
+            <input class="w3-input" id="prefix" type="text" value="{{item.prefix}}"/>
+        </div>
+    </div>
+    <div class="w3-margin">
+        <div class="w3-padding-16">
+            <input type="checkbox" id="aliasCheckbox" class="w3-check">
+            <label for="aliasCheckbox">__MSG_subjects_prefix_switch.label.setrd.justAlias__</label>
+        </div>
+
+        <select id="aliasButton" class="w3-select w3-border" size="1" disabled="true" size="30">
+
+        </select>
+    </div>
+
+    <div class="w3-center w3-margin-top w3-section">
+        <input type="button" class="w3-button w3-green" id="button_ok" data="ok" value="__MSG_subjects_prefix_switch.ok__" />
+        <input type="button" class="w3-button w3-grey" id="button_cancel" data="cancel"  value="__MSG_subjects_prefix_switch.cancel__" />
+    </div>
+
+</div>
+</body>
+
+</html>

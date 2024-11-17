@@ -214,5 +214,11 @@
     },
     "toolTip.onOff": {
         "message": "Cambiar el prefijo activado/desactivado"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "Aceptar"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Cancelar"
     }
 }
