@@ -31,7 +31,12 @@ async function initMenu() {
 }
 
 async function settingsChangeAction(name, value) {
-    console.log(`Changed value in "subswitch.": ${name} = ${value}`);
+    utils.dumpStr(`Changed value in "subswitch.": ${name} = ${value}`);
+
+    //knowing there are 3 items saved together - rds + rds_addresses + rds_sequences
+    if (name === 'rds_addresses' || name === 'rds_sequences') {
+        return;
+    }
 
     await items.reloadPrefixesDataString();
     //TODO TO TEST removeAll
@@ -40,7 +45,7 @@ async function settingsChangeAction(name, value) {
 }
 
 async function main() {
-    console.log("Init of subswitch - START");
+    utils.dumpStr("Init of subswitch - main - START");
 
     // Prepare legacy prefs. The very last conversion step will migrate these to
     // WebExtension storage.
@@ -59,19 +64,8 @@ async function main() {
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_addresses", "");
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_sequences", "");
 
-    // replaced by
-    //    () => browser.runtime.openOptionsPage()
-    // to open the new WebExtension options page. However, this is actually bad
-    // practice. Users are now used to find options in the add-on manager and the
-    // old pattern of adding stuff to the tools menu should no longer be used.
-    browser.menus.create({
-        id: "oldOptions",
-        contexts: ["tools_menu"],
-        title: browser.i18n.getMessage("subjects_prefix_switch.label.toolbar"),
-        onclick: () => browser.runtime.openOptionsPage()
-    })
 
-    console.log("Init of subswitch - END");
+    utils.dumpStr("Init of subswitch - main - END");
 }
 
 async function getPrefixForTabId(tabid) {
@@ -164,18 +158,21 @@ function registerListeners() {
             return;
         }
 
+        const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
+        utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${value}`);
 
-        let composeDetails = await browser.compose.getComposeDetails(tab.id);
-        utils.dumpDir(composeDetails);
+        if (!value) {
+            let composeDetails = await browser.compose.getComposeDetails(tab.id);
+            utils.dumpDir(composeDetails);
 
-        switch (composeDetails.type) {
-            case "new":
-                return doHandleNew(tab, composeDetails);
+            switch (composeDetails.type) {
+                case "new":
+                    return doHandleNew(tab, composeDetails);
 
-            case "reply":
-                return doHandleReply(tab, composeDetails);
+                case "reply":
+                    return doHandleReply(tab, composeDetails);
+            }
         }
-
     });
 
     browser.menus.onShown.addListener(async (info, tab) => {
@@ -257,21 +254,19 @@ function doHandleCommand (message, sender) {
 }
 
 async function doHandleNew(tab, composeDetails) {
-    const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
-    utils.dumpStr(`messenger XXXX -> doHandleNew ${value} ${composeDetails.type}`);
-    if (!value) {
-        let list = items.getPrefixesData();
+    utils.dumpStr(`messenger XXXX -> doHandleNew ${composeDetails.type}`);
 
-        if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
-            let listItem = list[list.defaultPrefixIndex];
-            utils.dumpStr(`messenger XXXX -> doHandleNew setting the ${listItem}`);
+    let list = items.getPrefixesData();
 
-            await message_subject_util.alterSubject(tab.id, listItem, list);
-        }
+    if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
+        let listItem = list[list.defaultPrefixIndex];
+        utils.dumpStr(`messenger XXXX -> doHandleNew setting the ${listItem}`);
 
-        await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
-        utils.dumpStr(`messenger XXXX -> doHandleNew saving the ${list.defaultPrefixIndex} ${composeDetails.type}`);
+        await message_subject_util.alterSubject(tab.id, listItem, list);
     }
+
+    await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
+    utils.dumpStr(`messenger XXXX -> doHandleNew saving the ${list.defaultPrefixIndex} ${composeDetails.type}`);
 }
 
 async function doHandleReply(tab, composeDetails) {
@@ -297,9 +292,12 @@ async function doHandleReply(tab, composeDetails) {
 
         if (!message_subject_util.isAddressOnIgnoreList(authorEmailClean, ignoreList)) {
             const discoveryItemPattern = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryItemPattern`);
+
+            await items.reloadPrefixesDataString();
+
             let list = items.getPrefixesData();
 
-            const {remotePrefixItemIndex, remotePrefix} = message_subject_util.findSubSwitchHeader(fullOrginalMessage, SUBSWITCH_MIME_HEADER, discoveryItemPattern, list);
+            let {remotePrefixItemIndex, remotePrefix} = message_subject_util.findSubSwitchHeader(fullOrginalMessage, SUBSWITCH_MIME_HEADER, discoveryItemPattern, list);
 
             utils.log(`background -> doHandleReply ${remotePrefixItemIndex} ${remotePrefix}` );
 
@@ -312,7 +310,10 @@ async function doHandleReply(tab, composeDetails) {
             } else if (remotePrefix) {
                 //found prefix in subject but not exactly the same -> show popup, ask for user guidance
 
-                let xxxFun = function (message, sender, sendResponse)  {
+                let listInt = items.getPrefixesData();
+                let remotePrefixItemIndexInt = -1;
+
+                var prefixFoundListener = function (message, sender, sendResponse) {
                     if (message.action === "getData") {
                         // Send the data to the popup immediately
                         sendResponse(  {
@@ -325,7 +326,8 @@ async function doHandleReply(tab, composeDetails) {
 
                         utils.log(`background -> doHandleReply START ${newPrfix}` );
 
-                        list.push(newPrfix);
+                        remotePrefixItemIndexInt = listInt.length;
+                        listInt.push(newPrfix);
 
                         items.savePrefixes();
 
@@ -337,20 +339,30 @@ async function doHandleReply(tab, composeDetails) {
                         let prefixIndex = message.index;
                         utils.log(`background -> doHandleReply saveAlias ${prefixIndex}` );
 
-                        if (list[prefixIndex]) {
-                            list[prefixIndex].aliases.push(remotePrefix.prefix)
+                        if (listInt[prefixIndex]) {
+                            listInt[prefixIndex].aliases.push(remotePrefix.prefix)
                         }
 
-                        items.savePrefixes();
-                        utils.log(`background -> doHandleReply saveAlias END` );
+                        remotePrefixItemIndexInt = prefixIndex;
 
+                        items.savePrefixes();
+
+                        utils.log(`background -> doHandleReply saveAlias END` );
                     }
                 };
 
-                let result = popups.awaitPopup("messenger/prefix_found.html", 600, 480 , xxxFun);
+                browser.runtime.onMessage.addListener(prefixFoundListener);
 
+                let result = await popups.awaitPopup("messenger/prefix_found.html", 600, 480);
 
-                //browser.composeAction.setBadgeText({text: "DUPA"});
+                browser.runtime.onMessage.removeListener(prefixFoundListener);
+
+                utils.log(`background -> doHandleReply with support ${remotePrefixItemIndexInt}` );
+                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, remotePrefixItemIndexInt);
+
+                if (remotePrefixItemIndexInt>=0) {
+                    message_subject_util.updatePrefixForTabId(tab.id, listInt[remotePrefixItemIndexInt]);
+                }
 
             } else {
                 //no prefix -> default prefix application
@@ -379,9 +391,8 @@ async function doHandleReply(tab, composeDetails) {
 
 //TODO localize
 
-//TODO WIP loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
-//TODO WIP FORMAT DATE
-
+//DONE loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
+//DONE FORMAT DATE
 //DONE checkbox
 //DONE prefixModalAlertShow(msgDuplicate);
 //DONE  initWithDefault / on_off_prefix

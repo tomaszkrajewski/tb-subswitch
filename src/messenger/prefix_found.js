@@ -66,6 +66,7 @@ function registerListeners() {
 
         utils.dumpStr("prefix_found.js -> button_ok END");
     });
+
     document.getElementById("button_cancel").addEventListener("click", notifyMode);
 
     utils.dumpStr("prefix_found.js -> registerListeners END");

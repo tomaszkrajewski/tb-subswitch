@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "SubSwitch",
   "description": "__MSG_extensionDescription__",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Tomasz Krajewski",
   "homepage_url": "https://github.com/tomaszkrajewski/tb-SubSwitch",
   "browser_specific_settings": {

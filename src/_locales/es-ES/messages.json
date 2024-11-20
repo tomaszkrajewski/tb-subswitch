@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "Nuevo Prefijo"
     },
-    "discovery.confirmMessage": {
-        "message": "Se ha encontrado un nuevo prefijo en este mensaje. \\n\\nDesea agregar este prefijo a la lista?"
+    "discovery.confirmMessage_1": {
+        "message": "Se ha encontrado un nuevo prefijo en este mensaje."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Desea agregar este prefijo a la lista?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch / Nuevo prefijo encontrado"

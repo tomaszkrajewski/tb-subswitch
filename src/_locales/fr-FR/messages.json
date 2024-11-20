@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "Nouveau préfixe"
     },
-    "discovery.confirmMessage": {
-        "message": "Un nouveau préfixe a été trouvé. \\n\\nVoulez-vous l'ajouter ŕ votre liste?"
+    "discovery.confirmMessage_1": {
+        "message": "Un nouveau préfixe a été trouvé."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Voulez-vous l'ajouter ŕ votre liste?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch / Nouveau préfixe trouvé"

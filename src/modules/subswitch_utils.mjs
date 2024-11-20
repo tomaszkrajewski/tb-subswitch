@@ -13,7 +13,7 @@ export const     EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 //FIXME RE-ORGANIZE
-const PUBLIC_DIST = false;
+const PUBLIC_DIST = true;
 
 export function openURL(link) {
     if (link) {

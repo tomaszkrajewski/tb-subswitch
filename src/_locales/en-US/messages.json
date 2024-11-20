@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "New prefix"
     },
-    "discovery.confirmMessage": {
-        "message": "New prefix has been found in this message. \\n\\nDo you want to add this prefix to your list?"
+    "discovery.confirmMessage_1": {
+        "message": "New prefix has been found in this message."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Do you want to add this prefix to your list?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch / New prefix found"

@@ -9,18 +9,17 @@
 
     <link rel="stylesheet" href="../assets/options.css">
 
-    <script src="/modules/mustache.min.js"></script>
-
-    <script type="module" src="prefix_found.js"></script>
+   <script type="module" src="prefix_found.js"></script>
 </head>
 
 <body>
-<div class="w3-panel w3-blue" style="margin-top: 0px; margin-bottom: 0px">
+<div class="w3-panel w3-pale-blue" style="margin-top: 0px;">
     <h3>__MSG_discovery.confirmHeader__</h3>
-    <p>__MSG_discovery.confirmMessage__</p>
+    <p>__MSG_discovery.confirmMessage_1__</p>
+    <p><b>__MSG_discovery.confirmMessage_2__</b></p>
 </div>
-<div class="w3-panel">
-    <div class="w3-margin">
+<div class="w3-panel" style="margin-top: 0px; margin-bottom: 0px;">
+    <div>
         <div class="w3-padding-16">
             <label for="description">__MSG_subjects_prefix_switch.label.setrd.description__</label>
             <input class="w3-input"  id="description" type="text" value="{{item.description}}"/>
@@ -30,7 +29,7 @@
             <input class="w3-input" id="prefix" type="text" value="{{item.prefix}}"/>
         </div>
     </div>
-    <div class="w3-margin">
+    <div>
         <div class="w3-padding-16">
             <input type="checkbox" id="aliasCheckbox" class="w3-check">
             <label for="aliasCheckbox">__MSG_subjects_prefix_switch.label.setrd.justAlias__</label>

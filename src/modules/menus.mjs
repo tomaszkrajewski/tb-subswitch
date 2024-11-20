@@ -13,7 +13,7 @@ export async function addMenuEntry(createData) {
 
     try {
         await promise;
-        console.info(`Successfully created menu entry <${id}>`);
+        //console.info(`Successfully created menu entry <${id}>`);
     } catch (error) {
         if (error.message.includes("already exists")) {
             console.info(`The menu entry <${id}> exists already and was not added again.`);
