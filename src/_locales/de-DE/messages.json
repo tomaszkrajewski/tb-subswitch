@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "Neues Etikett"
     },
-    "discovery.confirmMessage": {
-        "message": "In dieser Nachricht wurde ein nues Etikett gefunden \\n\\nMöchten Sie dieses Etikett Ihrer Sammlung hinzufügen?"
+    "discovery.confirmMessage_1": {
+        "message": "In dieser Nachricht wurde ein nues Etikett gefunden."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Möchten Sie dieses Etikett Ihrer Sammlung hinzufügen?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch | Neues Etikett gefunden"
@@ -214,5 +217,11 @@
     },
     "toolTip.onOff": {
         "message": "Etikett ein- oder ausschalten"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Abbrechen"
     }
 }

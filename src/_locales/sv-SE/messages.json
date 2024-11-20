@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "Nytt prefix"
     },
-    "discovery.confirmMessage": {
-        "message": "Ett nytt prefix har identifierats i detta meddelande. \\n\\nVill du lägga till detta prefix i din lista?"
+    "discovery.confirmMessage_1": {
+        "message": "Ett nytt prefix har identifierats i detta meddelande."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Vill du lägga till detta prefix i din lista?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch: Nytt prefix identifierat"
@@ -217,5 +220,11 @@
     },
     "toolTip.onOff": {
         "message": "Visa/dölj prefixet"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Avbryt"
     }
 }

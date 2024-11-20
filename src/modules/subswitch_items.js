@@ -87,7 +87,6 @@ class SubswitchPrefixItem {
         return sb;
     }
 
-
     //FIXME keep persistence of formated value?
     get lastFormattedPrefixValue() { return this.lastPrefixValue; }
     get formattedPrefixValue(){
@@ -110,24 +109,57 @@ class SubswitchPrefixItem {
             }
         }
 
-    /*
-    TODO: DATE_UTILS
-            var dateRE       = new RegExp(utils.PATTERN_DATE);
 
-            var dtMatchArr = tmpPrefix.match(dateRE);
-            var dateValue = new Date();
+        var dateRE = new RegExp(utils.PATTERN_DATE);
 
-            if (dtMatchArr != null) {
-                for (var i=0; i<dtMatchArr.length; i++) {
-                    var dateFormatRE = new RegExp(/{(date|time|datetime):([\w\\\/\-: ]+)}/gi);
-                    var dateFormat = dateFormatRE.exec(dtMatchArr[i])[2];
+        var dtMatchArr = tmpPrefix.match(dateRE);
+        var dateValue = new Date();
 
-                    tmpPrefix = tmpPrefix.replace(dtMatchArr[i], com.ktsystems.subswitch.Utils.dateFormat(dateValue, dateFormat));
-                }
+        if (dtMatchArr != null) {
+            for (var i=0; i<dtMatchArr.length; i++) {
+                var dateFormatRE = new RegExp(/{(date|time|datetime):([\w\\\/\-: ]+)}/gi);
+                var dateFormat = dateFormatRE.exec(dtMatchArr[i])[2];
+
+                tmpPrefix = tmpPrefix.replace(dtMatchArr[i], utils.dateFormatExt(dateValue, dateFormat));
             }
-     */
+        }
 
         this.lastPrefixValue = tmpPrefix;
+
+        return tmpPrefix;
+    }
+
+    get patternPrefixString() {
+        var numberRE = new RegExp(utils.PATTERN_NUMBER);
+        var numberReplacement = "\\d+"
+        var dateRE   = new RegExp(utils.PATTERN_DATE);
+        var dateReplacement = ".+"
+        var tmpPrefix = this.prefixCode;
+
+        utils.dumpStr('-> patternPrefixString START');
+
+        utils.dumpStr(`patternPrefixString; numberRE= ${numberRE} ; dateRE= ${dateRE} ; tmpPrefix= ${tmpPrefix}`);
+
+        if (tmpPrefix.match(numberRE)) {
+            var numnerMatchArr = numberRE.exec(tmpPrefix);
+
+            if (numnerMatchArr.length == 2) {
+                tmpPrefix = tmpPrefix.replace(numnerMatchArr[0], numberReplacement);
+            }
+        }
+        /*
+                var dtMatchArr = tmpPrefix.match(dateRE);
+
+                if (dtMatchArr != null) {
+                    for (var i=0; i<dtMatchArr.length; i++) {
+                        var dateFormatRE = new RegExp(/{(date|time|datetime):([\w\\\/\-: ]+)}/gi);
+                        var dateFormat = dateFormatRE.exec(dtMatchArr[i])[2];
+
+                        tmpPrefix = tmpPrefix.replace(dtMatchArr[i], com.ktsystems.subswitch.Utils.dateFormat(dateValue, dateFormat));
+                    }
+                }
+        */
+        utils.dumpStr(`-> patternPrefixString END RESULT: ${tmpPrefix}`);
 
         return tmpPrefix;
     }

@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "新的前置字元"
     },
-    "discovery.confirmMessage": {
-        "message": "新的前置字元已於此訊息找到. \\n\\n你想要加入此前置字元到你的清單內嗎?"
+    "discovery.confirmMessage_1": {
+        "message": "新的前置字元已於此訊息找到."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "你想要加入此前置字元到你的清單內嗎?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch / 找到新的前置字元"
@@ -214,5 +217,11 @@
     },
     "toolTip.onOff": {
         "message": "切換前置字元 開/關"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "取消"
     }
 }

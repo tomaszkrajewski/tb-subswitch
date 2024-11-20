@@ -1,5 +1,6 @@
 import * as utils from "./modules/subswitch_utils.mjs";
 import * as menus from "./modules/menus.mjs";
+import * as popups from "./modules/popups.mjs"
 import * as items from "./modules/subswitch_items.js";
 import * as message_subject_util from "./modules/message_subject_util.js";
 
@@ -30,7 +31,12 @@ async function initMenu() {
 }
 
 async function settingsChangeAction(name, value) {
-    console.log(`Changed value in "subswitch.": ${name} = ${value}`);
+    utils.dumpStr(`Changed value in "subswitch.": ${name} = ${value}`);
+
+    //knowing there are 3 items saved together - rds + rds_addresses + rds_sequences
+    if (name === 'rds_addresses' || name === 'rds_sequences') {
+        return;
+    }
 
     await items.reloadPrefixesDataString();
     //TODO TO TEST removeAll
@@ -39,7 +45,7 @@ async function settingsChangeAction(name, value) {
 }
 
 async function main() {
-    console.log("Init of subswitch - START");
+    utils.dumpStr("Init of subswitch - main - START");
 
     // Prepare legacy prefs. The very last conversion step will migrate these to
     // WebExtension storage.
@@ -58,19 +64,8 @@ async function main() {
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_addresses", "");
     await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_sequences", "");
 
-    // replaced by
-    //    () => browser.runtime.openOptionsPage()
-    // to open the new WebExtension options page. However, this is actually bad
-    // practice. Users are now used to find options in the add-on manager and the
-    // old pattern of adding stuff to the tools menu should no longer be used.
-    browser.menus.create({
-        id: "oldOptions",
-        contexts: ["tools_menu"],
-        title: browser.i18n.getMessage("subjects_prefix_switch.label.toolbar"),
-        onclick: () => browser.runtime.openOptionsPage()
-    })
 
-    console.log("Init of subswitch - END");
+    utils.dumpStr("Init of subswitch - main - END");
 }
 
 async function getPrefixForTabId(tabid) {
@@ -158,23 +153,25 @@ function registerListeners() {
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(tab)}`);
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${JSON.stringify(state)}`);
 
-        let composeDetails = await browser.compose.getComposeDetails(tab.id);
-        utils.dumpDir(composeDetails);
+        if (state.canSendNow) {
+            utils.dumpStr(`messenger XXXX -> onComposeStateChanged CAN SEND NOW EXIT`);
+            return;
+        }
 
         const value = await utils.getFromSession(`initiatedWithPrefix-${tab.id}`);
         utils.dumpStr(`messenger XXXX -> onComposeStateChanged ${value}`);
+
         if (!value) {
-            let list = items.getPrefixesData();
+            let composeDetails = await browser.compose.getComposeDetails(tab.id);
+            utils.dumpDir(composeDetails);
 
-            if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
-                let listItem = list[list.defaultPrefixIndex];
-                utils.dumpStr(`messenger XXXX -> onComposeStateChanged setting the ${listItem}`);
+            switch (composeDetails.type) {
+                case "new":
+                    return doHandleNew(tab, composeDetails);
 
-                await message_subject_util.alterSubject(tab.id, listItem, list);
+                case "reply":
+                    return doHandleReply(tab, composeDetails);
             }
-
-            await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
-            utils.dumpStr(`messenger XXXX -> onComposeStateChanged saving the ${list.defaultPrefixIndex}`);
         }
     });
 
@@ -256,13 +253,146 @@ function doHandleCommand (message, sender) {
     return true;
 }
 
+async function doHandleNew(tab, composeDetails) {
+    utils.dumpStr(`messenger XXXX -> doHandleNew ${composeDetails.type}`);
+
+    let list = items.getPrefixesData();
+
+    if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
+        let listItem = list[list.defaultPrefixIndex];
+        utils.dumpStr(`messenger XXXX -> doHandleNew setting the ${listItem}`);
+
+        await message_subject_util.alterSubject(tab.id, listItem, list);
+    }
+
+    await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
+    utils.dumpStr(`messenger XXXX -> doHandleNew saving the ${list.defaultPrefixIndex} ${composeDetails.type}`);
+}
+
+async function doHandleReply(tab, composeDetails) {
+    utils.log(`background -> doHandleReply START`);
+
+    const orginalMessage = await browser.messages.get(composeDetails.relatedMessageId);
+    const fullOrginalMessage = await browser.messages.getFull(composeDetails.relatedMessageId);
+
+    utils.dumpDir(orginalMessage);
+    utils.dumpDir(fullOrginalMessage);
+
+    const subject = orginalMessage.subject;
+    const author = orginalMessage.author;
+    const authorEmails = await browser.messengerUtilities.parseMailboxString(author);
+    const authorEmailClean = authorEmails[0].email;
+
+    try {
+        const ignoreString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryIgnoreList`);
+
+        const ignoreList = ignoreString.split(";");
+
+        utils.log(`background -> doHandleReply ${subject} ${authorEmailClean}` );
+
+        if (!message_subject_util.isAddressOnIgnoreList(authorEmailClean, ignoreList)) {
+            const discoveryItemPattern = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryItemPattern`);
+
+            await items.reloadPrefixesDataString();
+
+            let list = items.getPrefixesData();
+
+            let {remotePrefixItemIndex, remotePrefix} = message_subject_util.findSubSwitchHeader(fullOrginalMessage, SUBSWITCH_MIME_HEADER, discoveryItemPattern, list);
+
+            utils.log(`background -> doHandleReply ${remotePrefixItemIndex} ${remotePrefix}` );
+
+            if (remotePrefixItemIndex >= 0) {
+                //found existing prefix
+                message_subject_util.updatePrefixForTabId(tab.id, list[remotePrefixItemIndex]);
+
+                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, remotePrefixItemIndex);
+
+            } else if (remotePrefix) {
+                //found prefix in subject but not exactly the same -> show popup, ask for user guidance
+
+                let listInt = items.getPrefixesData();
+                let remotePrefixItemIndexInt = -1;
+
+                var prefixFoundListener = function (message, sender, sendResponse) {
+                    if (message.action === "getData") {
+                        // Send the data to the popup immediately
+                        sendResponse(  {
+                            description: remotePrefix.description,
+                            prefix: remotePrefix.prefix});
+                    } else if (message.action === "savePrefix") {
+                        utils.log(`background -> doHandleReply savePrefix START` );
+
+                        let newPrfix = items.createNewPrefix(message.description, message.prefix);
+
+                        utils.log(`background -> doHandleReply START ${newPrfix}` );
+
+                        remotePrefixItemIndexInt = listInt.length;
+                        listInt.push(newPrfix);
+
+                        items.savePrefixes();
+
+                        utils.log(`background -> doHandleReply savePrefix END` );
+
+                    } else if (message.action === "saveAlias") {
+                        utils.log(`background -> doHandleReply saveAlias START` );
+
+                        let prefixIndex = message.index;
+                        utils.log(`background -> doHandleReply saveAlias ${prefixIndex}` );
+
+                        if (listInt[prefixIndex]) {
+                            listInt[prefixIndex].aliases.push(remotePrefix.prefix)
+                        }
+
+                        remotePrefixItemIndexInt = prefixIndex;
+
+                        items.savePrefixes();
+
+                        utils.log(`background -> doHandleReply saveAlias END` );
+                    }
+                };
+
+                browser.runtime.onMessage.addListener(prefixFoundListener);
+
+                let result = await popups.awaitPopup("messenger/prefix_found.html", 600, 480);
+
+                browser.runtime.onMessage.removeListener(prefixFoundListener);
+
+                utils.log(`background -> doHandleReply with support ${remotePrefixItemIndexInt}` );
+                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, remotePrefixItemIndexInt);
+
+                if (remotePrefixItemIndexInt>=0) {
+                    message_subject_util.updatePrefixForTabId(tab.id, listInt[remotePrefixItemIndexInt]);
+                }
+
+            } else {
+                //no prefix -> default prefix application
+
+                if (!list.defaultPrefixOff && list.defaultPrefixIndex >= 0) {
+                    let listItem = list[list.defaultPrefixIndex];
+                    utils.dumpStr(`messenger XXXX -> doHandleNew setting the ${listItem}`);
+
+                    await message_subject_util.alterSubject(tab.id, listItem, list);
+                }
+
+                await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, list.defaultPrefixIndex);
+             }
+
+        }
+    } catch (e) {
+        utils.dumpError(`background -> doHandleReply Error ${e}` );
+        utils.dumpDir(e);
+    }
+
+    utils.log(`background -> doHandleReply END`);
+    return true;
+}
 
 //TODO WONT DO on_off_prefix button
 
-//TODO loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
-//TODO FORMAT DATE
 //TODO localize
 
+//DONE loadOriginalMsgSSHeader / isAddressOnIgnoreList / findSubSwitchHeader / displayConfirm
+//DONE FORMAT DATE
 //DONE checkbox
 //DONE prefixModalAlertShow(msgDuplicate);
 //DONE  initWithDefault / on_off_prefix

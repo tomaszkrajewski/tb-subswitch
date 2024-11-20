@@ -2,8 +2,11 @@
     "discovery.confirmHeader": {
         "message": "Nuovo prefisso"
     },
-    "discovery.confirmMessage": {
-        "message": "Un nuovo prefisso è stato trovato in questo messaggio. \\n\\nVuoi aggiungerlo alla tua lista?"
+    "discovery.confirmMessage_1": {
+        "message": "Un nuovo prefisso è stato trovato in questo messaggio."
+    },
+    "discovery.confirmMessage_2": {
+        "message": "Vuoi aggiungerlo alla tua lista?"
     },
     "discovery.confirmTitle": {
         "message": "SubSwitch / Trovato un nuovo prefisso"
@@ -214,5 +217,11 @@
     },
     "toolTip.onOff": {
         "message": "Accende o spegne il prefisso"
+    },
+    "subjects_prefix_switch.ok": {
+        "message": "OK"
+    },
+    "subjects_prefix_switch.cancel": {
+        "message": "Annulla"
     }
 }
