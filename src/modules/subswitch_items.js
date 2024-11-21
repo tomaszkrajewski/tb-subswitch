@@ -15,8 +15,12 @@ class SubswitchPrefixItem {
         return (this.prefixCode != "" && this.label != "");
     }
 
+    isTemplateWithSequence() {
+        return utils.isTemplateWithSequence(this.prefix);
+    }
+
     incSeqValue () {
-        if (utils.isTemplateWithSequence(this.prefix)) {
+        if (this.isTemplateWithSequence()) {
             this.currentSeqValue++;
             if (this.currentSeqValue > utils.SEQ_MAX_VALUE) {
                 this.currentSeqValue = 0;
@@ -359,6 +363,26 @@ export function savePrefixes() {
     utils.dumpStr('-> savePrefixes END');
 };
 
+export function savePrefixesSequences() {
+    utils.dumpStr('-> savePrefixesSequences');
+
+    const entriesSplitSign = ENTRIES_SPLIT_SIGN;
+    const entrySplitSign = ENTRY_SPLIT_SIGN;
+
+    var writer = {
+        sb_seq: [],
+        writeItem:    function (s) {
+            this.sb_seq.push(s.currentSeqValue);
+        },
+        toSeqString: function () {  return this.sb_seq.join(entriesSplitSign); }
+    };
+
+    PREFIXES_LIST.forEach(writer.writeItem, writer);
+
+    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_sequences`, writer.toSeqString());
+
+    utils.dumpStr('<- savePrefixesSequences; ');
+};
 
 let PREFIXES_LIST;
 let ENTRIES_SPLIT_SIGN;
@@ -368,7 +392,6 @@ let IGNORE_SIGNS;
 export async function reloadPrefixesDataString() {
     return await loadPrefixes();
 };
-
 
 export async function loadPrefixesDataString() {
     if (PREFIXES_LIST != null) {
