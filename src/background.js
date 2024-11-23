@@ -86,7 +86,7 @@ async function getPrefixForTabId(tabid) {
 async function customSendAction(tab, composeDetails) {
     // Perform any modifications or logging
     utils.dumpStr("SubSwitch -> Sending email START");
-    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(composeDetails)}${JSON.stringify(composeDetails)}`);
+    utils.dumpStr(`SubSwitch -> Sending email composeDetails ${JSON.stringify(tab)} ${JSON.stringify(composeDetails)}`);
 
     items.loadPrefixesDataString();
 
@@ -100,11 +100,6 @@ async function customSendAction(tab, composeDetails) {
         utils.dumpStr(`SubSwitch -> Sending email selectedPrefix ${selectedPrefix}`);
 
         if (selectedPrefix) {
-            selectedPrefix.incSeqValue();
-
-           //savePrefixes
-           //com.ktsystems.subswitch.PrefixesListSingleton.getInstance().savePrefixesSequences();
-
             if (!composeDetails.customHeaders) {
                 composeDetails.customHeaders = [];
             }
@@ -126,6 +121,38 @@ async function customSendAction(tab, composeDetails) {
 }
 
 
+async function customAfterSendAction(tab, composeDetails) {
+    // Perform any modifications or logging
+    utils.dumpStr("SubSwitch -> After sending email START");
+    utils.dumpStr(`SubSwitch -> After sending email composeDetails ${JSON.stringify(tab)} ${JSON.stringify(composeDetails)}`);
+
+    if (composeDetails.messages.length > 0) {
+        utils.dumpStr(`SubSwitch -> After sending email POSITIVE PATH`);
+
+        items.loadPrefixesDataString();
+
+        const selectedPrefix = await getPrefixForTabId(tab.id);
+        const dontIncreaseSeq = await utils.getFromSession(`dontIncreaseSeq-${tab.id}`);
+
+        utils.dumpStr(`SubSwitch -> After sending email selectedPrefix ${selectedPrefix} - should NOT increse the sequence ${dontIncreaseSeq}`);
+
+        //dodac if czy zapisac bo był increase
+        if ((dontIncreaseSeq === undefined || !dontIncreaseSeq) &&
+            selectedPrefix && selectedPrefix.isTemplateWithSequence()) {
+                utils.dumpStr(`SubSwitch -> After sending email selectedPrefix ${selectedPrefix} - increasing the sequence`);
+
+                selectedPrefix.incSeqValue();
+
+                items.savePrefixesSequences();
+        }
+   }
+
+    utils.dumpStr("SubSwitch -> After sending email END");
+
+    return true;
+}
+
+
 function registerListeners() {
 
     // Monitor the preferences
@@ -136,6 +163,8 @@ function registerListeners() {
 
     // Attach the custom send action
     browser.compose.onBeforeSend.addListener(customSendAction);
+    // Attach the custom after send action
+    browser.compose.onAfterSend.addListener(customAfterSendAction);
 
     messenger.menus.onClicked.addListener(async (info, tab) => {
         const index = info.menuItemId.substring(12);
@@ -306,6 +335,7 @@ async function doHandleReply(tab, composeDetails) {
                 message_subject_util.updatePrefixForTabId(tab.id, list[remotePrefixItemIndex]);
 
                 await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, remotePrefixItemIndex);
+                await utils.saveToSession(`dontIncreaseSeq-${tab.id}`, true);
 
             } else if (remotePrefix) {
                 //found prefix in subject but not exactly the same -> show popup, ask for user guidance
@@ -359,6 +389,7 @@ async function doHandleReply(tab, composeDetails) {
 
                 utils.log(`background -> doHandleReply with support ${remotePrefixItemIndexInt}` );
                 await utils.saveToSession(`initiatedWithPrefix-${tab.id}`, remotePrefixItemIndexInt);
+                await utils.saveToSession(`dontIncreaseSeq-${tab.id}`, true);
 
                 if (remotePrefixItemIndexInt>=0) {
                     message_subject_util.updatePrefixForTabId(tab.id, listInt[remotePrefixItemIndexInt]);

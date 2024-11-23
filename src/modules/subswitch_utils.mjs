@@ -30,13 +30,13 @@ export function openMailWindow(to) {
 export function dumpStr(str) {
     if (PUBLIC_DIST)
         return;
-    console.log((new Date()).getTime() + ": " + str);
+    console.log((new Date()).getTime() + ": SubSwitch: " + str);
 };
 
 export function log(str) {
     if (PUBLIC_DIST)
         return;
-    console.log((new Date()).getTime() + ": " + str);
+    console.log((new Date()).getTime() + ": SubSwitch: " + str);
 };
 
 export function dumpDir(object) {
@@ -46,7 +46,7 @@ export function dumpDir(object) {
 };
 
 export function dumpError(str) {
-    console.error((new Date()).getTime() + ": " + str);
+    console.error((new Date()).getTime() + ": SubSwitch: " + str);
 };
 
 export function padNumber(n, len) {
@@ -87,6 +87,7 @@ export async function getFromSession(key) {
     } catch (error) {
         dumpError("Error retrieving from session storage:", error);
     }
+    return null;
 }
 
 
