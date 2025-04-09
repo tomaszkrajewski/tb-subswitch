@@ -87,7 +87,7 @@
         "message": "Erstellen"
     },
     "subjects_prefix_switch.label.options.contextmenu": {
-        "message": "&quot;SubSwitch&quot; im Kontextmenü anzeigen"
+        "message": "\"SubSwitch\" im Kontextmenü anzeigen"
     },
     "subjects_prefix_switch.label.options.createdBy": {
         "message": "Entwickelt von"
@@ -123,7 +123,7 @@
         "message": "Grundeinstellungen"
     },
     "subjects_prefix_switch.label.options.msgSubject": {
-        "message": "Vor Betreffzeile &quot;SubSwitch&quot; anzeigen"
+        "message": "Vor Betreffzeile \"SubSwitch\" anzeigen"
     },
     "subjects_prefix_switch.label.options.offbydefault": {
         "message": "Entiketten standardmäßig deaktivieren"
