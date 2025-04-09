@@ -1,4 +1,5 @@
 import * as utils from "./subswitch_utils.mjs";
+import * as preferences from "./preferences.js"
 
 class SubswitchPrefixItem {
     constructor(aLabel, aPrefix) {
@@ -185,23 +186,23 @@ class SubswitchPrefixItem {
 async function loadPrefixes() {
     utils.dumpStr('-> loadPrefixes START');
 
-    let entriesSplitSign = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.entries_split_sign`);
+    let entriesSplitSign = await preferences.getPref(`entries_split_sign`);
     // com.ktsystems.subswitch.Const.ENTRIES_SPLIT_SIGN
     ENTRIES_SPLIT_SIGN = entriesSplitSign;
 
-    let entrySplitSign = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.entry_split_sign`);
+    let entrySplitSign = await preferences.getPref(`entry_split_sign`);
     // com.ktsystems.subswitch.Const.ENTRY_SPLIT_SIGN
     ENTRY_SPLIT_SIGN = entrySplitSign;
 
-    let ignoreSigns = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryIgnoreSigns`);
+    let ignoreSigns = await preferences.getPref(`discoveryIgnoreSigns`);
     IGNORE_SIGNS = ignoreSigns;
 
-    let prefixesDataString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds`);
-    let prefixesAddressesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_addresses`);
-    let prefixesSequencesString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.rds_sequences`);
+    let prefixesDataString = await preferences.getPref(`rds`);
+    let prefixesAddressesString = await preferences.getPref(`rds_addresses`);
+    let prefixesSequencesString = await preferences.getPref(`rds_sequences`);
 
-    let offbydefault = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.offbydefault`);
-    let defaultRD = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.defaultrd`);
+    let offbydefault = await preferences.getPref(`offbydefault`);
+    let defaultRD = await preferences.getPref(`defaultrd`);
 
     utils.dumpStr('-> initPrefixesArray prefixesDataString ' + prefixesDataString);
     utils.dumpStr('-> initPrefixesArray prefixesAddressesString ' + prefixesAddressesString);
@@ -352,12 +353,12 @@ export function savePrefixes() {
 
     PREFIXES_LIST.forEach(writer.writeItem, writer);
 
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds`, writer.toString());
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_addresses`, writer.toAddressesString());
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_sequences`, writer.toSeqString());
+    preferences.setPref(`rds`, writer.toString());
+    preferences.setPref(`rds_addresses`, writer.toAddressesString());
+    preferences.setPref(`rds_sequences`, writer.toSeqString());
 
     if (PREFIXES_LIST.defaultPrefixIndex != undefined) {
-        browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.defaultrd`, PREFIXES_LIST.defaultPrefixIndex);
+        preferences.setPref(`defaultrd`, PREFIXES_LIST.defaultPrefixIndex);
     }
 
     utils.dumpStr('-> savePrefixes END');
@@ -379,7 +380,7 @@ export function savePrefixesSequences() {
 
     PREFIXES_LIST.forEach(writer.writeItem, writer);
 
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.rds_sequences`, writer.toSeqString());
+    preferences.setPref(`rds_sequences`, writer.toSeqString());
 
     utils.dumpStr('<- savePrefixesSequences; ');
 };

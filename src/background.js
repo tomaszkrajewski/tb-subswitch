@@ -3,13 +3,13 @@ import * as menus from "./modules/menus.mjs";
 import * as popups from "./modules/popups.mjs"
 import * as items from "./modules/subswitch_items.js";
 import * as message_subject_util from "./modules/message_subject_util.js";
-
+import * as preferences from "./modules/preferences.js"
 
 //FIXME const file
 const SUBSWITCH_MIME_HEADER = 'X-SubSwitch';
 
 async function initMenu() {
-    const contextmenu = await browser.LegacyPrefs.getPref("extensions.subjects_prefix_switch.contextmenu");
+    const contextmenu = await preferences.getPref("contextmenu");
 
     if (!contextmenu) {
         return
@@ -30,40 +30,46 @@ async function initMenu() {
     }
 }
 
-async function settingsChangeAction(name, value) {
-    utils.dumpStr(`Changed value in "subswitch.": ${name} = ${value}`);
-
-    //knowing there are 3 items saved together - rds + rds_addresses + rds_sequences
-    if (name === 'rds_addresses' || name === 'rds_sequences') {
+async function settingsChangeAction(changes, area) {
+    // Ignore changes in the session storage.
+    if (area != "local") {
         return;
     }
 
-    await items.reloadPrefixesDataString();
-    //TODO TO TEST removeAll
-    await browser.menus.removeAll();
-    await initMenu();
+    let relevantChanges = false;
+    for (let name of Object.keys(changes)) {
+        let value = changes[name].newValue;
+        utils.dumpStr(`Changed value in "subswitch.": ${name} = ${value}`);
+
+        // Only react to changed preferences (which have a preference. prefix),
+        // storage could later include other data.
+        if (!name.startsWith("preference.")) {
+            continue;
+        }
+
+        // Knowing there are 3 items saved together - rds + rds_addresses + rds_sequences.
+        if (name === 'preference.rds_addresses' || name === 'preference.rds_sequences') {
+            continue;
+        }
+        
+        relevantChanges = true;
+        break;
+    }
+
+    if (relevantChanges) {
+        await items.reloadPrefixesDataString();
+        //TODO TO TEST removeAll
+        await browser.menus.removeAll();
+        await initMenu();
+    }
 }
 
 async function main() {
     utils.dumpStr("Init of subswitch - main - START");
 
-    // Prepare legacy prefs. The very last conversion step will migrate these to
-    // WebExtension storage.
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.addRDtoEmail", true);
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.beforeMsgSubject", true);
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.contextmenu", true);
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.defaultrd", "1");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.discoveryIgnoreList", "bugzilla?@?.com");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.discoveryIgnoreSigns", "[]/ ");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.discoveryItemPattern", "\\[.+\\]");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.entries_split_sign", "##");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.entry_split_sign", "~~");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.loadRDfromEmail", true);
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.offbydefault", false);
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds", "Organizational mail~~[ORG]~~false##Project ABCD~~[ABCD/{number:NN}][{date:yyyy/mm/dd}]~~true##Private mail~~[PRV]~~true~~[PRIV]");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_addresses", "");
-    await browser.LegacyPrefs.setDefaultPref("extensions.subjects_prefix_switch.rds_sequences", "");
-
+    // The very last conversion step will migrate these to WebExtension storage.
+    // After a few month, this can be removed together with the LegacyPrefs API.
+    await preferences.migrateToLocalStorage();
 
     utils.dumpStr("Init of subswitch - main - END");
 }
@@ -90,7 +96,7 @@ async function customSendAction(tab, composeDetails) {
 
     items.loadPrefixesDataString();
 
-    const addRDtoEmail = await browser.LegacyPrefs.getPref("extensions.subjects_prefix_switch.addRDtoEmail");
+    const addRDtoEmail = await preferences.getPref("addRDtoEmail");
 
     utils.dumpStr(`SubSwitch -> Sending email addRDtoEmail ${addRDtoEmail}`);
 
@@ -156,10 +162,7 @@ async function customAfterSendAction(tab, composeDetails) {
 function registerListeners() {
 
     // Monitor the preferences
-    browser.LegacyPrefs.onChanged.addListener(
-        settingsChangeAction,
-        "extensions.subjects_prefix_switch."
-    );
+    browser.storage.onChanged.addListener(settingsChangeAction);
 
     // Attach the custom send action
     browser.compose.onBeforeSend.addListener(customSendAction);
@@ -313,14 +316,14 @@ async function doHandleReply(tab, composeDetails) {
     const authorEmailClean = authorEmails[0].email;
 
     try {
-        const ignoreString = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryIgnoreList`);
+        const ignoreString = await preferences.getPref(`discoveryIgnoreList`);
 
         const ignoreList = ignoreString.split(";");
 
         utils.log(`background -> doHandleReply ${subject} ${authorEmailClean}` );
 
         if (!message_subject_util.isAddressOnIgnoreList(authorEmailClean, ignoreList)) {
-            const discoveryItemPattern = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.discoveryItemPattern`);
+            const discoveryItemPattern = await preferences.getPref(`discoveryItemPattern`);
 
             await items.reloadPrefixesDataString();
 
