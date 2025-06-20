@@ -9,7 +9,7 @@
     "gecko": {
       "id": "{957509b1-217a-46c7-b08b-f67d08d53883}",
       "strict_min_version": "115.0",
-      "strict_max_version": "139.*"
+      "strict_max_version": "141.*"
     }
   },
   "icons": {

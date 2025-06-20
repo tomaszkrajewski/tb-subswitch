@@ -9,11 +9,11 @@ i18n.localizeDocument();
 
 //FIXME MOVE TEMPLATES TO ONE script
 const PREFIX_ROW = `
-        <input type="button" style="font-weight: bold;" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-pale-green" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
+        <input type="button" style="font-weight: bold; text-align: left" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-pale-green" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
 `;
 
 const SELECTED_PREFIX_ROW = `
-        <input type="button" style="font-weight: bold;" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-cyan" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
+        <input type="button" style="font-weight: bold; text-align: left" class="w3-button w3-small w3-block w3-padding-small w3-round-large w3-cyan" value="{{description}} / {{prefix}}" id="prefix-{{id}}" " />
 `;
 
 async function openOptions() {
