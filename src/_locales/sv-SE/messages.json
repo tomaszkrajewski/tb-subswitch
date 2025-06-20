@@ -90,7 +90,7 @@
         "message": "Nytt"
     },
     "subjects_prefix_switch.label.options.contextmenu": {
-        "message": "Visa &quot;SubSwitch&quot; i snabbmenyn"
+        "message": "Visa \"SubSwitch\" i snabbmenyn"
     },
     "subjects_prefix_switch.label.options.createdBy": {
         "message": "Skapat av"
@@ -108,7 +108,7 @@
         "message": "Ta bort"
     },
     "subjects_prefix_switch.label.options.discovery.autodisable.description.wildcard1": {
-        "message": "Frågetecken ( ? ) kan användas som ett jokertecken. (Exempel: &quot;?@mozilla.com&quot;, &quot;test@?.com&quot; eller &quot;t?t@m?a.c?&quot; kommer att matchas när &quot;test@mozilla.com&quot; är avsändare)"
+        "message": "Frågetecken ( ? ) kan användas som ett jokertecken. (Exempel: \"?@mozilla.com\", \"test@?.com\" eller \"t?t@m?a.c?\" kommer att matchas när \"test@mozilla.com\" är avsändare)"
     },
     "subjects_prefix_switch.label.options.discoveryIgnoreSigns": {
         "message": "Tecken som skall ignoreras när prefix jämförs"
@@ -126,7 +126,7 @@
         "message": "Allmänt"
     },
     "subjects_prefix_switch.label.options.msgSubject": {
-        "message": "Visa &quot;SubSwitch&quot; före ämnesfältet"
+        "message": "Visa \"SubSwitch\" före ämnesfältet"
     },
     "subjects_prefix_switch.label.options.offbydefault": {
         "message": "Dölj prefix som standard"

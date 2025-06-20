@@ -1,6 +1,7 @@
 import * as i18n from "../modules/i18n.mjs"
 import * as utils from "../modules/subswitch_utils.mjs"
 import * as items from "../modules/subswitch_items.js"
+import * as preferences from "../modules/preferences.js"
 
 i18n.localizeDocument();
 
@@ -40,7 +41,7 @@ toElements.forEach(toElement => {
 // load preferences
 let prefElements = document.querySelectorAll('[data-preference]');
 for (let prefElement of prefElements) {
-    let value = await browser.LegacyPrefs.getPref(`extensions.subjects_prefix_switch.${prefElement.dataset.preference}`);
+    let value = await preferences.getPref(`${prefElement.dataset.preference}`);
     utils.dumpStr(prefElement.tagName);
 
     // handle checkboxes
@@ -52,7 +53,7 @@ for (let prefElement of prefElements) {
         }
         // enable auto save
         prefElement.addEventListener("change", () => {
-            browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.${prefElement.dataset.preference}`, prefElement.checked);
+            preferences.setPref(`${prefElement.dataset.preference}`, prefElement.checked);
         })
     // handle checkboxes
     } else if (prefElement.tagName == "INPUT" && prefElement.type == "text") {
@@ -63,7 +64,7 @@ for (let prefElement of prefElements) {
         }
         // enable auto save
         prefElement.addEventListener("change", () => {
-            browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.${prefElement.dataset.preference}`, prefElement.value);
+            preferences.setPref(`${prefElement.dataset.preference}`, prefElement.value);
         })
     // handle richlistbox / select
     } else if (prefElement.tagName == "SELECT") {
@@ -76,7 +77,7 @@ for (let prefElement of prefElements) {
         //FIXME: SAVING this way is not working, so saving directly in addAutoSwitch and removeAutoswitch
         prefElement.addEventListener("change", () => {
             utils.dumpStr("change "+prefElement);
-            browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.${prefElement.dataset.preference}`, getStringFromListbox(prefElement));
+            preferences.setPref(`${prefElement.dataset.preference}`, getStringFromListbox(prefElement));
         })
     }
 }
@@ -258,7 +259,7 @@ function addAutoSwitch() {
     input.innerText = "";
     input.value = "";
 
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.discoveryIgnoreList`, getStringFromListbox(listbox));
+    preferences.setPref(`discoveryIgnoreList`, getStringFromListbox(listbox));
 };
 
 function removeAutoswitch() {
@@ -268,14 +269,14 @@ function removeAutoswitch() {
     if (selected >= 0) {
         listbox.remove(selected);
 
-        browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.discoveryIgnoreList`, getStringFromListbox(listbox));
+        preferences.setPref(`discoveryIgnoreList`, getStringFromListbox(listbox));
     }
 };
 
 function saveDefaultPrefix(prefixDefault) {
     utils.dumpStr("saveDefaultPrefix START prefixDefault" + prefixDefault);
 
-    browser.LegacyPrefs.setPref(`extensions.subjects_prefix_switch.defaultrd`, prefixDefault);
+    preferences.setPref(`defaultrd`, prefixDefault);
 
     utils.dumpStr("saveDefaultPrefix END");
 };
